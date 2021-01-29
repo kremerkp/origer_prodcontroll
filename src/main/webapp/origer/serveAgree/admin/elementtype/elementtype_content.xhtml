@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<p:panel id="pnl_checklistsElementsTyps" header="Typen Elemente"
+			styleClass="invoices_table" toggleable="false"
+			style="margin-bottom:20px">
+
+			<p:dataTable value="#{elementTypeBean.data}"
+				filteredValue="#{elementTypeBean.filteredData}" var="el"
+				paginator="true" paginatorPosition="bottom" rows="20" selectionMode="single"
+				rowKey="#{el.id}" selection="#{elementTypeBean.selectedData}">
+				<p:ajax event="rowSelect" update=":frmList:layButtons"
+					process="@this" />
+				<p:ajax event="rowUnselect" update="@form" process="@this" />
+				<p:ajax event="rowDblselect"
+					listener="#{elementTypeBean.openElementType()}" process="@this" />
+
+				<p:column headerText="Name (DE)" filterBy="#{el.name}" styleClass="oneFilterSmall"
+					filterMatchMode="contains">
+					<h:outputText value="#{el.name}"/>
+                </p:column>
+
+				<p:column headerText="Name (FR)" filterBy="#{el.description}" styleClass="oneFilterSmall"
+					filterMatchMode="contains">
+					<h:outputText value="#{el.description}"/>                
+                </p:column>
+
+				<p:column headerText="Kurzname" filterBy="#{el.shortname}" styleClass="oneFilterSmall"
+					filterMatchMode="contains">
+					<h:outputText value="#{el.shortname}"/>                
+                </p:column>
+
+				<p:column headerText="Aktiv" styleClass="col_active centerCol">
+					<p:selectBooleanCheckbox disabled="true" value="#{el.active}" />
+				</p:column>
+			</p:dataTable>
+
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="neu" ajax="false"
+					action="#{elementTypeBean.add()}" />
+				<p:commandButton value="bearbeiten" ajax="false"
+					action="#{elementTypeBean.edit()}" styleClass="ml15"
+					disabled="#{elementTypeBean.selectedData == null}" process="@this" />
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="71" pageHeight="29" whenNoDataType="NoDataSection" columnWidth="71" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="46183d07-781a-47ba-891a-743911b0811b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="barcodeAdapter"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="barcode" class="java.lang.String">
+		<fieldDescription><![CDATA[barcode]]></fieldDescription>
+	</field>
+	<field name="buildingSite" class="java.lang.String">
+		<fieldDescription><![CDATA[buildingSite]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="29">
+			<componentElement>
+				<reportElement x="44" y="-7" width="34" height="35" uuid="2abb0c14-a7c0-4fcc-ad7b-8cd93d5b1336">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$F{barcode}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<textField>
+				<reportElement x="2" y="13" width="71" height="9" uuid="5e7035a7-8333-409f-ac92-3b92a41b0514"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{buildingSite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="-3" width="50" height="20" uuid="75424785-4031-4149-9c7f-20871f3e6a1c"/>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{barcode}.replace( "*", "")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

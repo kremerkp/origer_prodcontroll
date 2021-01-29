@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<div id="diagAddInvoice"> 
+		<p:dialog header="Rechnung hinzufügen?" widgetVar="newInvoicePopup"
+			modal="true" height="250">
+			<h:panelGrid columns="2" cellpadding="5">
+			 <h:panelGrid id="invoiceAddGrid" columns="1" cellpadding="5">
+					<p:outputLabel  value="Dem Wartungsvertrag wird eine Rechnung hinzugefügt." />
+			  </h:panelGrid>
+				<f:facet name="footer"> 
+					<p:commandButton value="neue Rechnung erstellen"   onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+						onclick="PF('newInvoicePopup').hide();"
+						actionListener="#{contractInfo.addNewInvoice}"  
+						update="@form" />
+					<p:commandButton value="zur Liste der Rechnung"   onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+						onclick="PF('newInvoicePopup').hide();"
+						actionListener="#{contractInfo.showInvoicesForContract}"  
+						update="@form" /> 
+						<br/>
+						<br/>
+					<p:commandButton value="chancel"
+						onclick="PF('newInvoicePopup').hide();" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</div>
+
+</ui:composition>

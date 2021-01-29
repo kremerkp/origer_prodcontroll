@@ -1,0 +1,622 @@
+/* PanelGrid */
+table.pnlStd {
+	border: 1px solid #999;
+	margin-bottom: 10px;
+	min-width: 100px;
+}
+
+table.pnlStd tr.ui-widget-content {
+	border: none;
+}
+
+table.pnlStd td.ui-panelgrid-cell {
+	border: none;
+}
+
+table.pnlStd td.header {
+	background: white;
+	color: #3f403f;
+	font-size: 25px;
+	font-weight: bold;
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+
+table.pnlStd td input {
+	width: 100%;
+}
+
+table.pnlStd td textArea {
+	width: 98%;
+}
+
+table.pnlStd td p.error-msg {
+	background: #ffb8b8;
+	border: 1px solid red;
+	font-weight: bold;
+	margin: 5px;
+	padding: 5px;
+	color: black;
+}
+/* Commandbutton */
+button.ui-button {
+	box-shadow: none;
+}
+
+button.ui-button.ui-state-default {
+	background: #eeeeee;
+	border: 1px solid #999;
+	border-radius: 0;
+}
+
+button.ui-button.ui-state-hover {
+	background: #e9f7ff;
+	border: 1px solid #628395;
+	box-shadow: none;
+}
+
+button.tile span.ui-button-text {
+	color: #9a9898 !important;
+}
+
+span.tile span.ui-button-text {
+	color: #9a9898 !important;
+}
+
+button.ui-button.edit span.ui-button-text {
+	text-shadow: none;
+	color: #ececec;
+}
+
+button.ui-button.backButton span.ui-button-text {
+	text-shadow: none;
+	color: #ececec;
+}
+
+div.layButtons span.ui-button-text {
+	text-shadow: none !important;
+	color: white !important;
+}
+
+div.layButtons span.ui-button-text:hover {
+	text-shadow: none !important;
+	color: #efefef !important;
+}
+
+button.ui-button span.ui-button-text {
+	text-shadow: none;
+	color: #484848;
+}
+
+button.ui-button span.ui-button-text:hover {
+	color: #ececec;
+}
+
+/* Menubar */
+div.ui-menubar {
+	background: #3f403f;
+	padding: 0 0 0 25px;
+	margin: 0;
+	border-radius: 0;
+	border: none;
+}
+
+div.ui-menubar ul.ui-menu-list li.ui-menuitem {
+	margin-right: 20px;
+	border-radius: 0;
+	margin-bottom: 0;
+}
+
+div.ui-menubar ul.ui-menu-list li.ui-menuitem.active {
+	background: #f9f9f9;
+}
+
+div.ui-menubar ul.ui-menu-list li.ui-menuitem.active a span {
+	color: black;
+}
+
+div.ui-menubar ul.ui-menu-list li.ui-menuitem span.ui-menuitem-text {
+	color: white;
+	font-weight: bold;
+}
+
+div.ui-menubar ul.ui-menu-list li.ui-menuitem a {
+	border: none;
+	height: 20px;
+	line-height: 20px;
+	border-radius: 0;
+}
+
+div.ui-menubar ul.ui-menu-list li.ui-menuitem a.ui-state-hover {
+	background: #c0803e;
+	border: none;
+	box-shadow: none;
+	border-radius: 0;
+}
+
+div.ui-menubar ul.ui-menu-list li.ui-menuitem a.ui-submenu-link.ui-state-hover
+	{
+	background: #c0803e;
+}
+
+div.ui-menubar ul.ui-menu-list li.ui-menuitem-active ul {
+	background: white;
+	border-radius: 0;
+	padding: 0;
+}
+
+div.ui-menubar ul.ui-menu-list li.ui-menuitem-active ul span.ui-menuitem-text
+	{
+	color: black;
+}
+
+div.ui-menubar ul.ui-menu-list li.ui-menuitem-active ul a {
+	padding: 5px 0;
+	width: 100%;
+}
+
+div.ui-menubar ul.ui-menu-list li.ui-menuitem-active ul a span {
+	padding-left: 5px;
+}
+
+div.ui-menubar ul.ui-menu-list li.ui-menuitem-active ul a.ui-state-hover span
+	{
+	color: white;
+}
+/* DropDown Menu */
+div.ui-menu.ui-menu-dynamic {
+	background: white;
+}
+
+div.ui-menu.ui-menu-dynamic li.ui-menuitem-active a.ui-state-hover {
+	background: #c0803e;
+	box-shadow: none;
+	color: #ffffff;
+}
+/* Textarea */
+textarea.ui-inputfield.ui-inputtextarea {
+	border-radius: 0;
+	box-shadow: none;
+}
+
+textarea.ui-inputfield.ui-inputtextarea.ui-state-focus {
+	box-shadow: none;
+	background: #e9f7ff;
+	border: 1px solid #628395;
+}
+
+textarea.ui-inputfield.ui-inputtextarea.ui-state-error {
+	background: #ffb8b8;
+}
+/* InputText */
+input.ui-inputfield, .ui-widget-content input.ui-inputfield,
+	.ui-widget-header input.ui-inputfield {
+	box-shadow: none;
+	border: 1px solid #999;
+	border-radius: 0;
+	height: 15px;
+	padding: 1px;
+}
+
+input.ui-inputfield.ui-state-focus, .ui-widget-content input.ui-inputfield.ui-state-focus,
+	.ui-widget-header input.ui-inputfield.ui-state-focus {
+	box-shadow: none;
+	background: #e9f7ff;
+	border: 1px solid #628395;
+}
+
+input.ui-inputfield.ui-state-error, .ui-widget-content input.ui-inputfield.ui-state-error,
+	.ui-widget-header input.ui-inputfield.ui-state-error {
+	background: #ffb8b8;
+}
+/* Datatable */
+div.ui-datatable-tablewrapper {
+	width: 95%;
+	border: 1px solid #3f403f;
+}
+
+div.ui-datatable-tablewrapper tbody {
+	border: none;
+}
+
+div.ui-datatable-tablewrapper thead tr {
+	border-bottom: 1px solid white;
+}
+
+div.ui-datatable-tablewrapper thead tr th select.ui-column-filter {
+	background: white;
+	width: 100%;
+}
+
+div.ui-datatable-tablewrapper tr {
+	border: none;
+}
+
+div.ui-datatable-tablewrapper tr.ui-state-hover.ui-datatable-even, div.ui-datatable-tablewrapper tr.ui-state-hover.ui-datatable-odd
+	{
+	border: none !important;
+	color: white !important;
+	background: #717171 !important;
+}
+
+div.ui-datatable-tablewrapper tr.ui-state-highlight.ui-datatable-even,
+	div.ui-datatable-tablewrapper tr.ui-state-highlight.ui-datatable-odd {
+	background: #3f403f !important;
+	color: white !important;
+	border: none !important;
+}
+
+tr.ui-state-highlight a {
+	background: #3f403f !important;
+	color: white !important;
+	border: none !important;
+}
+
+div.ui-datatable-tablewrapper tr.ui-datatable-even {
+	background: #eeeeee;
+}
+
+div.ui-datatable-tablewrapper tr.ui-datatable-odd {
+	background: white;
+}
+
+div.ui-datatable-tablewrapper tr th {
+	border: none;
+}
+
+div.ui-datatable-tablewrapper tr th.ui-state-default {
+	background: white;
+}
+
+div.ui-datatable-tablewrapper tr th input.ui-column-filter {
+	width: 95%;
+}
+
+div.ui-datatable-tablewrapper tr td {
+	border: none;
+	border-left: 1px solid #999;
+}
+
+div.ui-datatable-tablewrapper tr td:first-child {
+	border-left: none;
+}
+
+.pagination-button {
+	background: #EFEFEF;
+	border-radius: 0;
+	box-shadow: none;
+	text-shadow: none;
+}
+
+div.ui-datatable div.ui-paginator {
+	background: white;
+	border: 1px solid white;
+	border-top: none;
+	width: 95%;
+	padding: 0;
+}
+
+div.ui-datatable div.ui-paginator span.ui-paginator-next, div.ui-datatable div.ui-paginator span.ui-paginator-last,
+	div.ui-datatable div.ui-paginator span.ui-paginator-first, div.ui-datatable div.ui-paginator span.ui-paginator-prev
+	{
+	background: #EFEFEF;
+	border-radius: 0;
+	box-shadow: none;
+	text-shadow: none;
+}
+
+div.ui-datatable div.ui-paginator span.ui-paginator-pages>span.ui-paginator-page
+	{
+	background: #EFEFEF;
+	border-radius: 0;
+	box-shadow: none;
+	text-shadow: none;
+}
+
+div.ui-datatable div.ui-paginator span.ui-paginator-pages>span.ui-paginator-page.ui-state-active
+	{
+	background: #CCC;
+}
+/* Checkbox */
+div.ui-chkbox-box.ui-state-default {
+	background: white;
+	box-shadow: none;
+}
+/* SelectOneMenu */
+div.ui-selectonemenu.ui-widget {
+	box-shadow: none;
+	border-radius: 0;
+}
+
+div.ui-selectonemenu.ui-widget div.ui-selectonemenu-trigger {
+	background: #eeeeee;
+	box-shadow: none;
+}
+
+div.ui-selectonemenu.ui-widget div.ui-selectonemenu-trigger.ui-state-hover
+	{
+	background: #e9f7ff;
+}
+
+div.ui-selectonemenu-filter-container span.ui-icon {
+	display: none;
+}
+
+div.ui-selectonemenu-panel input.ui-selectonemenu-filter {
+	width: 100%;
+}
+
+div.ui-selectonemenu-panel div.ui-selectonemenu-filter-container {
+	width: 85%;
+}
+
+div.ui-selectonemenu-panel li.ui-selectonemenu-list-item.ui-state-hover
+	{
+	background: #c0803e;
+	color: #ffffff;
+	box-shadow: none;
+	border-radius: 0;
+}
+
+div.ui-selectonemenu-panel li.ui-selectonemenu-list-item.ui-state-highlight
+	{
+	background: red;
+	box-shadow: none;
+	border-radius: 0;
+	background: #3f403f;
+}
+/* File Uploader */
+div.ui-fileupload div.ui-fileupload-buttonbar {
+	border-radius: 0;
+	background: #3f403f;
+}
+
+div.ui-fileupload div.ui-fileupload-buttonbar span.ui-button {
+	background: #eeeeee;
+	border: 1px solid #999;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+div.ui-fileupload div.ui-fileupload-buttonbar span.ui-button.ui-state-hover
+	{
+	background: #e9f7ff;
+}
+/* Scheduler */
+div.fc.ui-widget {
+	width: 98%;
+	margin: auto;
+}
+
+div.fc.ui-widget th.fc-day-header {
+	background: #3f403f;
+	padding: 3px 0;
+	text-shadow: none;
+	color: white;
+	font-weight: bold;
+}
+
+div.fc.ui-widget td.fc-day.ui-state-highlight {
+	background: #eeeeee;
+}
+
+div.fc.ui-widget div.fc-event {
+	padding: 5px 15px 5px 5px;
+}
+
+div.fc.ui-widget td.fc-day.ui-state-highlight {
+	border: 1px solid #a8a8a8;
+	border-bottom: none;
+	border-right: none;
+	background: #EEE;
+}
+
+div.fc.ui-widget td.fc-day.ui-state-highlight div.fc-day-number {
+	color: black;
+	font-weight: bold;
+	text-shadow: none;
+}
+
+div.fc.ui-widget td.fc-day div.fc-day-background {
+	background: #EEE;
+	border-bottom: 1px solid #a8a8a8;
+}
+
+div.fc.ui-widget td.fc-day.ui-state-highlight {
+	border: 2px solid red;
+	background: #EEE;
+}
+
+div.fc.ui-widget td.fc-day.ui-state-highlight div.fc-day-background {
+	background-color: red;
+}
+
+div.fc.ui-widget td.fc-day.ui-state-highlight div.fc-day-background div.fc-day-number
+	{
+	color: white;
+}
+
+div.fc.ui-widget div.fc-day-background div.fc-day-number {
+	font-weight: bold;
+}
+
+div.fc.ui-widget td.fc-day div.fc-day-background div.fc-day-number {
+	float: none;
+	text-align: right;
+	color: black;
+}
+
+div.fc.ui-widget td.fc-day.fc-other-month div.fc-day-number {
+	opacity: 0.75;
+}
+/* Picker */
+table.ui-picklist div.ui-picklist-caption {
+	background: #eeeeee;
+	background-image: none;
+	border-radius: 0;
+}
+
+table.ui-picklist ul.ui-picklist-list {
+	width: inherit;
+}
+
+table.ui-picklist ul.ui-picklist-list li.ui-picklist-item {
+	background-image: none;
+	text-shadow: none;
+	color: black;
+	border-radius: 0;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+table.ui-picklist ul.ui-picklist-list li.ui-picklist-item.ui-state-highlight
+	{
+	background: #d3d3d3;
+}
+
+table.ui-picklist ul.ui-picklist-list li.ui-picklist-item.ui-state-hover
+	{
+	background: #b6e4ff;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+table.ui-picklist button.ui-button.ui-state-default {
+	margin: 10px auto;
+}
+/* Dialog */
+div.ui-dialog {
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+
+div.ui-dialog div.ui-dialog-content {
+	background: #f9f9f9;
+	overflow-x: hidden;
+}
+
+div.ui-dialog div.ui-dialog-titlebar {
+	background: #3f403f;
+	background-image: none;
+	text-shadow: none;
+	box-shadow: none;
+}
+
+div.ui-dialog div.ui-dialog-titlebar span.ui-dialog-title {
+	color: white;
+	font-weight: bold;
+}
+/* Error Messages */
+div.ui-messages div.ui-messages-error {
+	border-radius: 0;
+	border-color: #d28994;
+}
+
+div.ui-message.ui-message-error {
+	border-color: #d28994;
+	border-radius: 0;
+	height: 24px;
+	padding: 3px 4px 4px 4px;
+}
+
+div.ui-message.ui-message-error span.ui-message-error-icon {
+	background-position: 0px -52px;
+	width: 24px;
+	height: 24px;
+}
+
+div.ui-message.ui-message-error span.ui-message-error-detail {
+	font-weight: bold;
+	position: relative;
+	top: 4px;
+}
+/* Picklist */
+table.ui-picklist {
+	width: 100%;
+	position: relative;
+	border: 1px solid #999;
+}
+
+table.ui-picklist div.ui-picklist-filter-container {
+	margin-bottom: 5px;
+}
+
+table.ui-picklist div.ui-picklist-filter-container input.ui-inputfield {
+	width: 97%;
+}
+
+table.ui-picklist div.ui-picklist-filter-container span.ui-icon.ui-icon-search
+	{
+	position: absolute;
+	top: 4px;
+	right: 4px;
+}
+/* Tab View */
+div.ui-tabs ul.ui-tabs-nav li.ui-state-default {
+	background-image: none;
+	background: #c8c8c8;
+	box-shadow: none;
+}
+
+div.ui-tabs ul.ui-tabs-nav li.ui-state-default a {
+	text-shadow: none;
+}
+
+div.ui-tabs ul.ui-tabs-nav li.ui-state-active {
+	background: white;
+}
+/* SelectOneMenu */
+div.ui-selectonelistbox {
+	width: 95%;
+	overflow: hidden;
+}
+
+div.ui-selectonelistbox li.ui-selectlistbox-item {
+	padding: 2px 5px;
+	margin: 0;
+}
+
+div.ui-selectonelistbox li.ui-selectlistbox-item.ui-state-hover {
+	background: #c0803e;
+	color: #ffffff;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+div.ui-selectonelistbox li.ui-selectlistbox-item.ui-state-highlight {
+	background: #3f403f;
+	color: white;
+	border: none;
+	box-shadow: none;
+	border-radius: 0;
+}
+/* SelectManyMenu */
+div.ui-selectmanymenu {
+	width: 95%;
+	overflow: hidden;
+}
+
+div.ui-selectmanymenu li.ui-selectlistbox-item {
+	padding: 2px 5px;
+	margin: 0;
+}
+
+div.ui-selectmanymenu li.ui-selectlistbox-item.ui-state-hover {
+	background: #c0803e;
+	color: #ffffff;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+div.ui-selectmanymenu li.ui-selectlistbox-item.ui-state-highlight {
+	background: #3f403f;
+	color: white;
+	border: none;
+	box-shadow: none;
+	border-radius: 0;
+}
+/*# sourceMappingURL=../less/primefaces.css.map */

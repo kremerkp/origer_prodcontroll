@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<div id="diagAssignElements">
+		<p:dialog header="Elemente für alle Intervalle übernehmen" widgetVar="assignServiceElements"
+			modal="true" height="250">
+			<h:panelGrid columns="2" cellpadding="5">
+			Serviceelemente für alle Intervalle zuordnen? 
+				<f:facet name="footer"> 
+					<p:commandButton value="ok"  
+						onclick="PF('delServiceElements').hide();"  onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+						actionListener="#{contractInfo.assignElementsForSelectedIntervall()}" 
+						update="@form" />
+					<p:commandButton value="chancel"
+						onclick="PF('assignServiceElements').hide();" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</div>
+
+</ui:composition>

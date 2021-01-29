@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		function getAC_Customer() {
+			// contractForm:bsNr 
+			console.log("geht");
+			var var_ac_buildingSite_code = jQuery(
+					'#contractForm\\:cc_lastname_input').val();
+			console.log(var_ac_buildingSite_code);
+			// set hiddenField;
+			document.getElementById("contractForm:ac_customer").value = var_ac_buildingSite_code;
+
+			console.log("geht");
+		}
+	</script>
+
+	<h:inputHidden id="ac_customer"
+		value="#{contractInfo.customerLastname}" />
+
+	<p:panel id="pnl_customerContact" header="Kunde"
+		styleClass="buildingSite_formular" toggleable="true">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel for="cc_lastname" value="Suche: " />
+			<p:autoComplete var="c" itemValue="#{c}" itemLabel="#{c.lastname}"
+				converter="#{simpleConverter}"
+				completeMethod="#{applicationBean.completePerson}"
+				value="#{contractInfo.customerContact}"
+				disabled="#{contractInfo.disableEditModeCustomer}"
+				scrollHeight="400" dropdown="true" id="cc_lastname"
+				forceSelection="false" styleClass="autocomplete_customer closed">
+				<p:ajax event="itemSelect" update="@form"
+					listener="#{contractInfo.updateCustomer()}" />
+				<p:ajax event="blur" onsuccess="getAC_Customer()" />
+			</p:autoComplete>
+
+			<p:outputLabel for="cc_last" value="Nachname: " />
+			<p:inputMask id="cc_last"
+				disabled="#{contractInfo.disableEditModeCustomer}" required="true"
+				value="#{contractInfo.customerLastname}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+
+			<p:outputLabel for="cc_firstname" value="Vorname: " />
+			<p:inputMask id="cc_firstname"
+				disabled="#{contractInfo.disableEditModeCustomer}" required="true"
+				value="#{contractInfo.customerFirstname}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+
+			<p:outputLabel for="cc_title" value="Anrede: " rendered="false" />
+			<p:inputMask id="cc_title" rendered="false"
+				disabled="#{contractInfo.disableEditModeCustomer}"
+				value="#{contractInfo.customerTitel}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+
+			<p:outputLabel for="cc_company" value="Firma" />
+			<p:inputMask id="cc_company"
+				disabled="#{contractInfo.disableEditModeCustomer}" required="true"
+				value="#{contractInfo.customerCompany}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+
+			<p:outputLabel for="cc_street" rendered="true" value="Straße" />
+			<p:inputMask id="cc_street" rendered="true"
+				disabled="#{contractInfo.disableEditModeCustomer}" required="true"
+				value="#{contractInfo.customerStreet}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+
+			<p:outputLabel for="cc_streetnumber" rendered="true" value="Nr.:" />
+			<p:inputMask id="cc_streetnumber" rendered="true"
+				disabled="#{contractInfo.disableEditModeCustomer}" required="true"
+				value="#{contractInfo.customerStreetnumber}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+
+			<p:outputLabel for="cc_zip" rendered="true" value="PLZ" />
+			<p:inputMask id="cc_zip" rendered="true"
+				disabled="#{contractInfo.disableEditModeCustomer}" required="true"
+				value="#{contractInfo.customerZip}">
+				<p:ajax></p:ajax> 
+			</p:inputMask>
+			
+			<p:outputLabel for="cc_town" rendered="true" value="Ort" />
+			<p:inputMask id="cc_town" rendered="true"
+				disabled="#{contractInfo.disableEditModeCustomer}" required="true"
+				value="#{contractInfo.customerTown}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+
+			<p:outputLabel for="cc_country" rendered="true" value="Land" />
+
+			<p:autoComplete var="c" itemValue="#{c}"
+				itemLabel="#{c.name} - #{c.alpha2}" converter="#{simpleConverter}"
+				completeMethod="#{applicationBean.completeCountries}"
+				value="#{contractInfo.customerCountry}"
+				disabled="#{contractInfo.disableEditModeCustomer}" scrollHeight="400"
+				dropdown="true" id="cc_country" forceSelection="false"
+				styleClass="autocomplete_customer closed">
+				<p:ajax event="itemSelect"
+					listener="#{contractInfo.updateCountriesCustomer()}" />
+			</p:autoComplete>
+
+
+
+			<p:outputLabel for="cc_mail" value="e-Mail" />
+			<p:inputMask id="cc_mail"
+				disabled="#{contractInfo.disableEditModeCustomer}" required="true"
+				value="#{contractInfo.customerMailAdress}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+
+			<p:outputLabel for="cc_phone" value="Telefon" />
+			<p:inputMask id="cc_phone"
+				disabled="#{contractInfo.disableEditModeCustomer}" required="true"
+				value="#{contractInfo.customerPhoneNumber}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+
+			<p:outputLabel for="cc_mobil" value="Handy" />
+			<p:inputMask id="cc_mobil"
+				disabled="#{contractInfo.disableEditModeCustomer}"
+				value="#{contractInfo.customerMobilNumber}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+
+		</h:panelGrid>
+
+
+
+		<p:commandButton id="newCust" value=" neu " style="margin-left: 10px;"
+			actionListener="#{contractInfo.ac_createNewCustomer()}"
+			disabled="#{!contractInfo.disableNewBtnCustomer}" update="@form" />
+
+		<p:commandButton id="editCust" value=" bearbeiten "
+			style="margin-left: 10px;"
+			actionListener="#{contractInfo.ac_editCustomer()}"
+			disabled="#{contractInfo.customerContact.lastname == null or !contractInfo.disableEditBtnCustomer}"
+			update="@form" />
+
+		<p:commandButton id="newCust_save" value=" speichern "
+			style="margin-left: 10px;"
+			actionListener="#{contractInfo.ac_createNewCustomer_save()}"
+			disabled="#{!contractInfo.disableSaveBtnCustomer}" update="@form" />
+
+
+
+	</p:panel>
+
+</ui:composition>
+

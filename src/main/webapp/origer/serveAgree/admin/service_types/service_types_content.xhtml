@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:form id="frmList">
+
+		<p:panel id="pnl_serviceTypes" header="Servicearten"
+			styleClass="bs_table invoices_table" toggleable="false"
+			style="margin-bottom:20px">
+
+			<p:dataTable value="#{serviceTypeBean.data}"
+				filteredValue="#{serviceTypeBean.filteredData}" var="st"
+				paginator="true" paginatorPosition="bottom" rows="20"
+				selectionMode="single" rowKey="#{st.id}"
+				selection="#{serviceTypeBean.selectedData}">
+				<p:ajax event="rowSelect" update=":frmList:layButtons"
+					process="@this" />
+				<p:ajax event="rowUnselect" update="@form" process="@this" />
+				<p:ajax event="rowDblselect" listener="#{serviceTypeBean.openServiceType}" 
+					process="@this" />
+
+				<p:column headerText="Name (DE)" filterBy="#{st.name}"
+					filterMatchMode="contains">
+					<h:outputText value="#{st.name}"/>
+                                    
+                </p:column>
+                
+                <p:column headerText="Name (FR)" filterBy="#{st.nameFrench}"
+					filterMatchMode="contains">
+					<h:outputText value="#{st.nameFrench}"/>
+                                    
+                </p:column>
+
+				<p:column headerText="Kurzname" filterBy="#{st.shortname}"
+					filterMatchMode="contains">
+					<h:outputText value="#{st.shortname}"/>
+                </p:column>
+
+				<p:column headerText="Beschreibung" filterBy="#{st.description}"
+					filterMatchMode="contains">
+					<h:outputText value="#{st.description}"/>
+                </p:column>
+
+				<p:column headerText="Aktiv" styleClass="col_active marginTop">
+					<p:selectBooleanCheckbox disabled="true" value="#{st.active}" />
+				</p:column>
+
+			</p:dataTable>
+
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons" rendered="true"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="neu" ajax="false" rendered="true"
+					action="#{serviceTypeBean.add()}" />
+				<p:commandButton value="bearbeiten" ajax="false"
+					action="#{serviceTypeBean.edit()}" styleClass="ml15"
+					disabled="#{serviceTypeBean.selectedData == null}" process="@this" />
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="frmChecklist">
+		<p:panelGrid styleClass="pnlStd frmChecklist">
+			<p:row>
+				<p:column styleClass="header" colspan="2">
+					<p:outputLabel value="Checkliste" />
+
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="error" colspan="2">
+					<p:messages />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Aktiv" />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="active"
+						value="#{checklistEditBean.checklist.active}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Name" />
+				</p:column>
+				<p:column>
+					<p:inputText value="#{checklistEditBean.checklist.name}"
+						required="true" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Service - Elemente" />
+				</p:column>
+				<p:column rendered="#{!checklistEditBean.langFr}">
+					<p:pickList id="checkItems"
+						value="#{checklistEditBean.checklistItemsPickList}" var="item"
+						itemLabel="#{item.checkListItemCategory.name} - #{item.name}"
+						styleClass="picklistItems" filterFunction="true" responsive="true"
+						showSourceFilter="true" showTargetFilter="true"
+						filterMatchMode="contains" required="true" showCheckbox="true"
+						itemValue="#{item}">
+						<o:converter converterId="omnifaces.ListConverter"
+							list="#{checklistEditBean.allItemsList}" />
+					</p:pickList>
+				</p:column>
+
+				<p:column rendered="#{checklistEditBean.langFr}">
+					<p:pickList id="checkItemsFr"
+						value="#{checklistEditBean.checklistItemsPickList}" var="item"
+						itemLabel="#{item.checkListItemCategory.nameFrench} - #{item.nameFrench}"
+						styleClass="picklistItems" filterFunction="true" responsive="true"
+						showSourceFilter="true" showTargetFilter="true"
+						filterMatchMode="contains" required="true" showCheckbox="true"
+						itemValue="#{item}">
+						<o:converter converterId="omnifaces.ListConverter"
+							list="#{checklistEditBean.allItemsList}" />
+					</p:pickList>
+				</p:column>
+
+
+			</p:row>
+			<p:row><p:outputLabel id="selectArea"></p:outputLabel>
+			</p:row>
+			<p:outputLabel id="selectArea">
+				<p:row>
+					<p:dataTable id="sourceEntries" var="ent"
+						value="#{checklistEditBean.source}">
+						<p:column style="width:20px">
+							<h:outputText id="dragIcon" styleClass="ui-icon ui-icon-arrow-4" />
+							<p:draggable for="dragIcon" revert="true" helper="clone" />
+						</p:column>
+
+						<p:column headerText="ID">
+							<h:outputText value="#{ent.id}" />
+						</p:column>
+
+						<p:column headerText="Name">
+							<h:outputText value="#{ent.name}" />
+						</p:column>
+					</p:dataTable>
+				</p:row>
+			</p:outputLabel>
+			<p:outputLabel id="dropArea">
+				<p:row>
+					<p:dataTable id="targetEntries" var="ent"
+						value="#{checklistEditBean.target2}">
+						<p:column style="width:20px">
+							<h:outputText id="dragIcon" styleClass="ui-icon ui-icon-arrow-4" />
+							<p:draggable for="dragIcon" revert="true" helper="clone" />
+						</p:column>
+
+						<p:column headerText="ID">
+							<h:outputText value="#{ent.checklistItem.id}" />
+						</p:column>
+
+						<p:column headerText="Name">
+							<h:outputText value="#{ent.checklistItem.name}" />
+						</p:column>
+						
+						<p:column headerText="SK">
+							<h:outputText  value="#{ent.vc}" />
+						</p:column>
+						
+						<p:column headerText="FK">
+							<h:outputText  value="#{ent.fc}" />
+						</p:column>
+
+					</p:dataTable>
+				</p:row>
+			</p:outputLabel>
+
+
+		</p:panelGrid>
+
+		<br clear="all" />
+
+		<p:spacer styleClass="seperator" />
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+
+			<p:commandButton actionListener="#{checklistEditBean.save()}"
+				onstart="PF('w_dlgWait').show();"
+				oncomplete="PF('w_dlgWait').hide();" value="Speichern"
+				process="@form" update="@form" styleClass="clear" />
+
+			<p:commandButton actionListener="#{checklistEditBean.saveAndClose()}"
+				value="Speichern und Schliessen" process="@form" update="@form"
+				styleClass="clear" />
+		</h:panelGroup>
+		<p:dialog widgetVar="w_dlgWait" modal="true" closable="false"
+			draggable="false" resizable="false" header="Speichern...">
+			<p>Bitte warten...</p>
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="frmOffers" styleClass="editForm">
+	
+		<pe:blockUI widgetVar="bui">
+			<p:graphicImage name="/img/ajax-loader.gif"
+				style="margin-right: 12px; vertical-align: middle;" />
+			<h:outputText value="bitte warten..." styleClass="wordwrap"  />
+		</pe:blockUI>
+
+		<p:panelGrid styleClass="pnlStd frmOffers adminInput">
+			<p:row>
+				<p:column styleClass="header" colspan="2">
+						<p:outputLabel value="Angebote neu"  />
+                        
+                    </p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="error" colspan="2">
+					<p:messages />
+				</p:column>
+			</p:row>
+			<p:row rendered="false">
+				<p:column>
+                        
+                        <p:outputLabel value="Aktiv" />
+                    </p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="active"
+						value="#{offersEditBean.offer.active}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        
+                        <p:outputLabel value="Name" />
+                    </p:column>
+				<p:column>
+					<p:inputText id="itemName" value="#{offersEditBean.offer.name}"
+						required="true" />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column>
+                        
+                        <p:outputLabel value="Angebotsdatum" />
+                    </p:column>
+				<p:column>
+					<p:calendar id="offerDate"
+						value="#{offersEditBean.offer.offerdate}" showTodayButton="true"
+						showWeek="true" navigator="true" required="true"
+						locale="de" />
+				</p:column>
+			</p:row>
+
+
+			<p:row>
+				<p:column>
+                        
+                        <p:outputLabel value="Betrag" />
+                    </p:column>
+				<p:column>
+					<p:inputNumber id="itemAmount"
+						value="#{offersEditBean.offer.amount}" symbol=" €"
+						symbolPosition="s" thousandSeparator="." decimalSeparator=","
+						equired="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<p:outputLabel for="state" value="Status:" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu id="state" value="#{offersEditBean.offer.state}">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItem itemLabel="ok" itemValue="ok" />
+						<f:selectItem itemLabel="abgelehnt" itemValue="abgelehnt" />
+						<f:selectItem itemLabel="gesendet" itemValue="gesendet" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+			<p:row>
+
+				<p:column>
+                        
+                        <p:outputLabel value="Wartungsvertrag" />
+                    </p:column>
+				<p:column>
+					<p:autoComplete var="ser" itemValue="#{ser}" required="true"
+						itemLabel="#{ser.serviceContractNumber}"
+						converter="#{simpleConverter}"
+						completeMethod="#{offersEditBean.completeServiceContract}"
+						value="#{offersEditBean.serviceContract}" size="25"
+						scrollHeight="400" style="float:left" dropdown="true" id="serID">
+
+						<p:ajax event="itemSelect" 
+							listener="#{offersEditBean.initializeItems}"
+							onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+							update=":frmOffers:offerItems :frmOffers:itemsButton itemsButtonAll" />
+					</p:autoComplete>
+					<p:commandButton id="itemsButton" 
+							style="margin-left: 150px;"
+							action="#{offersEditBean.showOnlyActiveElements}"  
+							disabled="#{offersEditBean.serviceContract == null}"  process="@this"
+							update=":frmOffers:offerItems"
+							value="Elemente mit Status anbieten" />
+							
+					<p:commandButton id="itemsButtonAll" 
+							style="margin-left: 150px;"
+							actionListener="#{offersEditBean.showAllElements}"  
+							disabled="#{offersEditBean.serviceContract == null}"  process="@this"
+							update=":frmOffers:offerItems"
+							value="alle Elemente" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        
+                        <p:outputLabel value="Zuweisung Element" />
+                    </p:column>
+				<p:column>
+					<p:pickList id="offerItems"
+						value="#{offersEditBean.serviceElementPickList}" var="el"
+						itemLabel="#{el.elementnumber}" styleClass="picklistItems"
+						filterFunction="true" responsive="true" required="true"
+						showSourceFilter="true" showTargetFilter="true"
+						filterMatchMode="contains" showCheckbox="true" itemValue="#{el}">
+						<o:converter converterId="omnifaces.ListConverter"
+							list="#{offersEditBean.allItemsList}" />
+					</p:pickList>
+				</p:column>
+			</p:row>
+			
+			<p:row>
+
+				<p:column>
+                        
+                        <p:outputLabel value="Dateien Hochladen" />
+                    </p:column>
+				<p:column>
+					<p:fileUpload
+						fileUploadListener="#{offersEditBean.handleFileUpload}"
+						fileLimit="10" fileLimitMessage="maximal 10 Dateien"
+						mode="advanced" dragDropSupport="true" sizeLimit="10000000"
+						multiple="true" process="@this,fileTable" update="fileTable"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column colspan="2">
+
+					<p:dataTable var="file" id="fileTable"
+						emptyMessage="keine Dateien hinterlegt"
+						value="#{offersEditBean.fileList}">
+						<p:column headerText="url">
+							<p:outputLabel value="#{file.url}" />
+						</p:column>
+
+						<p:column headerText="delete" width="30">
+							<p:commandButton action="#{offersEditBean.actionDelFile}"
+								update="@form" ajax="false" id="delFile"
+								icon="ui-icon-closethick" title="Icon Only">
+								<f:setPropertyActionListener target="#{offersEditBean.delFile}"
+									value="#{file.id}" />
+							</p:commandButton>
+						</p:column>
+						<p:column headerText="open" width="30">
+							<p:commandButton
+								actionListener="#{offersEditBean.actionOpenFile(file)}"
+								update="@form" ajax="false" id="openFile"
+								icon="ui-icon-circle-arrow-s" title="Icon Only">
+								<p:fileDownload value="#{offersEditBean.file}" />
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+
+				</p:column>
+			</p:row>
+
+		</p:panelGrid>
+
+		<br clear="all" />
+
+		<p:spacer styleClass="seperator" />
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<p:commandButton actionListener="#{offersEditBean.save()}"
+				onstart="PF('w_dlgWait').show();"
+				oncomplete="PF('w_dlgWait').hide();" value="Speichern"
+				process="@form" update="@form" styleClass="clear" />
+			<p:commandButton actionListener="#{offersEditBean.saveAndClose()}"
+				value="Speichern und Schliessen" process="@form" update="@form"
+				styleClass="clear" />
+
+		</h:panelGroup>
+
+		<p:dialog widgetVar="w_dlgWait" modal="true" closable="false"
+			draggable="false" resizable="false" header="Speichern...">
+			<p>Bitte warten...</p>
+		</p:dialog>
+	</h:form>
+
+</ui:composition>

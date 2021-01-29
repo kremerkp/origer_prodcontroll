@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="frmChecklistItem" styleClass="editForm">
+		<p:panelGrid styleClass="pnlStd frmChecklist adminInput" style="width:1400px !important">
+			<p:row>
+				<p:column styleClass="header" colspan="2">
+
+					<p:outputLabel value="Prüfteile anlegen/bearbeiten" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="error" colspan="2">
+					<p:messages />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width:140px !important">
+
+					<p:outputLabel value="Aktiv"  />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="active"
+						value="#{checklistItemEditBean.checklistItem.active}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Name (DE)" />
+				</p:column>
+				<p:column>
+					<p:inputText id="itemName"
+						value="#{checklistItemEditBean.checklistItem.name}"
+						required="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Name (FR)" />
+				</p:column>
+				<p:column>
+					<p:inputText id="itemNameFrench"
+						value="#{checklistItemEditBean.checklistItem.nameFrench}"
+						required="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Kategorie Checkliste" />
+				</p:column>
+				<p:column>
+					<p:autoComplete var="it" itemValue="#{it}" required="true"
+						itemLabel="#{it.name}" converter="#{simpleConverter}"
+						completeMethod="#{checklistItemEditBean.completeItemCategory}"
+						value="#{checklistItemEditBean.checklistItemCategory}" size="25"
+						scrollHeight="400" style="float:left" dropdown="true" id="snID"
+						styleClass="nutsPortAutoComplete">
+					</p:autoComplete>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+
+		<br clear="all" />
+
+		<p:spacer styleClass="seperator" />
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<p:commandButton actionListener="#{checklistItemEditBean.save()}"
+				onstart="PF('w_dlgWait').show();"
+				oncomplete="PF('w_dlgWait').hide();" value="Speichern"
+				process="@form" update="@form" styleClass="clear" />
+			<p:commandButton
+				actionListener="#{checklistItemEditBean.saveAndClose()}"
+				value="Speichern und Schliessen" process="@form" update="@form"
+				styleClass="clear" />
+		</h:panelGroup>
+		<p:dialog widgetVar="w_dlgWait" modal="true" closable="false"
+			draggable="false" resizable="false" header="Speichern...">
+			<p>Bitte warten...</p>
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

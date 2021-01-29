@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Origer-Wartung</title>
+	<h:outputStylesheet library="css" name="default.css" />
+	<h:outputStylesheet library="css" name="custom.css" />
+	<h:outputStylesheet library="css" name="primefaces.css" />
+	<h:outputScript library="js" name="default.js" />
+	<link rel="shortcut icon"
+		href="https://maintenance.origer.lu:58443/origer/filearchiv/material/fav_origer.png" />
+</h:head>
+<h:body styleClass="login">
+        #{usersBean.checkForValidSession()}
+        
+        <div class="logo-login" />
+
+	<h:form id="frmLogin">
+		<div id="login">
+
+			<p:panelGrid styleClass="pnlStd" id="tblLogin">
+				<p:row rendered="#{flash['error'] != null}">
+					<p:column colspan="2" styleClass="error-msg">
+						<p class="error-msg">Anmeldung fehlgeschlagen</p>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="loginLabel username" id="username_col">
+						<h3>Benutzername:</h3>
+					</p:column>
+					<p:column styleClass="inputCol login_username">
+						<p:inputText value="#{usersBean.user.username}" id="username"
+							title="shaosfd" style="background-color:white;"
+							styleClass="default-focus"
+							onkeypress="if (event.keyCode === 13) {
+                                                 $('#frmLogin\\:btnLogin').trigger('click');
+                                                 console.log('DEBUG');
+                                             }" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="loginLabel">
+						<h3>Passwort:</h3>
+					</p:column>
+					<p:column styleClass="inputCol">
+						<p:password value="#{usersBean.user.password}" id="password"
+							onkeypress="if (event.keyCode === 13) {
+                                                $('#frmLogin\\:btnLogin').trigger('click');
+                                                console.log('DEBUG');
+                                            }" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="2" styleClass="loginButton">
+						<p:commandButton value=" anmelden "
+							actionListener="#{usersBean.login()}" process="@form"
+							onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+							id="btnLogin" update="@form" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</div>
+
+		<pe:blockUI widgetVar="bui">
+			<p:graphicImage name="/img/ajax-loader.gif"
+				style="margin-right: 12px; vertical-align: middle;" />
+			<h:outputText value="bitte warten..." styleClass="wordwrap"  />
+		</pe:blockUI>
+	</h:form>
+</h:body>
+</html>
+

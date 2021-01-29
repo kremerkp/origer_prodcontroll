@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2017-05-05T10:08:45 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="printHist_elementTable" pageWidth="565" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="565" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" resourceBundle="reports/i18n/i18n" uuid="73df1df4-13af-4fbe-bde7-f930ebe5a763">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="checklistItemName" class="java.lang.String">
+		<fieldDescription><![CDATA[checklistItemName]]></fieldDescription>
+	</field>
+	<field name="visualControl" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[visualControl]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[description]]></fieldDescription>
+	</field>
+	<field name="checkedAsOk" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[checkedAsOk]]></fieldDescription>
+	</field>
+	<field name="checkedAsRepaired" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[checkedAsRepaired]]></fieldDescription>
+	</field>
+	<field name="createOffer" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[createOffer]]></fieldDescription>
+	</field>
+	<field name="functionalControl" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[functionalControl]]></fieldDescription>
+	</field>
+	<field name="checkedAsLack" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[checkedAsLack]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="checkedAsDefect" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[checkedAsDefect]]></fieldDescription>
+	</field>
+	<field name="urlImage" class="java.lang.String">
+		<fieldDescription><![CDATA[urlImage]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="50">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="20" width="220" height="30" backcolor="#F0F0F0" uuid="f0079b20-c71d-4148-beff-354ad6297007"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{history.checklist.check}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="220" y="20" width="31" height="30" backcolor="#F0F0F0" uuid="08fc75a4-c7bf-46d3-a538-0476fc3aae6a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{history.checklist.fuko}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="251" y="20" width="31" height="30" backcolor="#F0F0F0" uuid="bec9d77b-da8b-4ef1-8f0d-a1cd78b80880"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{history.checklist.siko}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="282" y="20" width="31" height="30" backcolor="#F0F0F0" uuid="00f4a2c6-dc41-4d1b-b71d-4c70a4d84917"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{history.checklist.ok}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="313" y="20" width="31" height="30" backcolor="#F0F0F0" uuid="f93c4ae0-9c68-4642-bbfe-bfcb9e2bfa09"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{history.checklist.defekt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="375" y="20" width="31" height="30" backcolor="#F0F0F0" uuid="29b3927d-117a-433f-99b2-9f43e7108071"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{history.checklist.angebot}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="406" y="20" width="31" height="30" backcolor="#F0F0F0" uuid="878a8cbd-9216-46c7-b33b-d3edfaa9fbf1"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{history.checklist.reapariert}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="344" y="20" width="31" height="30" backcolor="#F0F0F0" uuid="a3da7cd4-427c-4340-bbf9-19490d13e986"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{history.checklist.mangel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="437" y="20" width="113" height="30" backcolor="#F0F0F0" uuid="409001ed-a8e8-470d-8689-af207accc692">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{history.checklist.remark}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="220" height="23" uuid="7a98be8c-3cc1-458b-a046-c90ca666fa1d"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{checklistItemName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="31" height="23" uuid="782aa303-ea19-428a-87d6-9ad85028b431"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{functionalControl} == true ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="0" width="31" height="23" uuid="3eadcd29-d3ff-4f33-a055-62aec932c91f"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{createOffer} == true ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="406" y="0" width="31" height="23" uuid="3a46ed65-ed4d-4708-a1c5-fab0a42591f2"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{checkedAsRepaired} == true ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="344" y="0" width="31" height="23" uuid="b62fbe93-2bdd-4d26-b85d-0224cbd8226e"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{checkedAsLack} == true ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="251" y="0" width="31" height="23" uuid="48a56cde-cd99-4b39-af60-eaa14483d033"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{visualControl} == true ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="313" y="0" width="31" height="23" uuid="4c778a79-4a6f-43ee-bec4-d2c1eb82675f"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{checkedAsDefect} == true ? "X" : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="437" y="0" width="113" height="23" uuid="106caecb-7c51-4fbd-a568-7d6404141a71">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="282" y="0" width="31" height="23" uuid="46e70de0-6f4a-44ac-adfb-c8122f0ecda5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{checkedAsOk} == true ? "X" : ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

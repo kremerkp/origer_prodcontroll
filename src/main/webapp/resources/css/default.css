@@ -1,0 +1,801 @@
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
+	margin-right: 25px;
+}
+
+.clear {
+	clear: both;
+}
+
+.heute {
+	margin-left: 10px;
+}
+
+label#frmRecord\:lbl_region2 {
+	padding-left: 48px;
+}
+
+input#frmRecord\:regionTo {
+	margin-left: 10px;
+}
+
+.mr15 {
+	margin-right: 15px;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
+#back\3a back {
+	background-color: #c9dded;
+}
+
+body {
+	background: #d5d5d5;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin: 0 0 30px 0;
+	padding: 0;
+}
+
+#frmLogin\:tblLogin {
+	margin: 0px auto 0;
+}
+
+#frmLogin\:tblLogin {
+	width: 100px !important;
+}
+
+div#bottom {
+	position: fixed;
+	bottom: 0;
+	z-index: 999;
+	left: 0;
+	width: 100%;
+	height: 25px;
+	margin: 0;
+	padding: 0;
+	background: black;
+}
+
+div#bottom p {
+	margin-top: 5px;
+	margin-left: 25px;
+	color: white;
+}
+
+div#bottom p span {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+div#bottom a.logout {
+	display: block;
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	color: white;
+}
+
+div#content {
+	margin: 0 0 0 0;
+}
+
+div#content h1 {
+	color: white;
+}
+
+div#top ul li.level-switcher {
+	position: absolute;
+	right: 50px;
+	top: 0;
+}
+
+img.seperator {
+	height: 10px;
+	display: block;
+	clear: both;
+}
+
+/* users_list.xhtml */
+table.frmUsers {
+	float: left;
+	width: 450px;
+}
+
+table.frmUsers div.picklistItems {
+	width: 700px!important;
+	
+}
+
+table.frmUsers .ui-picklist .ui-picklist-list{
+	height: 100px!important;
+}
+
+table.frmUsers .sc .ui-picklist-list{
+	height: 350px!important;
+}
+
+
+table.frmUsers td:first-child {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+table.pnlStd.frmVessel {
+	margin-left: 25px;
+	width: 98%;
+	float: left;
+}
+
+table.pnlStd.frmRoles {
+	margin-left: 25px;
+	width: 600px;
+	float: left;
+}
+
+table.pnlStd {
+	border: 1px solid #999;
+	margin-bottom: 10px;
+	min-width: 0px !important;
+}
+
+div.backNavigation {
+	width: 98%;
+	border: 1px solid darkblue;
+	background: lightblue;
+	margin: 5px 0 10px 0;
+	padding: 5px 0 5px 10px;
+}
+
+div.backNavigation a {
+	text-decoration: none;
+}
+
+button#frmMenu\:menuButton {
+	margin-right: 20px;
+}
+
+form#frmUsersAccount>table {
+	width: 500px;
+}
+
+form#frmUsersAccount>table>tbody>tr>td:first-child {
+	width: 145px;
+}
+
+form#frmUsersAccount>table>tbody>tr>td:last-child input {
+	width: 100%;
+}
+
+.margin-top {
+	margin-top: 20px;
+}
+/* Left Menu */
+body.three-column-layout div#left {
+	position: fixed;
+	width: 150px;
+	height: 93%;
+	background: #C4E1E9;
+	color: white;
+	margin: 10px 0 0 0;
+	padding: 25px 0 0 0;
+}
+
+body.three-column-layout div#left ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+body.three-column-layout div#left ul li {
+	padding: 0 0 0 10px;
+	line-height: 30px;
+	margin: 0 15px 5px 0;
+}
+
+body.three-column-layout div#left ul li.active {
+	background: #f9f9f9;
+}
+
+body.three-column-layout div#left ul li.active a {
+	color: black;
+}
+
+body.three-column-layout div#left ul li a {
+	line-height: 16px;
+	color: white;
+	text-decoration: none;
+}
+
+body.three-column-layout div#content {
+	margin-left: 175px;
+}
+
+div.fileUpload {
+	width: 800px;
+	R
+}
+
+div.back-link {
+	margin: 0 15px 15px 0;
+	padding: 7px;
+	border: 1px solid #9897A0;
+	background: white;
+}
+
+div.back-link a {
+	text-decoration: none;
+	color: #9897A0;
+}
+
+.w100 {
+	width: 100%;
+}
+
+.ml15 {
+	margin-left: 15px;
+}
+
+.mb15 {
+	margin-bottom: 15px;
+}
+
+.mt15 {
+	margin-top: 15px;
+}
+
+div.panel {
+	display: inline-block;
+	background: #ffffff;
+}
+
+div.panel h2 {
+	color: #9897A0;
+	padding: 7px 10px;
+	font-size: 25px;
+	margin: 0;
+}
+
+div.panel div.panel-element {
+	float: left;
+	margin: 8px 25px 8px 8px;
+	/* border: 1px solid blue; */
+	vertical-align: top;
+}
+
+div.panel div.panel-element label {
+	display: block;
+	margin-top: 5px;
+}
+
+div.panel div.panel-element label.inline {
+	display: inline;
+}
+
+div.panel div.panel-element input[type="text"], div.panel div.panel-element textarea
+	{
+	padding: 4px;
+	width: 100%;
+}
+
+div.panel div.panel-element div.ui-selectonemenu {
+	width: 100% !important;
+}
+
+div.application-message {
+	background: #ffcccc;
+	color: #660000;
+	font-size: 16px;
+	font-weight: bold;
+	border: 1px solid red;
+	padding: 8px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+
+div.panel div.panel-element label.inputMargin5 {
+	margin-top: 3px;
+	margin-bottom: 5px;
+}
+
+.inputMargin5 input {
+	width: 40px !important;
+	margin-bottom: 5px;
+}
+
+.inputMargin5 {
+	margin-bottom: 5px !important;
+}
+
+div.inputMargin5 {
+	margin-bottom: 5px;
+	margin-right: 5px;
+}
+
+form .tile {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+button.tile_f5P, button.tile_f6P, button.tile_dbd {
+	padding-top: 15px;
+}
+
+div.tileNavigation button.ui-button {
+	width: 200px !important;
+	height: 175px !important;
+	margin-right: 35px;
+	margin-bottom: 25px;
+}
+
+div#outerTile {
+	width: 721px;
+	float: left;
+}
+
+div#outerTile div.ui-widget-content {
+	border: 0px solid #a8a8a8;
+	background: none;
+}
+
+div#tagesjournal ui-panel-title {
+	background: none;
+}
+
+div#tagesjournal div.ui-widget-content {
+	background: white;
+}
+
+div#tagesjournal {
+	display: flex !important;
+}
+
+div.autocomplete_customer {
+	
+}
+
+.acc {
+	position: absolute;
+}
+
+.separator {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+div.input_margin span {
+	float: left;
+}
+
+div.dropBoxMargin {
+	margin-left: 40px;
+	margin-right: 15px;
+}
+
+div.dropBoxMargin.anzahlContainerLabel {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.ui-grid-col-10.margin.charge {
+	margin-bottom: 5px;
+}
+
+button.ui-priority-primary.backbutton {style = height:30px;
+	width: 90%;
+	margin-bottom: 10px;
+	margin-rigth: 10px;
+}
+
+.ui-grid-col-10 {
+	margin-top: 3px;
+}
+
+.ui-grid-col-10.margin {
+	margin-bottom: -10px;
+}
+
+label.recordTitle {
+	font-size: 30px !important;
+	font-variant: small-caps;
+}
+
+div.inputFieldInsideMargin {
+	margin-left: 15px;
+	margin-right: 15px;
+	float: left;
+}
+
+div.input_margin {
+	float: left;
+	margin-top: 5px;
+}
+
+.ui-grid-col-10 {
+	width: 99% !important;
+}
+
+label.lbl_text_float_inner {
+	margin-left: 40px;
+	margin-top: 5px;
+	float: left;
+}
+
+table.ui-selectoneradio label {
+	font-size: 16px;
+	margin-right: 10px;
+	margin-left: 5px;
+}
+
+table.ui-selectoneradio {
+	margin-top: -4px;
+	margin-right: 55px;
+}
+
+div.lbl_text_float_inner label {
+	margin-left: 40px;
+	margin-top: 5px;
+	float: left;
+}
+
+button.ui-button.ui-state-default {
+	border-radius: 0;
+}
+
+label.lbl_text_float_inside {
+	float: left;
+	margin-right: 15px;
+	margin-top: 5px;
+}
+
+div.lbl_text_float_inside label {
+	margin-left: 40px;
+	margin-right: 15px;
+	margin-top: 10px;
+	float: left;
+}
+
+.newRecordBtn {
+	margin-left: 10px;
+	height: 25px;
+}
+
+label.lbl_inside_dropDown {
+	margin-top: 5px;
+	margin-left: 43px;
+	margin-right: 10px;
+}
+
+div.lbl_first_right label {
+	float: left;
+	width: 110px;
+	margin-top: 10px;
+}
+
+div.lbl_text_float_outer label {
+	float: left;
+}
+
+span.pe-timepicker {
+	margin-left: 3px;
+}
+
+label.lbl_text_float, span.lbl_date_float input {
+	height: 25px;
+	font-size: 16px;
+	display: table-cell;
+	vertical-align: middle;
+	float: left;
+	margin-top: 5px;
+}
+
+div.lbl_text_float {
+	float: left;
+}
+
+label.lbl_text, span.lbl_date input {
+	height: 25px;
+	font-size: 16px;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+label.lbl_date rigth {
+	text-align: right;
+}
+
+input.ui-inputfield, .ui-widget-content input.ui-inputfield,
+	.ui-widget-header input.ui-inputfield {
+	height: 25px !important;
+	font-size: 16px !important;
+	display: table-cell !important;
+	vertical-align: middle !important;
+}
+
+button.pe-timepicker-trigger {
+	margin: 2px;
+	padding-left: 4px;
+	margin-left: 6px;
+}
+
+}
+span.date_in input {
+	width: 228px;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default,
+	.ui-widget-header .ui-state-default {
+	border: 1px solid rgb(229, 229, 229);
+}
+
+.pe-timepicker-input {
+	width: 100px;
+}
+
+#content input[disabled] {
+	background-color: white;
+	color: black;
+}
+
+div.input_margin.disabledLook input[readonly] {
+	background-color: #ECF3F9 !important;
+	border-color: #ADADAC;
+}
+
+div.input_margin.disabledLook button {
+	background-color: #ECF3F9 !important;
+	border-color: #ADADAC;
+	pointer-events: none;
+}
+
+input[disabled] {
+	background-color: white;
+	color: black;
+}
+
+div.input_margin.btnChrg {
+	margin-left: 36px;
+	margin-top: 6px;
+}
+
+div.input_margin.ladestatus {
+	margin-left: 10px;
+	margin-right: 5px;
+}
+
+/*
+	Erfassung Chargen / Buttons ok 
+	// START 
+*/
+div#loader {
+	box-shadow: none;
+	background-color: transparent;
+	background: transparent;
+	border: none;
+}
+
+div#loader>div {
+	box-shadow: none;
+	background-color: transparent;
+	background: transparent;
+	border: none;
+}
+
+div.ui-panel-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-all
+	{
+	background-color: white;
+	border: none;
+	font-size: 20px;
+	font-weight: normal;
+	display: table-cell;
+	font-variant: small-caps;
+}
+
+.ui-panel .ui-panel-content {
+	padding: 5px 5px !important;
+}
+
+.ui-panel .ui-panel-titlebar {
+	padding: 4px 3px 0px 5px !important;
+}
+
+div.ui-datatable-tablewrapper {
+	width: 100% !important;
+	border: none !important;
+	border-left: 1px solid #DADADA !important;
+	border-right: 1px solid #DADADA !important;
+}
+
+div.ui-datatable div.ui-paginator {
+	width: 100% !important;
+}
+
+button.ui-button.ui-state-default {
+	
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default,
+	.ui-widget-header .ui-state-default {
+	border: 1px solid #a8a8a8;
+	background: rgba(0, 0, 0, 0.74) !important;
+	/*
+rgba(142, 179, 124, 0.62)!important;
+*/
+	font-weight: bold;
+	color: white;
+	text-shadow: none;
+}
+
+ul.ui-autocomplete-multiple-container.ui-widget.ui-inputfield.ui-state-default.ui-corner-all
+	{
+	background: #c9dded !important;
+}
+
+.ui-growl {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: 25px;
+	margin-left: -200px;
+	width: 550px;
+	height: 80px;
+}
+
+div.ui-dialog div.ui-dialog-titlebar {
+	background: #0A1F30 !important;
+	background-image: none;
+	text-shadow: none;
+	box-shadow: none;
+}
+
+div.ui-state-error, input.ui-state-error {
+	border-color: red !important;
+	border-width: 2px !important;
+}
+
+td.ui-editable-column.isAval label, td.ui-editable-column.isLoaded label
+	{
+	width: 100px !important;
+}
+
+img.spacerTileAdmin {
+	display: inherit;
+	padding-bottom: 50px;
+}
+
+span.inputNumberFilterleft input {
+	margin-right: 20px;
+}
+
+div label.lbl_text_left {
+	margin-left: 20px;
+	font-size: 16px;
+}
+
+.ui-inputfield.ui-state-focus, .ui-widget-content /*
+ SEARCH-MASK END
+*/ 
+
+
+ul.ui-autocomplete-multiple-container.ui-widget.ui-inputfield.ui-state-focus.ui-corner-all
+	{
+	background: white !important;
+	border: 2px solid blue;
+	box-shadow: none;
+}
+
+input.ui-inputfield.ui-inputtext.ui-widget.ui-state-focus.ui-corner-all.pe-inputNumber
+	{
+	background: white !important;
+	border: 2px solid blue;
+	box-shadow: none;
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield
+	{
+	background: #ffffff;
+	-moz-box-shadow: inset 0 0 1em black;
+	-webkit-box-shadow: inset 0 0 1em black;
+	box-shadow: none !important;
+	color: black;
+}
+
+table.frmUsersOriger {
+	float: left;
+	width: 600px;
+}
+
+table.frmUsersOriger td:first-child {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+div.layButtons{
+	margin-bottom: 50px!important;
+}
+
+td.dn_text{
+		text-align: center!important;
+}
+
+td.dn_text button{
+		right: -18px!important; 
+}
+
+td.dn_amount, td.dn_amount input, td.dn_floor input{
+	text-align: center; 
+}
+
+div.addElements td.dn_amount, td.dn_amount span{
+	text-align: center!important; 
+}
+
+td.dn_amount span{
+	text-align: center; 
+}
+
+
+
+tr.lastRow{
+	background: white!important;
+	vertical-align: middle;
+	border-bottom: 1px solid black; 
+	height: 60px; 
+}
+
+div.addElements tr.prelastRow{
+	vertical-align: middle;
+	border-bottom: 1px solid #cfcccc!important; 
+	height: 60px; 
+}
+
+.lastRow > td.add_delete_note{
+	text-align: right; 
+}
+.lastRow td.add_delete_note{
+	text-align: right!important;
+	padding-right: 23px!important;
+}
+
+div.addElements div, div.addElements table, div.addElements tr, div.addElements td, div.addElements th, div.addElements tbody{
+	border: none!important; 
+}
+
+div.addElements thead{
+	height: 50px; 
+	background: #4f4f4f;
+}
+
+div.addElements thead span{
+	color: white;
+	font-size: 12pt; 
+}
+
+div.addElements thead th{
+	vertical-align: middle!important;
+}
+
+#contractForm\:addElements_data{
+	border: none!important;
+}
+
+tr.lastRow td{
+	margin-top: 2px; 
+	width: 100px;
+	border: none; 
+	
+
+color: black;
+
+font-weight: bold;
+
+text-align: right;
+}

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<div id="diagServiceType">
+		<p:dialog header="Elemente hinzufügen" widgetVar="addServiceElements"
+			modal="true" height="250">
+			<h:panelGrid columns="2" cellpadding="5">
+			 <h:panelGrid id="pnl_refreshobject" columns="2" cellpadding="5">
+					<p:outputLabel for="numberOfElements" value="Anz: " />
+					<p:spinner id="numberOfElements" min="0" max="9999"   value="#{contractInfo.numberOfElements}" >
+					</p:spinner>
+
+					<p:outputLabel for="elementChecklist" value="Checkliste: " />
+
+					<p:autoComplete var="c" itemValue="#{c}" itemLabel="#{c.code}"
+						converter="#{simpleConverter}"
+						completeMethod="#{contractInfo.completeChecklist}"
+						value="#{contractInfo.elementChecklist}"  scrollHeight="400"
+						dropdown="true" id="elementChecklist" forceSelection="false"
+						styleClass="autocomplete_customer closed">
+					</p:autoComplete> 
+				</h:panelGrid>
+				<f:facet name="footer"> 
+					<p:commandButton value="ok"   onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+						onclick="PF('addServiceElements').hide();"
+						actionListener="#{contractInfo.generateElementsForSelectedIntervall()}"
+						update="@form" />
+					<p:commandButton value="chancel"
+						onclick="PF('addServiceElements').hide();" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</div>
+
+</ui:composition>

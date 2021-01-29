@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<p:panel id="pnl_servicesHistoryTable" 
+		styleClass="servicesElementsTable_table" toggleable="false"
+		style="margin-bottom:20px; height: 70%">
+		<h3 style="margin: 3px 0px 0px 10px; font-size: 20px; font-weight: normal; font-variant: small-caps;" >#{msg['report.confirmation.element.history']}</h3>
+		<h:panelGrid columns="3" cellpadding="5">
+			<p:dataTable var="hist" editable="true" id="histElTab" styleClass="stateTable"
+				rowKey="#{hist}" selectionMode="single"
+				selection="#{serviceCustomerHistoryBean.historyElementsSelected}"
+				value="#{serviceCustomerHistoryBean.historyElements}">
+				<p:ajax event="rowSelect" process="@this"
+					listener="#{serviceCustomerHistoryBean.onRowSelectShowChecklist}"
+					update=":customerView:checkTab" />
+				<f:facet name="header">
+					<p:panelGrid styleClass="historyHeader">
+						<p:row>
+							<p:column styleClass="#{serviceCustomerHistoryBean.styleState('state')}  col_ele"   >
+								<p:outputLabel styleClass="col1"
+									value="#{serviceCustomerHistoryBean.selectedElement.elementnumber} - #{serviceCustomerHistoryBean.selectedElement.lastState}"></p:outputLabel>
+							</p:column>
+							<p:column styleClass="col_button" >
+								<p:commandButton styleClass="col2" value=" " disabled="#{empty serviceCustomerHistoryBean.selectedElement.elementnumber}"
+									icon="fa fa-comments" onclick="PF('addNotice').show();"></p:commandButton>
+							</p:column>
+						</p:row>
+					</p:panelGrid>
+				</f:facet>
+
+				<p:column headerText="#{msg['history.name']}"
+					filterBy="#{hist.name}" styleClass="oneFilterSmall" width="125"
+					rendered="false" filterMatchMode="contains">
+					<h:outputText value="#{hist.name}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.date']}"
+					filterBy="#{hist.date}" styleClass="oneFilterSmall" width="125"
+					filterMatchMode="contains">
+					<h:outputText value="#{hist.date}"
+						rendered="#{sessionBean.isAdmin}">
+						<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
+					</h:outputText>
+					<h:outputText value="#{hist.date}"
+						rendered="#{!sessionBean.isAdmin}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="#{msg['history.status']}"
+					filterBy="#{hist.state}" width="100"
+					styleClass="#{serviceCustomerHistoryBean.styleState(hist.state)} oneFilterSmall"
+					filterMatchMode="contains">
+					<h:outputText value="#{hist.state}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.comment']}"
+					filterBy="#{hist.description}" styleClass="oneFilterSmall"
+					width="150" filterMatchMode="contains">
+					<h:outputText value="#{hist.description}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.repaired']}"
+					styleClass="oneFilterSmall"
+					filterBy="#{hist.checklistitemsRepaired}"
+					filterMatchMode="contains">
+					<h:outputText value="#{hist.checklistitemsRepaired}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.to.be.repaired']}"
+					styleClass="oneFilterSmall"
+					filterBy="#{hist.checklistitems2Repair}" filterMatchMode="contains">
+					<h:outputText value="#{hist.checklistitems2Repair}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.monteure']}"
+					styleClass="oneFilterSmall" filterMatchMode="contains">
+					<p:repeat value="#{hist.mechanics}" var="mont">
+						<h:outputText value="#{mont}" />
+						<br />
+					</p:repeat>
+				</p:column>
+
+				<p:column headerText=" " styleClass="delete" width="55" >
+					<p:commandButton value="" icon="fa fa-remove"
+						style="height:30px; background-color:red" 
+						rendered="#{hist.state eq '-'}"
+						styleClass="deleteButton" onclick="PF('delNotice').show();"
+						title="Eintrag löschen">
+						<f:setPropertyActionListener value="#{hist}"
+							target="#{serviceCustomerHistoryBean.historyElementsSelected}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+	</p:panel>
+
+</ui:composition>
+

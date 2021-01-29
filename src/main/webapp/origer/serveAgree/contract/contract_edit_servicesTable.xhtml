@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<p:panel id="pnl_servicesTable" header=""
+		styleClass="buildingSite_table" toggleable="false"
+		style="margin-bottom:20px; height: 30%">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:dataTable var="el" value="#{contractInfo.serviceList}"
+				id="serviceTable" selectionMode="single" styleClass="contract_intervalls"
+				selection="#{contractInfo.selectedService}"
+				filteredValue="#{contractInfo.filteredServiceList}" paginator="true"
+				paginatorPosition="bottom" editable="true" rowKey="#{el}"
+				editMode="cell" rows="10">
+
+				<p:ajax event="rowSelect" onstart="PF('bui').block();"
+					oncomplete="PF('bui').unblock();"
+					update="layButtons :contractForm:pnl_servicesElementsTable :contractForm:generateChecklistForService"
+					listener="#{contractInfo.updateElementList()}" process="@this" />
+				<p:ajax event="rowUnselect" update="@form" process="@this" /> 
+				<p:ajax event="cellEdit" listener="#{contractInfo.onCellEdit}"/>
+
+				<f:facet name="header">
+					<h:panelGroup layout="block" id="layButtons"
+						styleClass="margin-top">
+						<div>
+							<p:commandButton value="elemente erstellen" id="createElementsButton"
+								onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+								onclick="PF('addServiceElements').show();"
+								disabled="#{contractInfo.selectedService == null or !contractInfo.elementsAssigned}" />
+
+							<p:commandButton value="elemente zuordnen"
+								onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+								onclick="PF('assignServiceElements').show();"
+								disabled="#{contractInfo.selectedService == null}" />
+
+							<p:commandButton value="service löschen"
+								onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+								onclick="PF('delServiceElements').show();"
+								disabled="#{contractInfo.selectedService == null}" />
+								
+							<p:commandButton  ajax="true"  id="generateChecklistForService" rendered="false"
+								actionListener="#{contractInfo.generateHistEntriesSelectedServices}" 
+								disabled="#{contractInfo.selectedService == null}"   onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+								update=":contractForm" value="Checkliste für Intervall erstellen" />
+							
+							<p:commandButton  ajax="true"  id="generateChecklistForService2"
+								actionListener="#{contractInfo.generateHistEntriesAllServices}" 
+								disabled="#{contractInfo.selectedService == null}"   onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+								update=":contractForm" value="Checkliste für alle Intervalle erstellen" />
+
+							<p:commandButton value="service aktiv setzen" rendered="false"
+								actionListener="#{contractInfo.setServiceActive}"
+								onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+								ajax="true" update=":contractForm:serviceTable"
+								disabled="#{contractInfo.selectedService == null}" />
+
+
+						</div>
+					</h:panelGroup>
+				</f:facet>
+				
+				<p:column headerText="" width="5"  >
+					<h:outputText id="fade" value="#{el.comment.length() > 0 ? '**' : ''}"/>
+				   <p:tooltip id="toolTipFade" for="fade" value="#{el.comment}" position="top"/>
+				</p:column>
+								
+				<p:column headerText="Serviceart" filterBy="#{el.serviceType.name}" styleClass="leftCol"
+					sortBy="#{el.serviceType.name}">
+					<h:outputText value="#{el.serviceType.name}" />
+				</p:column>
+				<p:column headerText="Service bis" styleClass="centerCol"
+					filterBy="#{el.latestServiceDate}" sortBy="#{el.latestServiceDate}">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{el.latestServiceDate}">
+								<f:convertDateTime type="date" pattern="dd-MM-yy" />
+							</h:outputText>
+						</f:facet>
+						<f:facet name="input">
+							<p:calendar value="#{el.latestServiceDate}"
+								showTodayButton="true" showWeek="true" navigator="true"
+								mask="true" locale="de"/>
+
+						</f:facet>
+					</p:cellEditor>
+
+
+				</p:column>
+				<p:column headerText="Techniker" styleClass="leftCol " sortBy="#{el.technician.lastname}"
+					filterBy="#{el.technician.lastname} #{el.technician.firstname}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText
+								value="#{el.technician.lastname}, #{el.technician.firstname}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu id="tech" filter="true" value="#{el.technician}" 
+								converter="omnifaces.SelectItemsConverter" effect="fold"
+								editable="true">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{contractInfo.techlist}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Kunde" styleClass="leftCol" sortBy="#{el.customer.company}"
+					filterBy="#{el.customer.company}">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText
+								value="#{el.customer.company}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu id="cust" filter="true" value="#{el.customer}"
+								converter="omnifaces.SelectItemsConverter" effect="fold"
+								editable="true">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{contractInfo.custlist}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Intervall" styleClass="centerCol" sortBy="#{el.intervall}">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{el.intervall}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputNumber value="#{el.intervall}" />
+						</f:facet>
+					</p:cellEditor>
+
+
+				</p:column>
+
+				<p:column headerText="Soll-Stunden" styleClass="centerCol" >
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{el.targetAmount}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputNumber value="#{el.targetAmount}" />
+						</f:facet>
+					</p:cellEditor>
+
+
+				</p:column>
+
+				<p:column headerText="Summe Intervall" styleClass="centerCol" >
+
+					<p:cellEditor>
+						<f:facet name="output">
+
+							<h:outputText value="#{el.serviceAmount}">
+								<f:convertNumber type="currency" currencySymbol="€"
+									locale="de-DE" />
+							</h:outputText>
+
+						</f:facet>
+						<f:facet name="input">
+							<p:inputNumber value="#{el.serviceAmount}" symbol=" €"
+								symbolPosition="s" decimalSeparator="," thousandSeparator=".">
+							</p:inputNumber>
+						</f:facet>
+					</p:cellEditor>
+
+
+				</p:column>
+
+
+
+				<p:column headerText="Aktiv" styleClass="centerCol" >
+					<p:selectBooleanCheckbox value="#{el.active}" disabled="true" />
+				</p:column>
+
+				<p:column headerText="Checkliste vor." rendered="false">
+					<p:selectBooleanCheckbox value="#{el.checklistItemsCreated}"
+						disabled="true" />
+				</p:column>
+
+			</p:dataTable>
+		</h:panelGrid>
+	</p:panel>
+
+</ui:composition>
+

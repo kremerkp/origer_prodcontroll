@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+	</script>
+
+
+
+	<p:panel id="pnl_serviceContractBase" header="Vertragsstammdaten"
+		styleClass="buildingSite_formular" toggleable="true">
+		<h:panelGrid columns="2" cellpadding="5">
+
+			<p:outputLabel value="#{contractInfo.countedContracts}" />
+			<p:commandLink value="Zum nächsten Vertrag"
+				actionListener="#{contractInfo.nextContract}" />
+
+			<p:outputLabel for="scv_name1" value="Vertragsnr: " />
+			
+			<p:inputText id="scv_name1" required="true"  disabled="#{contractInfo.disableEditModeContract}" value="#{contractInfo.serviceName}"/>
+			
+			<p:autoComplete var="c" itemValue="#{c}" rendered="false"
+				itemLabel="#{c.serviceContractNumber}"
+				converter="#{simpleConverter}"
+				disabled="true"
+				completeMethod="#{applicationBean.completeServiceContractNumber}"
+				value="#{contractInfo.serviceContract}" scrollHeight="400"
+				dropdown="true" id="scb_name" forceSelection="false"
+				styleClass="autocomplete_customer closed">
+				<p:ajax event="itemSelect"
+					listener="#{contractInfo.updateServiceContract()}" update="@form" />
+				
+
+			</p:autoComplete>
+
+			<p:outputLabel for="cs_type2" value="Vertragsart" />
+			<p:selectOneMenu 	
+				disabled="#{contractInfo.disableEditModeContract}" 
+				required="true"
+				id="cs_type2" value="#{contractInfo.genContractTypeContract}">
+				<f:selectItem itemLabel="Auswahl Vertragsart" itemValue="" />
+				<f:selectItems value="#{contractInfo.contractTypeList}" />
+			</p:selectOneMenu>
+
+
+
+			<p:outputLabel for="scb_desc" value="Beschreibung: " />
+			<p:inputTextarea id="scb_desc" title="Beschreibung: "
+				disabled="#{contractInfo.disableEditModeContract}" required="true"
+				value="#{contractInfo.serviceDesc}" mask="true">
+				<p:ajax />
+			</p:inputTextarea>
+
+			<p:outputLabel for="scb_startdate" value="Vertragsbeginn: " />
+			<p:calendar id="scb_startdate" showTodayButton="true" showWeek="true"
+				navigator="true" disabled="#{contractInfo.disableEditModeContract}"
+				required="true" value="#{contractInfo.serviceStartdate}" mask="true"
+				locale="de">
+								<p:ajax  event="dateSelect"	 />
+			</p:calendar>
+
+			<p:outputLabel for="scb_enddate" value="Vertragsende: " />
+			<p:calendar id="scb_enddate"
+				disabled="#{contractInfo.disableEditModeContract}" required="true"
+				showTodayButton="true" showWeek="true" navigator="true"
+				value="#{contractInfo.serviceEnddate}" mask="true">
+								<p:ajax event="dateSelect" />
+			</p:calendar>
+
+			<p:outputLabel for="scb_contractSum" value="Auftragssumme" />
+			<p:inputNumber id="scb_contractSum" required="true" symbol=" €"
+				symbolPosition="s" thousandSeparator="." decimalSeparator=","
+				disabled="#{contractInfo.disableEditModeContract}"
+				value="#{contractInfo.serviceSumPerInterval}">
+				<p:ajax></p:ajax>
+			</p:inputNumber>
+		</h:panelGrid>
+
+		<p:commandButton style="width:45%; margin-right: 15px;"
+			disabled="#{!contractInfo.contractValid}"
+			actionListener="#{contractInfo.disableEditMode}" ajax="true"
+			value="(+) Ser-Int. " onclick="PF('addServiceType').show();" />
+
+		<p:commandButton style="width:45%;"
+			actionListener="#{contractInfo.addTypesToContract}" ajax="true"
+			disabled="#{!contractInfo.contractValid}" update="@form"
+			onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+			value="Ser-Vert. zuordnen" />
+
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:dataTable var="el" value="#{contractInfo.serviceTypeTable}"
+				styleClass="vertragsdaten" style="width:100%">
+				<p:column headerText="Intervall">
+					<h:outputText value="#{el.intervall}" />
+				</p:column>
+				<p:column headerText="Service bis">
+					<h:outputText value="#{el.latestServiceDate}">
+						<f:convertDateTime type="date" pattern="dd-MM-yy" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Vertrags-Art">
+					<h:outputText value="#{el.serviceType.name}" />
+				</p:column>
+				<p:column style="width:32px;text-align: center">
+					<p:commandButton update="@form" icon="ui-icon-close" ajax="true"
+						title="View" onclick="#{contractInfo.deleteItem()}">
+						<f:setPropertyActionListener value="#{el}"
+							target="#{contractInfo.selectedServiceType}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+		<p:commandButton id="newContract" value=" neu "
+			style="margin-left: 10px;"
+			actionListener="#{contractInfo.createNewContract()}"
+			disabled="#{!contractInfo.disableNewBtnContract}" update="@form" />
+
+
+		<p:commandButton id="editContract" value=" bearbeiten "
+			style="margin-left: 10px;" onstart="PF('bui').block();"
+			oncomplete="PF('bui').unblock();"
+			actionListener="#{contractInfo.ac_editContract()}"
+			disabled="#{contractInfo.serviceName == null or !contractInfo.disableEditBtnContract}"  update="@form" />
+
+
+		<p:commandButton id="newContract_save" value=" speichern "
+			style="margin-left: 10px;" onstart="PF('bui').block();"
+			oncomplete="PF('bui').unblock();"
+			actionListener="#{contractInfo.ac_createNewContract_save()}"
+			disabled="#{!contractInfo.disableSaveBtnContract}" update="@form" />
+
+	</p:panel>
+
+
+
+</ui:composition>
+

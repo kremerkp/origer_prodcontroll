@@ -1,0 +1,518 @@
+@import 'params.less';
+
+.right {
+    float: right;
+}
+.left {
+    float: left;
+    margin-right: 25px;
+}
+
+.clear {
+    clear: both;
+}
+
+.mr15 {
+    margin-right: 15px;
+}
+
+.center {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}
+
+body {
+    background: @mainBackgroundColor;
+    font-family:  Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    margin: 0 0 30px 0;
+    padding: 0;
+}
+#frmLogin\:tblLogin {
+    width: 300px;
+    margin: 200px auto 0;
+}
+
+div#bottom {
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    background: @mainColor;
+    p {
+        margin-top: 5px;
+        margin-left: 25px;
+        color: white;
+        span {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
+    a.logout {
+        display: block;
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        color: white;
+    }
+}
+
+
+div#content {
+    margin: 10px 0 0 10px;
+    h1 {
+        color: @mainColor;
+    }
+}
+
+div#top ul li.level-switcher {
+    position: absolute;
+    right: 50px;
+    top: 0;
+}
+img.seperator {
+    height: 10px;
+    display: block;
+    clear: both;
+}
+/* users_list.xhtml */
+table.frmUsers {
+    float: left;
+    width: 600px;
+    tr {
+
+    }
+    td:first-child {
+        width: 100px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    td:last-child {
+        width: 100%;
+        input {
+            width: 100%;
+        }
+    }
+}
+
+table.pnlStd.frmRoles {
+    margin-left: 25px;
+    width: 600px;
+    float: left;
+}
+
+div.backNavigation {
+    width: 98%;
+    border: 1px solid darkblue;
+    background: lightblue;
+    margin: 5px 0 10px 0;
+    padding: 5px 0 5px 10px;
+    a {
+        text-decoration: none;
+    }
+}
+
+button#frmMenu\:menuButton {
+    margin-right: 20px;
+}
+
+form#frmUsersAccount {
+    > table {
+        width: 500px;
+        > tbody > tr > td {
+            &:first-child {
+                width: 145px;
+            }
+            &:last-child input {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.margin-top {
+    margin-top: 20px;
+}
+
+/* Left Menu */
+body.three-column-layout {
+    div#left {
+        position: fixed;
+        width: @leftMenuWidth;
+        height: 93%;
+        background: @leftMenuColor;
+        color: white;
+        margin: 10px 0 0 0;
+        padding: 25px 0 0 0;
+        ul {
+            list-style-type:  none;
+            margin: 0;
+            padding: 0;
+            li {
+                padding: 0 0 0 10px;
+                line-height: 30px;
+                margin: 0 15px 5px 0;
+                &.active {
+                    background: @mainBackgroundColor;
+                    a {
+
+                        color: black;
+                    }
+                }
+                a {
+                    line-height: 16px;
+                    color: white;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+    div#content {
+        margin-left: @leftMenuWidth + 25px;
+    }
+}
+
+table.pnlFahrzeugTypen {
+    width: 600px;
+    td:first-child {
+        width: 50px;
+    }
+}
+
+table.pnlMission tr td:first-child {
+    width: 100px;
+}
+
+div.fileUpload {
+    width: 800px;
+}
+
+div.panel.pictures {
+    div.imageContainer {
+        text-align: center;
+        padding-top: 2px;
+        margin: 0 10px 10px 0;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        height: 175px;
+        width: 175px;
+        border: 1px solid @mainColor;
+        img.imageList {
+            max-width: 150px;
+            max-height: 150px;
+            cursor: pointer;
+        }
+        button.ui-button {
+            position: absolute;
+            bottom: 3px;
+            left: 48px;
+        }
+        &.main {
+            background: @hoverColor;
+        }
+    }
+}
+
+div.back-link {
+    margin: 0 15px 15px 0;
+    padding: 7px;
+    border: 1px solid @tableBorderColor;
+    background: white;
+
+    a {
+        text-decoration: none;
+        color: @mainColor;
+    }
+}
+
+.w100 {
+    width: 100%;
+}
+
+.ml15 {
+    margin-left: 15px;
+}
+
+.mb15 {
+    margin-bottom: 15px;
+}
+
+.mt15 {
+    margin-top:  15px;
+}
+
+div.panel {
+    display: inline-block;
+    background: @panelBackgroundColor;
+    border: 1px solid @panelBorderColor;
+
+    h2 {
+        color: @panelTitleColor;
+        padding: 7px 10px;
+        font-size: 25px;
+        margin: 0;
+    }
+
+    div.panel-element {
+        float: left;
+        margin: 8px 25px 8px 8px;
+        /* border: 1px solid blue; */
+        vertical-align: top;
+        label {
+            display: block;
+            margin-top: 5px;
+
+            &.inline {
+                display: inline;
+            }
+        }
+        input[type="text"], textarea {
+            padding: 4px;
+            width: 100%;
+        }
+        div.ui-selectonemenu {
+            width: 100% !important;
+        }
+        input[type="text"] {
+
+        }
+    }
+}
+
+div.einsatz_technisch_brand div.panel {
+
+}
+/* Einsaetze */
+#frmEinsatz div.panel-element.buttons {
+    float: right;
+    button {
+        width: 200px;
+        display: block;
+        margin-bottom: 5px;
+
+    }
+}
+
+div.panel.material {
+    border: none;
+
+    div.ui-message {
+        margin: 0 0 10px 0;
+        width: 95%;
+    }
+
+    div.add-material {
+        div.select-material {
+            width: 300px !important;
+        }
+        span.add-number input.ui-inputfield {
+            position: relative;
+            top: -4px;
+            margin-left: 10px;
+            width: 30px;
+        }
+        button.add-button {
+            position: relative;
+            top: -8px;
+            margin-left: 10px;
+        }
+    }
+}
+
+div.panel.fahrtenbuch {
+    border: none;
+
+    div.add-fahrtenbuch {
+        div.fahrzeug {
+            width: 300px;
+            display: inline-block;
+        }
+        div.fahrer {
+            width: 300px;
+            display: inline-block;
+        }
+        button.add-fahrt {
+            position: relative;
+            top: -8px;
+            margin-left: 5px;
+        }
+    }
+}
+
+div.panel.brandschutz {
+    border: none;
+}
+
+div.panel.allgemein {
+    div.panel-element div.ui-selectonemenu.polizei {
+        width: 200px !important;
+    }
+}
+
+table.picklistRoles {
+    table-layout: fixed;
+    tr {
+        > td {
+            width: 33%;
+            ul.ui-picklist-list {
+                width: initial;
+            }
+        }
+        > td+td {
+            width: 50px;
+        }
+        > td+td+td {
+            width: 33%;
+        }
+    }
+}
+
+form#teilnehmer-liste table.picklistRoles ul.ui-picklist-list {
+    width: 182px;
+}
+
+div.teilnehmer {
+    width: 800px;
+    h2 {
+        padding-bottom: 0;
+    }
+    div.panel-element {
+        width: 775px;
+        h3 {
+            margin: 0;
+        }
+        div.liste {
+            float: left;
+            width: 50%;
+            h4 {
+                margin: 3px 0 0 0;
+            }
+            div.ui-selectonelistbox {
+                height: 225px;
+            }
+            div.ui-selectmanymenu {
+                height: 225px;
+            }
+            div.ui-selectlistbox-filter-container {
+                width: 97%;
+            }
+            div.buttons {
+                margin-top: 15px;
+            }
+        }
+    }
+}
+
+/* Scheduler */
+div.fc-event-inner span.fc-event-time, div.fc-event-inner span.fc-event-title {
+    font-size: 12px;
+}
+
+/* Uebungen */
+div.uebung-detail {
+    width: 500px;
+    div {
+        margin-bottom: 7px;
+        label {
+            font-weight: bold;
+        }
+    }
+    textarea {
+        width: 90%;
+    }
+}
+
+span.checkbox-text {
+    position: relative;
+    top: -3px;
+}
+
+/* Calendar */
+div.fc-event.angenommen {
+    background-image: url('/images/css/angenommen.png');
+    background-repeat: no-repeat;
+    background-position: 99%;
+    background-size: 16px;
+}
+div.fc-event.abgelehnt {
+    background-image: url('/images/css/abgelehnt.png');
+    background-repeat: no-repeat;
+    background-position: 99%;
+    background-size: 16px;
+}
+div.fc-event.angefragt {
+    background-image: url('/images/css/angefragt.png');
+    background-repeat: no-repeat;
+    background-position: 99%;
+    background-size: 16px;
+}
+div.fc-event.qualified {
+    background-image: url('/images/css/qualified.png');
+    background-repeat: no-repeat;
+    background-position: 99%;
+    background-size: 16px;
+}
+div.fc-event.warten {
+    background-image: url('/images/css/warten.png');
+    background-repeat: no-repeat;
+    background-position: 99%;
+    background-size: 16px;
+}
+
+div.dlgUebung {
+    a.edit_link {
+        font-size: 12px;
+    }
+    img.logo {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 100;
+        height: 100px;
+    }
+    p.status {
+        margin: 0;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    div.ui-dialog-content {
+        min-width: 875px;
+    }
+    div.ui-datatable {
+        margin-left: 15px;
+    }
+    div.ui-datatable-tablewrapper {
+        margin-bottom: 0;
+    }
+
+    div.panel-element {
+        margin-right: 35px;
+        label {
+            padding-bottom: 3px;
+        }
+    }
+}
+
+button.neue_uebung {
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
+
+div.application-message {
+    background: lighten(red, 40%);
+    color: darken(red, 30%);
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid red;
+    padding: 8px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}

@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<p:panel id="pnl_invoices" header="Rechnungen"
+			styleClass="invoices_table" toggleable="false"
+			style="margin-bottom:20px">
+
+			<p:dataTable value="#{invoicesBean.data}"
+				filteredValue="#{invoicesBean.filteredData}" var="inv"
+				paginator="true" paginatorPosition="bottom" rows="20"
+				selectionMode="single" rowKey="#{inv.id}" styleClass="centertable"
+				selection="#{invoicesBean.selectedInvoice}">
+				<p:ajax event="rowSelect" update=":frmList:layButtons" listener="#{invoicesBean.updateSelectedData()}"
+					process="@this" />
+				<p:ajax event="rowUnselect" update="@form" process="@this" />
+				<p:ajax event="rowDblselect"
+					listener="#{invoicesBean.openInvoice()}" process="@this" />
+
+				<p:column headerText="Name" filterBy="#{inv.name}"
+					filterMatchMode="contains" styleClass="col_big leftCol oneFilterSmall">
+					<p:outputLabel value="#{inv.name}"/>
+                </p:column>
+				<p:column headerText="Rechnungsnummer" styleClass="oneFilterSmall" filterBy="#{inv.number}"
+					filterMatchMode="contains">
+					<p:outputLabel value="#{inv.number}"/>
+                </p:column>
+				<p:column headerText="Rechnungsdatum#{applicationBean.gSp(50)}" styleClass="centerCol marginTop" sortBy="#{inv.invoiceDate}"> 
+					<p:outputLabel value="#{inv.invoiceDate}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</p:outputLabel>
+				</p:column>
+				<p:column headerText="Rechnungsbetrag" styleClass="centerCol oneFilterSmall" filterBy="#{inv.amount}"
+					filterMatchMode="contains">
+					<h:outputText value="#{inv.amount}">
+						<f:convertNumber type="currency" currencySymbol="€" locale="de-DE" />
+					</h:outputText>
+
+				</p:column>
+
+				<p:column headerText="Wartungsvertrag" styleClass="leftCol oneFilterSmall"
+					filterBy="#{inv.serviceContract.serviceContractNumber}"
+					filterMatchMode="contains">
+					<p:outputLabel value="#{inv.serviceContract.serviceContractNumber}"/>
+                                    
+                </p:column>
+				<p:column headerText="Status der Rechnung" styleClass="centerCol oneFilterSmall" filterBy="#{inv.state}"
+					filterMatchMode="contains">
+					<p:outputLabel value="#{inv.state}" rendered="false" />
+                    
+					<p:graphicImage rendered="#{invoicesBean.renderStatePayed(inv.state)}"
+						value="/resources/img/green.png" width="24" height="24">
+					</p:graphicImage> 
+
+					<p:graphicImage rendered="#{invoicesBean.renderStateSend(inv.state)}"
+						value="/resources/img/wait.png" width="24" height="24">						
+					</p:graphicImage>
+
+
+				</p:column>
+
+				<p:column headerText="Aktiv" styleClass="col_active"
+					rendered="false">
+					<p:selectBooleanCheckbox disabled="true" value="#{inv.active}" />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="Filter aufheben" ajax="false"
+					action="#{invoicesBean.refreshSite()}" />
+				<p:commandButton value="neu" ajax="false"
+					action="#{invoicesBean.add()}" />
+				<p:commandButton value="bearbeiten" ajax="false"
+					action="#{invoicesBean.edit()}" styleClass="ml15"
+					disabled="#{invoicesBean.selectedInvoice == null}" process="@this" />
+				<p:commandButton value="Vertragsdetails" ajax="false"
+					action="#{invoicesBean.goToContract()}" styleClass="ml15"
+					disabled="#{invoicesBean.serviceContract == null}"
+					process="@this" />
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

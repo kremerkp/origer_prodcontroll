@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		
+	<p:dialog header="markierte Jobs ausführen" widgetVar="synchJobs"
+		modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+		<p:outputPanel id="synchJobs" style="text-align:center;">
+			<p:panelGrid columns="2" columnClasses="label,value">
+
+				<p:commandButton id="jc_button" value="Job ausführen"
+					actionListener="#{synchJobBean.synchJobsFunction()}"
+					oncomplete="PF('synchJobs').hide(); PF('bui').unblock();" ajax="true" 
+					onstart="PF('bui').block();" 
+					update="@form" process="@form" />
+
+				<p:commandButton id="ca_button_cha" value="abbruch"
+					oncomplete="PF('synchJobs').hide()" />
+
+			</p:panelGrid>
+		</p:outputPanel>
+	</p:dialog>
+	
+	
+		<p:panel id="pnl_checklistsElementsTyps"
+			header="Historie Synchronisierung" styleClass="job_table"
+			toggleable="false" style="margin-bottom:20px">
+
+			<p:dataTable value="#{synchJobBean.synchJobs}" id="synchJobsTab"
+				filteredValue="#{synchJobBean.filteredSynchJobs}" var="elements"
+				paginator="true" paginatorPosition="bottom" rows="25"
+				selection="#{synchJobBean.selectedSynchJobs}"
+				rowKey="#{elements}" rowsPerPageTemplate="25,50,100">
+				
+				<p:column selectionMode="multiple"
+					style="width:16px;text-align:center" />
+					
+				<p:column headerText="ID#{applicationBean.gSp(300)}" styleClass="twoFilterSmall" 
+					filterBy="#{elements.id}"
+					sortBy="#{elements.id}" filterMatchMode="contains">
+					<h:outputText value="#{elements.id}" />
+				</p:column>
+
+				<p:column headerText="Operationen gesamt#{applicationBean.gSp(80)}" styleClass="twoFilterSmall" 
+					filterBy="#{elements.targetElementsCount}"
+					sortBy="#{elements.targetElementsCount}" filterMatchMode="contains">
+					<h:outputText value="#{elements.targetElementsCount}" />
+				</p:column>
+
+				<p:column headerText="Operationen Fertig#{applicationBean.gSp(80)}" styleClass="twoFilterSmall" 
+					filterBy="#{elements.actualCountedElements}"
+					sortBy="#{elements.actualCountedElements}"
+					filterMatchMode="contains">
+					<h:outputText value="#{elements.actualCountedElements}" />
+				</p:column>
+
+				<p:column headerText="Status Android#{applicationBean.gSp(80)}" styleClass="twoFilterSmall" 
+					filterBy="#{elements.androidState}"
+					sortBy="#{elements.androidState}" filterMatchMode="contains">
+					<h:outputText value="#{elements.androidState}" />
+				</p:column>
+
+				<p:column headerText="Status Applikation#{applicationBean.gSp(80)}" styleClass="twoFilterSmall" 
+					filterBy="#{elements.webappState}" sortBy="#{elements.webappState}"
+					filterMatchMode="contains">
+					<h:outputText value="#{elements.webappState}" />
+				</p:column>
+				
+				<p:column headerText="Beschreibung#{applicationBean.gSp(80)}" styleClass="twoFilterSmall" 
+					filterBy="#{elements.description}" sortBy="#{elements.description}"
+					filterMatchMode="contains">
+					<h:outputText value="#{elements.description}" />
+				</p:column>
+
+				<p:column headerText="Letzte Änderung" styleClass="marginTop" 
+					sortBy="#{elements.createDate}" filterMatchMode="contains">
+					<h:outputText value="#{elements.createDate}">
+						<f:convertDateTime type="date" pattern="dd.MM.yyyy HH:mm" />
+					</h:outputText>
+
+				</p:column>
+
+			</p:dataTable>
+			
+			<p:contextMenu for="synchJobsTab">
+				<p:menuitem value="Synchronisation starten" update="synchJobsTab"
+					oncomplete="PF('synchJobs').show()"  />
+			</p:contextMenu>
+
+		<pe:blockUI widgetVar="bui">
+			<p:graphicImage name="/img/ajax-loader.gif"
+				style="margin-right: 12px; vertical-align: middle;" />
+			<h:outputText value="bitte warten..." styleClass="wordwrap"  />
+		</pe:blockUI>
+		
+		</p:panel>
+
+
+	</h:form>
+
+</ui:composition>

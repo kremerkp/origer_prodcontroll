@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="./../layout/basic_layout_tile.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+	<ui:define name="content">
+		<h:form id="tileStart">
+			<p:graphicImage  name="/img/logo-neu.png" styleClass="logotop" />
+			<div class="tileNavigation">
+				<p:hotkey bind="ctrl+7" action="#{tileNavigationBean.homeTile()}" />
+				<p:hotkey bind="ctrl+8" action="#{tileNavigationBean.homeTile()}" />
+				<p:hotkey bind="ctrl+9" action="#{tileNavigationBean.homeTile()}" />
+				<p:hotkey bind="ctrl+4" action="#{tileNavigationBean.homeTile()}" />
+
+				<p:commandButton value="Intervallübersicht" id="tile_entry"
+					rendered="#{request.isUserInRole('user')}"
+					onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+					action="#{tileNavigationBean.homeSearch()}" ajax="true"
+					styleClass="ui-priority-primary tile search intervalluebersicht" />
+
+
+				<p:commandButton value="Vertragdetails" id="tile_contract_infos"
+					rendered="true" onstart="PF('bui').block();"
+					oncomplete="PF('bui').unblock();"
+					action="#{tileNavigationBean.homeServiceContract()}" ajax="true"
+					styleClass="ui-priority-primary tile info_contract vertragsdetails" />
+
+
+				<p:commandButton value="Infos Wartung" id="tile_service_infos"
+					rendered="false" action="#{tileNavigationBean.homeTile()}"
+					onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+					ajax="true" styleClass="ui-priority-primary tile info_service infos_wartung" />
+
+					
+				<p:commandButton value="Reporting" id="tile_reporting"
+					rendered="#{request.isUserInRole('user')}"
+					onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+					action="/origer/serveAgree/admin/report/reporting.xhtml?faces-redirect=true" 
+					ajax="true"
+					styleClass="ui-priority-primary tile reporting reporting" />
+
+				<p:commandButton value="Rechnungen" id="tile_bill" rendered="false"
+					action="#{tileNavigationBean.homeTile()}" ajax="true"
+					onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+					styleClass="ui-priority-primary tile bills" />
+
+				<p:commandButton value="Angebote" id="tile_offers" rendered="false"
+					action="#{tileNavigationBean.homeTile()}" ajax="true"
+					onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+					styleClass="ui-priority-primary tile offers" />
+
+				<p:commandButton value="Verwaltung" id="tile_admin" rendered="false"
+					action="#{tileNavigationBean.homeAdmin()}" ajax="true"
+					onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+					styleClass="ui-priority-primary tile offers" />
+
+				<p:menuButton value="Vertrag" styleClass="dropDownIcon tile vertrag">
+					<p:menuitem value="Rechnungen" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/invoices/invoice_list.xhtml?faces-redirect=true" />
+					<p:menuitem value="Angebote" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/offers/offers_list.xhtml?faces-redirect=true" />
+
+					<p:menuitem value="Vertragsunterlagen" rendered="false"
+						onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/customer/offerReporting_list.xhtml?faces-redirect=true" />
+
+					<p:menuitem value="Wartungsverträge" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/service_contract/contract_list.xhtml?faces-redirect=true" />
+					<p:separator />
+					<p:menuitem value="Wartungen" onstart="PF('bui').block();" rendered="false"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/service/services_list.xhtml?faces-redirect=true" />
+					<p:menuitem value="Baustellen" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/building_site/building_site_list.xhtml?faces-redirect=true" />
+					<p:menuitem value="Servicearten" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/service_types/service_types_list.xhtml?faces-redirect=true" />
+					<p:menuitem value="Vertragsarten" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/service_types/contract_types_list.xhtml?faces-redirect=true" />
+						<p:separator />
+					<p:menuitem value="Kunden" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/customer/customer_list.xhtml?faces-redirect=true" />
+					<p:menuitem value="Techniker" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/technician/technician_list.xhtml?faces-redirect=true" />
+					<p:menuitem value="Monteure" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/monteur/monteur_list.xhtml?faces-redirect=true" />
+						
+				</p:menuButton>
+
+				<p:menuButton value="Checklist / Typen"
+					styleClass="dropDownIcon tile checklisten">
+					
+					<p:menuitem value="Checklisten" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/checklist/checklist_list.xhtml?faces-redirect=true;" />
+					<p:menuitem value="zu überprüfen" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/checklistItems/checklistItems_list.xhtml?faces-redirect=true" />
+
+					<p:menuitem value="Bestandteile" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/checklistCategory/checklistCategory_list.xhtml?faces-redirect=true" />
+						
+					<p:separator />
+
+
+
+					<p:menuitem value="Element-Typen" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/elementtype/elementtype_list.xhtml?faces-redirect=true" />
+
+					<p:menuitem value="Fassaden-Typen" onstart="PF('bui').block();" rendered="false"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/front/front_list.xhtml?faces-redirect=true" />
+
+					<p:menuitem value="Ausrichtung-Typen" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/direction/direction_list.xhtml?faces-redirect=true" />
+						
+					<p:menuitem value="DIN-Typen" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						action="/origer/serveAgree/admin/dintype/dintype_list.xhtml?faces-redirect=true" />
+				</p:menuButton>
+				
+				<p:menuButton value="Benutzer"
+					styleClass="dropDownIcon tile checklisten">
+					<p:menuitem value="Benutzerverwaltung" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();" 
+						action="/origer/serveAgree/admin/user/user_list.xhtml?faces-redirect=true" />
+					<p:menuitem value="Login-Übersicht" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();" 
+						action="/origer/serveAgree/admin/user/user_login_list.xhtml?faces-redirect=true" />					
+				</p:menuButton>				
+
+
+
+				<p:commandButton value="Kundenansicht" id="tile_customer" 
+					rendered="#{request.isUserInRole('user')}"
+					onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+					action="#{tileNavigationBean.homeCustomer()}" ajax="true"
+					styleClass="ui-priority-primary tile offers reporting_kunde" />
+					
+				<p:commandButton value="Abmelden" id="tile_logout" 
+					rendered="#{request.isUserInRole('user')}" 
+					onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+					action="#{sessionBean.logout()}" ajax="false"
+					styleClass="ui-priority-primary tile offers tile_logout" />
+
+
+
+				<p:commandButton value="Synchronisierung" 
+				   styleClass="ui-priority-primary tile twoRows historie_synch #{tileNavigationBean.openSynchExists()}" 
+					action="/origer/serveAgree/admin/synch/synchJobs.xhtml?faces-redirect=true"
+					update="@none" onstart="PF('bui').block()" 
+					oncomplete="PF('bui').unblock()" />
+					
+				<p:commandButton value="Kontrolle Zeiterfassung" styleClass="ui-priority-primary tile kontrolle_zeiterfassung" 
+					action="/origer/serveAgree/admin/timerecording/timerecording.xhtml?faces-redirect=true"
+					update="@none" onstart="PF('bui').block()"
+					oncomplete="PF('bui').unblock()" />
+					
+				<p:commandButton value="Barcodes nachdrucken"
+					styleClass="#{tileNavigationBean.newBarcodesExists()} barcodes_nachdrucken"
+					action="/origer/serveAgree/admin/elements/printElements.xhtml?faces-redirect=true"
+					update="@none" onstart="PF('bui').block()"
+					oncomplete="PF('bui').unblock()" />
+					
+				<p:commandButton value="Angebot erstellen"
+					styleClass="#{tileNavigationBean.openOffersExists()} barcodes_nachdrucken"
+					action="/origer/serveAgree/admin/service/openOffers.xhtml?faces-redirect=true"
+					update="@none" onstart="PF('bui').block()"
+					oncomplete="PF('bui').unblock()" />
+					
+				<p:commandButton value="offene Regiezeiten"
+					styleClass="#{tileNavigationBean.openBillableTimesExists()} barcodes_nachdrucken"
+					action="/origer/serveAgree/admin/service/openBillable.xhtml?faces-redirect=true"
+					update="@none" onstart="PF('bui').block()"
+					oncomplete="PF('bui').unblock()" />
+					
+				<p:commandButton value="Reparaturen" id="tile_repairs"
+					rendered="#{request.isUserInRole('user')}"
+					onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+					action="/origer/serveAgree/admin/repairs/repairs.xhtml?faces-redirect=true" 
+					ajax="true"
+					styleClass="ui-priority-primary tile reporting reporting" />
+
+			</div>
+
+			<pe:blockUI widgetVar="bui">
+				<p:graphicImage name="/img/ajax-loader.gif"
+					style="margin-right: 12px; vertical-align: middle;" />
+				<h:outputText value="bitte warten..." styleClass="wordwrap" />
+			</pe:blockUI>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+

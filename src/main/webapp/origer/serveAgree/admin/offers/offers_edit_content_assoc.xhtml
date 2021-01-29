@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="frmNewOffer">
+		<p:panelGrid styleClass="pnlStd frmNewOffer">
+			<p:row>
+				<p:column styleClass="header" colspan="2">
+					<p:outputLabel value="Angebot" />
+
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column styleClass="error" colspan="2">
+					<p:messages />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width: 150px;">
+
+					<p:outputLabel value="Aktiv" />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="active"
+						value="#{offerAssocEditBean.offerActiv}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Name" />
+				</p:column>
+				<p:column>
+					<p:inputText value="#{offerAssocEditBean.offerName}"
+						required="true" style="width: 300px;" />
+				</p:column>
+			</p:row>
+
+
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Angebotsdatum" />
+				</p:column>
+				<p:column>
+					<p:calendar id="offerDate" value="#{offerAssocEditBean.offerDate}"
+						showTodayButton="true" showWeek="true" navigator="true"
+						required="true" styleClass="input300"
+						locale="de" />
+				</p:column>
+			</p:row>
+
+
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Betrag" />
+				</p:column>
+				<p:column>
+					<p:inputNumber id="itemAmount"
+						value="#{offerAssocEditBean.offerValue}" symbol=" €"
+						symbolPosition="s" thousandSeparator="." decimalSeparator=","
+						equired="true" styleClass="input300" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<p:outputLabel for="state" value="Status:" />
+				</p:column>
+				<p:column>
+					<p:inputText id="state" disabled="true" value="#{offerAssocEditBean.offerState}" />
+				</p:column>
+			</p:row>
+			<p:row>
+
+				<p:column>
+
+					<p:outputLabel value="Wartungsvertrag" />
+				</p:column>
+				<p:column>
+
+					<p:selectOneMenu id="serviceContract"
+						value="#{offerAssocEditBean.serviceContract}"
+						converter="omnifaces.SelectItemsConverter" effect="fold"
+						disabled="#{offerAssocEditBean.offerExists}" editable="false">
+						<p:ajax event="change"
+							listener="#{offerAssocEditBean.serviceChanged(null)}" update=":frmNewOffer:srcEntries" />
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItems value="#{offerAssocEditBean.scontracts}" />
+					</p:selectOneMenu>
+
+					<p:autoComplete var="ser" itemValue="#{ser}" required="true"
+						rendered="false" itemLabel="#{ser.serviceContractNumber}"
+						converter="#{simpleConverter}"
+						completeMethod="#{offerAssocEditBean.completeServiceContract}"
+						value="#{offerAssocEditBean.serviceContract}" size="25"
+						scrollHeight="400" style="float:left" dropdown="true" id="serID">
+					</p:autoComplete>
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:outputLabel id="selectArea2"></p:outputLabel>
+			</p:row>
+
+			<p:row>
+
+				<p:column>
+
+					<p:outputLabel value="Dateien Hochladen" />
+				</p:column>
+				<p:column>
+					<p:fileUpload style="width: 300px;"
+						fileUploadListener="#{offerAssocEditBean.handleFileUpload}"
+						fileLimit="10" fileLimitMessage="maximal 10 Dateien"
+						mode="advanced" dragDropSupport="true" sizeLimit="10000000"
+						multiple="true" process="@this,fileTable" update="fileTable"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column colspan="2">
+
+					<p:dataTable var="file" id="fileTable"
+						emptyMessage="keine Dateien hinterlegt" style="width: 600px;"
+						value="#{offerAssocEditBean.fileList}">
+						<p:column headerText="url">
+							<p:outputLabel value="#{file.url}" />
+						</p:column>
+
+						<p:column headerText="delete" width="30">
+							<p:commandButton action="#{offerAssocEditBean.actionDelFile}"
+								update="@form" ajax="false" id="delFile"
+								icon="ui-icon-closethick" title="Icon Only">
+								<f:setPropertyActionListener
+									target="#{offerAssocEditBean.delFile}" value="#{file.id}" />
+							</p:commandButton>
+						</p:column>
+						<p:column headerText="open" width="30">
+							<p:commandButton
+								actionListener="#{offerAssocEditBean.actionOpenFile(file)}"
+								update="@form" ajax="false" id="openFile"
+								icon="ui-icon-circle-arrow-s" title="Icon Only">
+								<p:fileDownload value="#{offerAssocEditBean.file}" />
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+
+				</p:column>
+			</p:row>
+
+
+		</p:panelGrid>
+
+
+
+		<p:panel id="pnl_assocChecklist" header="" styleClass="assocChecklist"
+			rendered="#{!offerAssocEditBean.langFr}" toggleable="false"
+			style="margin-bottom:20px;">
+			<h:panelGrid columns="3" cellpadding="5" styleClass="assocGrid">
+				<p:dataTable id="srcEntries" var="ent" styleClass="srcTable"
+					style="width: 480px!important; min-width: 0;" rendered="#{offerAssocEditBean.id == null}"
+					selection="#{offerAssocEditBean.sourceSelected}" rowKey="#{ent}" paginator="true" paginatorPosition="bottom"
+					rows="10" value="#{offerAssocEditBean.source}">
+					<p:ajax event="rowSelect"
+						update=":frmNewOffer:pnl_checklistForSelectedElement"
+						listener="#{offerAssocEditBean.targetChecklist}" />
+					<f:facet name="header">
+						<h:outputText value="Verfügbare Elemente" />
+					</f:facet>
+					<p:column selectionMode="multiple"
+						style="width:16px;text-align:center" />
+
+					<p:column headerText="Name" width="50px;"
+						filterBy="#{ent.element.elementnumber}">
+						<h:outputText value="#{ent.element.elementnumber}" />
+					</p:column>
+
+					<p:column headerText="letzte Kontrolle          " width="90px;"
+						filterBy="#{ent.lastControlDate}">
+						<h:outputText value="#{ent.lastControlDate}" />
+					</p:column>
+
+					<p:column headerText="Status Wartung" width="60px;"
+						styleClass="#{serviceCustomerHistoryBean.styleState(ent.lastState)} oneFilterSmall"
+						filterBy="#{ent.lastState}">
+						<h:outputText value="#{ent.lastState}" />
+					</p:column>
+
+
+					<p:column headerText="Ang." styleClass="mini" width="20">
+						<p:selectBooleanCheckbox value="#{ent.createOffer}"
+							disabled="true" />
+					</p:column>
+					<p:column headerText="Status" rendered="false" styleClass="mini"
+						width="20">
+						<h:outputText value="#{ent.offerState}" />
+					</p:column>
+				</p:dataTable>
+				<h:panelGrid columns="1" styleClass="buttonTableSelected">
+					<p:commandButton id="btnPlus2" styleClass="btnPlus" value=" + "
+						update="@form" rendered="#{offerAssocEditBean.id == null}"
+						actionListener="#{offerAssocEditBean.setTargetList}" />
+					<p:commandButton id="btnMinus2" styleClass="btnMinus" value=" - "
+						update="@form" rendered="#{offerAssocEditBean.id == null}"
+						actionListener="#{offerAssocEditBean.setSourceList}" />
+				</h:panelGrid>
+
+				<p:dataTable id="targetEntries" var="ent" styleClass="trgTable"
+					style="width: 480px!important; min-width: 0;" editable="true"
+					editMode="cell" selection="#{offerAssocEditBean.targetSelected}"
+					rowKey="#{ent}" value="#{offerAssocEditBean.target}">
+					<p:ajax event="rowSelect"
+						update=":frmNewOffer:pnl_checklistForSelectedElement"
+						listener="#{offerAssocEditBean.sourceChecklist}" />
+						
+					<p:ajax event="cellEdit" listener="#{offerAssocEditBean.setState()}" update=":frmNewOffer:state" />
+
+
+					<f:facet name="header">
+						<h:outputText
+							value="Elemente bereits in einem Angebot enthalten (gleicher Wartungsvertrag)" />
+
+					</f:facet>
+					<p:column selectionMode="multiple"
+						style="width:16px;text-align:center" />
+
+					<p:column headerText="Name" width="50px;"
+						filterBy="#{ent.element.elementnumber}">
+						<h:outputText value="#{ent.element.elementnumber}" />
+					</p:column>
+
+					<p:column headerText="letzte Kontrolle" width="90px;"
+						filterBy="#{ent.lastControlDate}">
+						<h:outputText value="#{ent.lastControlDate}" />
+					</p:column>
+
+					<p:column headerText="Status Wartung" width="60px;"
+						styleClass="#{serviceCustomerHistoryBean.styleState(ent.lastState)} oneFilterSmall"
+						filterBy="#{ent.lastState}">
+						<h:outputText value="#{ent.lastState}" />
+					</p:column>
+
+
+					<p:column headerText="Ang." styleClass="mini" width="20">
+						<p:selectBooleanCheckbox value="#{ent.createOffer}"
+							disabled="true" />
+					</p:column>
+
+					<p:column headerText="Status" id="offerStateCol" rendered="true" styleClass="mini"
+						width="60">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{ent.offerState}" />
+							</f:facet>
+							<f:facet name="input">
+						        <p:selectOneMenu id="offerStateItems" value="#{ent.offerState}">
+						            <f:selectItem itemLabel="ok" itemValue="ok" />
+						            <f:selectItem itemLabel="gesendet" itemValue="gesendet" />
+						            <f:selectItem itemLabel="abgelehnt" itemValue="abgelehnt" />
+						        </p:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+		</p:panel>
+
+
+		<p:panel id="pnl_checklistForSelectedElement" header=""
+			rendered="true" styleClass="checklistForSelectedElement_table"
+			toggleable="false" style="margin-bottom:20px;">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:dataTable var="checklist" paginator="true"
+					paginatorPosition="bottom" rows="25" id="checkTab"
+					rowKey="#{checklist}" rowsPerPageTemplate="25,50,100"
+					value="#{offerAssocEditBean.checkListItems}">
+
+					<p:column headerText="zu überprüfen" styleClass="wordwrap">
+						<p:outputLabel
+							value="#{checklist.checkListItem.checkListItemCategory.name} - #{checklist.checkListItem.name}" />
+					</p:column>
+					<p:column headerText="Fu Ko" styleClass="wordwrap" width="30">
+						<p:selectBooleanCheckbox disabled="true"
+							value="#{checklist.functionalControl}"
+							rendered="#{checklist.visualAndFuntionControl == 0 or checklist.visualAndFuntionControl == 2}" />
+					</p:column>
+					<p:column headerText="Si Ko" styleClass="wordwrap" width="30">
+						<p:selectBooleanCheckbox disabled="true"
+							rendered="#{checklist.visualAndFuntionControl == 0 or checklist.visualAndFuntionControl == 1}"
+							value="#{checklist.visualControl}" />
+					</p:column>
+					<p:column headerText="ok" width="30">
+						<p:selectBooleanCheckbox disabled="true"
+							value="#{checklist.checkedAsOk}" />
+					</p:column>
+					<p:column headerText="defekt" styleClass="wordwrap" width="30">
+						<p:selectBooleanCheckbox disabled="true"
+							value="#{checklist.checkedAsDefect}" />
+					</p:column>
+					<p:column headerText="mangel" styleClass="wordwrap" width="30">
+						<p:selectBooleanCheckbox disabled="true"
+							value="#{checklist.checkedAsLack}" />
+					</p:column>
+
+					<p:column headerText="angebot" styleClass="wordwrap" width="30">
+						<p:selectBooleanCheckbox disabled="true"
+							value="#{checklist.createOffer}" />
+					</p:column>
+
+					<p:column headerText="repariert" styleClass="wordwrap" width="30">
+						<p:selectBooleanCheckbox disabled="true"
+							value="#{checklist.checkedAsRepaired}" />
+					</p:column>
+
+					<p:column headerText="Anmerkung" styleClass="wordwrap" width="90">
+						<p:outputLabel value="#{checklist.description}" />
+					</p:column>
+
+					<p:column headerText="Foto" width="125" rendered="true">
+
+						<p:lightBox styleClass="imagebox" id="lighbox1">
+
+							<p:repeat var="file" id="fileTable" styleClass="filesdownload"
+								value="#{checklist.files}">
+								<h:outputLink
+									value="/origer/filearchiv/#{file.subfolder}/#{file.name}"
+									title="File#{file.id}">
+									<img id="#{file.id}"
+										src="/origer/filearchiv/#{file.subfolder}/#{file.name}"
+										style="height: 100px;" />
+								</h:outputLink>
+								<br />
+							</p:repeat>
+						</p:lightBox>
+
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+		</p:panel>
+
+		<br clear="all" />
+
+		<p:spacer styleClass="seperator" />
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+
+			<p:commandButton actionListener="#{offerAssocEditBean.save()}"
+				onstart="PF('w_dlgWait').show();" disabled="#{empty offerAssocEditBean.source and !offerAssocEditBean.offerExists}"
+				oncomplete="PF('w_dlgWait').hide();" value="Speichern"
+				process="@form" update="@form" styleClass="clear" />
+
+			<p:commandButton disabled="#{empty offerAssocEditBean.source and !offerAssocEditBean.offerExists}"
+				actionListener="#{offerAssocEditBean.saveAndClose()}" 
+				value="Speichern und Schliessen" process="@form" update="@form"
+				styleClass="clear" />
+		</h:panelGroup>
+		<p:dialog widgetVar="w_dlgWait" modal="true" closable="false"
+			draggable="false" resizable="false" header="Speichern...">
+			<p>Bitte warten...</p>
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

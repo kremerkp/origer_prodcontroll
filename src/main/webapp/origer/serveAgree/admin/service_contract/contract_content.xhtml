@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<h:outputScript target="head">
+	    $ = jQuery;
+	    // Then you can use it
+	    $(window).load(function() {
+	        $("div.jqplot-point-label").append(" % ");
+	    });
+	</h:outputScript>
+
+		<p:panel id="pnl_serviceContracts" header="Wartungsverträge"
+			styleClass="sc_table" toggleable="false" style="margin-bottom:20px">
+
+
+			<p:dataTable value="#{serviceContractBean.data}"
+				filteredValue="#{serviceContractBean.filteredData}" var="sc"
+				paginator="true" paginatorPosition="bottom" rows="20"
+				selectionMode="single" rowKey="#{sc.id}"
+				selection="#{serviceContractBean.selectedData}">
+
+
+				<p:column headerText="Vertragsnummer"
+					styleClass="oneFilterSmall"
+					filterBy="#{sc.serviceContractNumber}" filterMatchMode="contains">
+					
+					<h:outputText value="#{sc.serviceContractNumber}" />
+
+				</p:column>
+
+				<p:column headerText="Anmerkung" filterBy="#{sc.description}"
+				styleClass="oneFilterSmall"
+					filterMatchMode="contains">
+					<h:outputText value="#{sc.description}" />
+				</p:column>
+
+
+				<p:column headerText="Anfangsdatum" styleClass="marginTop" >
+					<h:outputText value="#{sc.fromdate}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Endedatum" styleClass="marginTop">
+					<h:outputText value="#{sc.todate}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</p:column>
+
+
+				<p:column headerText="Baustelle" styleClass="marginTop">
+					<h:outputText value="#{sc.buildingSite.name}" />
+				</p:column>
+
+
+				<p:column headerText="Kunde" styleClass="marginTop">
+					<h:outputText
+						value="#{sc.partner.company}" />
+				</p:column>
+
+				<p:column headerText="Techniker" styleClass="marginTop">
+					<h:outputText
+						value="#{sc.technician.firstname},  #{sc.technician.lastname}" />
+
+				</p:column>
+
+
+				<p:column headerText="Vertrags-Art" styleClass="marginTop">
+					<h:outputText value="#{sc.serviceType.name}" />
+				</p:column>
+
+			</p:dataTable>
+
+
+		</p:panel>
+
+	</h:form>
+
+</ui:composition>

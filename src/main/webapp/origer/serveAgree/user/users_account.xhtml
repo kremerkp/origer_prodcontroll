@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../layout/basic_layout.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="top">
+        <ui:include src="../../navigation/user_navigation.xhtml" />
+    </ui:define>
+
+    <ui:define name="content">
+        <h1>Mein Konto</h1>
+        <h:form id="frmUsersAccount">
+            <script type="text/javascript">
+                markLeftMenuActive('brandbericht_arten');
+                markTopMenuActive('account');
+            </script>
+            <p:panelGrid styleClass="pnlStd">
+                
+                <p:row>
+                    <p:column colspan="2" styleClass="header">
+                        Passwort ändern
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column styleClass="error" colspan="2">
+                        <p:messages autoUpdate="true" styleClass="messages" />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        Benutzername:
+                    </p:column>
+                    <p:column>
+                        #{usersAccountBean.user.username}
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>Passwort:</p:column>
+                    <p:column><p:password id="password" value="#{usersAccountBean.newPassword}" /></p:column>
+                </p:row>
+                <p:row>
+                    <p:column>Passwort best�tigen:</p:column>
+                    <p:column><p:password value="#{usersAccountBean.confirmNewPassword}" /></p:column>
+                </p:row>
+                <p:row>
+                    <p:column>Email:</p:column>
+                    <p:column><p:inputText value="#{usersAccountBean.user.email}" /></p:column>
+                </p:row>
+                <p:row>
+                    <p:column>Vorname:</p:column>
+                    <p:column><p:inputText value="#{usersAccountBean.user.prename}" required="true" requiredMessage="Bitte Vornamen eingeben" /></p:column>
+                </p:row>
+                <p:row>
+                    <p:column>Name:</p:column>
+                    <p:column><p:inputText value="#{usersAccountBean.user.name}" /></p:column>
+                </p:row>
+                
+            </p:panelGrid>
+            <p:spacer styleClass="" />
+
+            <h:panelGroup layout="block" id="layButtons">
+                <div>
+                    <p:commandButton value="Speichern" actionListener="#{usersAccountBean.save()}" process="@form" update="@form" 
+                                     onsuccess="setTimeout(function() {$('table.pnlStd div.messages').fadeOut(250);}, 2000)" /> 
+                </div>
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

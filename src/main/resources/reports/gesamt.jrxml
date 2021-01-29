@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="gesamt" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8ead964b-b93f-4399-a20a-1fb33cb6c250">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="regieZeitReportList" class="java.util.List">
+		<fieldDescription><![CDATA[regieZeitReportList]]></fieldDescription>
+	</field>
+	<field name="intervalOverviewList" class="java.util.List">
+		<fieldDescription><![CDATA[intervalOverviewList]]></fieldDescription>
+	</field>
+	<field name="invoiceList" class="java.util.List">
+		<fieldDescription><![CDATA[invoiceList]]></fieldDescription>
+	</field>
+	<field name="buldingSite" class="java.lang.String">
+		<fieldDescription><![CDATA[buldingSite]]></fieldDescription>
+	</field>
+	<field name="contractName" class="java.lang.String">
+		<fieldDescription><![CDATA[contractName]]></fieldDescription>
+	</field>
+	<field name="contractCode" class="java.lang.String">
+		<fieldDescription><![CDATA[contractCode]]></fieldDescription>
+	</field>
+	<field name="monteuer" class="java.lang.String">
+		<fieldDescription><![CDATA[monteuer]]></fieldDescription>
+	</field>
+	<group name="Charts">
+		<groupExpression><![CDATA[$F{contractCode}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="351">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="5" y="140" width="798" height="59" uuid="bdcf7ee7-024a-4463-8491-47c9eb1f0b3a"/>
+				<textElement textAlignment="Center">
+					<font size="35"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Gesamtbericht"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="201" width="158" height="30" uuid="f71fe448-b462-4966-8a4b-1c2c4a2bbc38"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Baustelle: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="231" width="158" height="30" uuid="78baa9b1-39cb-4d2a-9eb3-fcc9a1d3efd3"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Wartungsvertrag: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="261" width="158" height="30" uuid="596337b3-f1d4-4dfc-bebd-b9b6c3b83ee5"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nummer: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="291" width="158" height="30" uuid="8840de37-0af4-4c1f-a37c-e8382139d541"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Datum: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="291" width="350" height="30" uuid="bdc754c5-0ae1-41ea-972d-5fee32408e3a"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="231" width="350" height="30" uuid="8a85b552-cad2-44c9-bc4f-c1694281a2a1"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contractName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="201" width="350" height="30" uuid="9ffadbac-58fa-4e82-ac8f-27c6db372641"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{buldingSite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="261" width="350" height="30" uuid="30c1c6c0-eb8f-4664-893b-f3658dd38bf0"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contractCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="321" width="158" height="30" uuid="05bdc3d2-1f34-4833-ace5-30765fc80031"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Seitenanzahl: "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="390" y="321" width="350" height="30" uuid="b066f45c-695d-4383-8497-342261965147"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Right">
+				<reportElement x="40" y="0" width="490" height="89" uuid="8e74388e-b272-440a-b904-0a070fafa103"/>
+				<box bottomPadding="4">
+					<bottomPen lineWidth="0.0" lineColor="#ABABAB"/>
+				</box>
+				<imageExpression><![CDATA["reports/images/logo-neu.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="210" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<subreport isUsingCache="true" runToBottom="true">
+				<reportElement positionType="Float" x="1" y="0" width="250" height="79" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="72ac5029-b056-4170-b0e6-d0d1bb7264a7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{intervalOverviewList} != null && $F{intervalOverviewList}.size() > 0]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="Pagecount">
+					<subreportParameterExpression><![CDATA[$V{PAGE_NUMBER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bs">
+					<subreportParameterExpression><![CDATA[$F{buldingSite}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cn">
+					<subreportParameterExpression><![CDATA[$F{contractName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cc">
+					<subreportParameterExpression><![CDATA[$F{contractCode}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{intervalOverviewList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reports/gesamt_sub_bilanz_MOD1.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="true" runToBottom="true">
+				<reportElement positionType="Float" x="275" y="0" width="250" height="79" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="c1ab4bde-5efc-4f84-86f7-ade1430dff8a">
+					<printWhenExpression><![CDATA[$F{intervalOverviewList} != null && $F{intervalOverviewList}.size() > 1]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{intervalOverviewList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reports/gesamt_sub_bilanz_MOD2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="true" runToBottom="true">
+				<reportElement positionType="Float" x="550" y="0" width="250" height="79" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="af537497-1a1e-43c4-8d83-53ff470610f9">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{intervalOverviewList} != null && $F{intervalOverviewList}.size() > 2]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{intervalOverviewList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reports/gesamt_sub_bilanz_MOD3.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="90">
+			<printWhenExpression><![CDATA[$F{intervalOverviewList} != null && $F{intervalOverviewList}.size() > 0]]></printWhenExpression>
+			<subreport isUsingCache="true" runToBottom="true">
+				<reportElement positionType="Float" x="0" y="0" width="799" height="90" isPrintInFirstWholeBand="true" uuid="2d407b47-5ba7-4065-95a8-42c2aac802bf"/>
+				<subreportParameter name="Pagecount">
+					<subreportParameterExpression><![CDATA[$V{PAGE_NUMBER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bs">
+					<subreportParameterExpression><![CDATA[$F{buldingSite}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cn">
+					<subreportParameterExpression><![CDATA[$F{contractName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cc">
+					<subreportParameterExpression><![CDATA[$F{contractCode}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{intervalOverviewList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reports/sub.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="90">
+			<printWhenExpression><![CDATA[$F{regieZeitReportList} != null && $F{regieZeitReportList}.size() > 0]]></printWhenExpression>
+			<subreport isUsingCache="true" runToBottom="true">
+				<reportElement x="0" y="0" width="799" height="90" uuid="8d20ab7f-d47a-4d65-8216-0c852422a583"/>
+				<subreportParameter name="Pagecount">
+					<subreportParameterExpression><![CDATA[$V{PAGE_NUMBER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bs">
+					<subreportParameterExpression><![CDATA[$F{buldingSite}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cn">
+					<subreportParameterExpression><![CDATA[$F{contractName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cc">
+					<subreportParameterExpression><![CDATA[$F{contractCode}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{regieZeitReportList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reports/gesamt_sub_regie.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="90">
+			<printWhenExpression><![CDATA[$F{invoiceList} != null &&  $F{invoiceList}.size() > 0]]></printWhenExpression>
+			<subreport isUsingCache="true" runToBottom="true">
+				<reportElement x="0" y="0" width="799" height="90" uuid="b4766b5a-898d-42a9-bde5-15ea26335093"/>
+				<subreportParameter name="Pagecount">
+					<subreportParameterExpression><![CDATA[$V{PAGE_NUMBER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bs">
+					<subreportParameterExpression><![CDATA[$F{buldingSite}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cn">
+					<subreportParameterExpression><![CDATA[$F{contractName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cc">
+					<subreportParameterExpression><![CDATA[$F{contractCode}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{invoiceList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reports/gesamt_sub_rechnung.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

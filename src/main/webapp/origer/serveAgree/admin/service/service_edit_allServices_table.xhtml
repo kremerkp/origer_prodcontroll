@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:outputScript target="head">
+	    $ = jQuery;
+	    // Then you can use it
+	    $(window).load(function() {
+	        $("div.jqplot-point-label").append(" % ");
+	    });
+	</h:outputScript>
+
+	<p:panel id="pnl_services" header="Übersicht Intevalle"
+		styleClass="buildingSite_table" toggleable="false"
+		style="margin-bottom:20px">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:dataTable var="sv" value="#{serviceBean.serviceList}"
+				paginator="true" widgetVar="intervallTable" selectionMode="single"
+				rowKey="#{sv.id}" filteredValue="#{serviceBean.serviceListfiltered}"
+				paginatorPosition="bottom"
+				selection="#{serviceBean.selectedService}" rows="15">
+				<p:ajax event="rowDblselect" listener="#{serviceBean.openService}"
+					process="@this" />
+
+				<p:column headerText="Baustellen-Nr " styleClass="code"
+					filterBy="#{sv.serviceContract.buildingSite.code}"
+					sortBy="#{sv.serviceContract.buildingSite.code}">
+					<h:outputText value="#{sv.serviceContract.buildingSite.code}" />
+				</p:column>
+
+				<p:column headerText="Bezeichnung Baustelle " styleClass="baust"
+					filterBy="#{sv.serviceContract.buildingSite.name}"
+					sortBy="#{sv.serviceContract.buildingSite.name}">
+					<h:outputText value="#{sv.serviceContract.buildingSite.name}" />
+				</p:column>
+
+				<p:column headerText="Wartung-Nr " rendered="true"
+					styleClass="wartNr"
+					filterBy="#{sv.serviceContract.serviceContractNumber}"
+					sortBy="#{sv.serviceContract.serviceContractNumber}">
+					<h:outputText value="#{sv.serviceContract.serviceContractNumber}" />
+				</p:column>
+
+
+				<p:column headerText="Vertrags-Art " styleClass="serKat"
+					filterBy="#{sv.serviceType.name}" sortBy="#{sv.serviceType.name}">
+					<h:outputText value="#{sv.serviceType.name}" />
+				</p:column>
+
+				<p:column headerText="Kunde " styleClass="cust"
+					filterBy="#{sv.partner.company}" sortBy="#{sv.partner.company}">
+					<h:outputText
+						value="#{sv.partner.company} " />
+				</p:column>
+
+				<p:column headerText="Techniker " styleClass="techn"
+					filterBy="#{sv.technician.lastname}"
+					sortBy="#{sv.technician.lastname}">
+					<h:outputText
+						value="#{sv.technician.lastname}, #{sv.technician.firstname} " />
+				</p:column>
+
+
+				<p:column headerText="Jahr" styleClass="year"
+					filterBy="#{sv.latestServiceDate}">
+					<h:outputText value="#{sv.latestServiceDate}">
+						<f:convertDateTime pattern="yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Int." styleClass="intYear"
+					filterBy="#{sv.intervall}" sortBy="#{sv.intervall}">
+					<h:outputText value="#{sv.intervall} von #{sv.countPerType}" />
+				</p:column>
+
+				<p:column headerText="Intervall aktiv" filterBy="#{sv.active}"
+					styleClass="active" filterMatchMode="equals">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('intervallTable').filter()">
+							<f:converter converterId="javax.faces.Boolean" />
+							<f:selectItem itemLabel="All" itemValue="" />
+							<f:selectItem itemLabel="Aktiv" itemValue="true" />
+							<f:selectItem itemLabel="Inaktiv" itemValue="false" />
+						</p:selectOneMenu>
+
+					</f:facet>
+					<p:selectBooleanCheckbox value="#{sv.active}" />
+				</p:column>
+
+				<p:column headerText="E.Soll" styleClass="totElement">
+					<h:outputText value="#{sv.totalElements}" />
+				</p:column>
+
+				<p:column headerText="E.Ist" styleClass="elChecked">
+					<h:outputText value="#{sv.elememtsChecked}" />
+				</p:column>
+
+				<p:column headerText="Intervall % ">
+					<p:chart type="bar" model="#{sv.horizontalBarModel}"
+						style="height:75px" />
+				</p:column>
+
+				<p:column headerText="Start" styleClass="latest">
+					<h:outputText value="#{sv.latestServiceDate}">
+						<f:convertDateTime pattern="#{applicationBean.dateWithoutTime}" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Soll-Std" sortBy="#{sv.targetAmount}"
+					styleClass="amountT">
+					<h:outputText value="#{sv.targetAmount}" />
+				</p:column>
+
+				<p:column headerText="Ist-Std" sortBy="#{sv.actualAmount}"
+					styleClass="amountI">
+					<h:outputText value="#{sv.actualAmount}" />
+				</p:column>
+
+				<p:column headerText="Sum Int."
+					filterBy="#{svserviceAmount}"
+					sortBy="#{sv.serviceAmount}"
+					styleClass="wrap sumContract">
+					<h:outputText value="#{svserviceAmount}" >
+						<f:convertNumber type="currency" currencySymbol="€" locale="de-DE" />
+					</h:outputText>
+				</p:column>
+
+			</p:dataTable>
+		</h:panelGrid>
+	</p:panel>
+</ui:composition>
+

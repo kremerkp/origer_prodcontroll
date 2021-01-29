@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<p:panel id="pnl_checklistForSelectedElement" header=""
+		styleClass="checklistForSelectedElement_table" toggleable="false"
+		style="margin-bottom:20px; height: 70%">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:dataTable var="checklist" paginator="true"
+				paginatorPosition="bottom" rows="25" id="checkTab"
+				rowKey="#{checklist}" rowsPerPageTemplate="25,50,100"
+				value="#{serviceProofReporting.checklistitems}">
+
+
+				<p:column headerText="#{msg['history.to.be.checked']}" styleClass="wordwrap" >
+						<h:outputText rendered="#{sessionBean.userLocale.country == 'DE'}" 
+							value="#{checklist.checkListItem.checkListItemCategory.name} - #{checklist.checkListItem.name}" />
+						<h:outputText rendered="#{sessionBean.userLocale.country == 'FR'}" 
+							value="#{checklist.checkListItem.checkListItemCategory.nameFrench} - #{checklist.checkListItem.nameFrench}" />						
+					</p:column>
+				<p:column headerText="#{msg['history.function.control']}" styleClass="wordwrap"  width="30" >
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{checklist.functionalControl}" rendered="#{checklist.visualAndFuntionControl == 0 or checklist.visualAndFuntionControl == 2}"/>
+				</p:column>
+				<p:column headerText="#{msg['history.view.control']}" styleClass="wordwrap"    width="30" >
+					<p:selectBooleanCheckbox disabled="true" rendered="#{checklist.visualAndFuntionControl == 0 or checklist.visualAndFuntionControl == 1}"
+						value="#{checklist.visualControl}" />
+				</p:column>
+				<p:column headerText="#{msg['history.ok']}" width="30" >
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{checklist.checkedAsOk}" />
+				</p:column>
+				<p:column headerText="#{msg['history.defect']}"  styleClass="wordwrap" width="30" >
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{checklist.checkedAsDefect}" />
+				</p:column>
+				<p:column headerText="#{msg['history.faulty']}" styleClass="wordwrap" width="30" >
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{checklist.checkedAsLack}" />
+				</p:column>
+				
+				<p:column headerText="#{msg[history.offer]}" styleClass="wordwrap" width="30">
+					<p:selectBooleanCheckbox disabled="true" value="#{checklist.createOffer}" />
+				</p:column>
+				
+				<p:column headerText="#{msg['history.repaired']}" styleClass="wordwrap"   width="30">
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{checklist.checkedAsRepaired}" />
+				</p:column>
+				
+				<p:column headerText="#{msg['history.comment']}" styleClass="wordwrap"
+				style="word-wrap: break-word !important; overflow-wrap: break-word !important;" 
+				 width="90"  >
+					<p:outputLabel 
+						value="#{checklist.description}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.picture']}" width="125" >
+
+					<p:lightBox styleClass="imagebox" id="lighbox1"  >
+
+						<p:repeat var="file" id="fileTable" styleClass="filesdownload" value="#{checklist.files}">
+							<h:outputLink value="/origer/filearchiv/#{file.subfolder}/#{file.name}"
+								title="File#{file.id}">
+								<img id="#{file.id}" src="/origer/filearchiv/#{file.subfolder}/#{file.name}" style="height: 100px;" />
+							</h:outputLink>
+							<br />
+						</p:repeat>
+					</p:lightBox>
+
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+	</p:panel>
+
+</ui:composition>
+

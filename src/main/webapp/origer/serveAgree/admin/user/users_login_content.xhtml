@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<p:panel id="pnl_userContact" header="Login-Übersicht"
+			styleClass="invoices_table" toggleable="false"
+			style="margin-bottom:20px">
+
+			<p:dataTable value="#{usersLoginListBean.data}"
+				filteredValue="#{usersLoginListBean.filteredData}" var="logging"
+				paginator="true" paginatorPosition="bottom" rows="20">
+				<p:column headerText="Datum" filterBy="#{logging.createDate}"
+					filterMatchMode="contains" width="200">
+					<h:outputText value="#{logging.createDate}">
+						<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
+					</h:outputText>                       
+                </p:column>
+				<p:column headerText="Beschreibung" filterBy="#{logging.message}"
+					filterMatchMode="contains">
+					<h:outputText value="#{logging.message}"/>
+                </p:column>				
+                <p:column headerText="IP-Adresse" filterBy="#{logging.ip}"
+					filterMatchMode="contains">
+					<h:outputText value="#{logging.ip}"/>
+                </p:column>
+			</p:dataTable>
+
+		</p:panel>
+
+
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomee>
+  <!-- see http://tomee.apache.org/containers-and-resources.html -->
+
+  <!-- activate next line to be able to deploy applications in apps -->
+  <!-- <Deployments dir="apps" /> -->
+  
+  
+  <Resource id="mail/ciest" type="javax.mail.Session">
+   mail.smtp.host=smtp.root.lu
+   mail.smtp.port=587
+   mail.transport.protocol=smtp
+   mail.smtp.auth=true
+   mail.smtp.user=joomla@theisen.lu
+   password=if56b31t
+</Resource>
+  
+
+  <Resource id="jdbc/origer" type="javax.sql.DataSource" >
+  JtaManaged true 
+  auth Container 
+  driverClassName com.microsoft.sqlserver.jdbc.SQLServerDriver
+  name jdbc/origer
+  password eye123***  
+  url jdbc:sqlserver://localhost:1433;databaseName=ciest
+  username sa
+  </Resource>
+  
+  <Resource id="jdbc/plansoft" type="javax.sql.DataSource" >
+  JtaManaged true 
+  auth Container 
+  driverClassName com.mysql.jdbc.Driver
+  name jdbc/plansoft
+  password if56b31t  
+  url jdbc:mysql://localhost:3306/plansoft
+  username root
+  </Resource>
+  
+  <Resource id="jdbc/bw" type="javax.sql.DataSource" >
+  JtaManaged true
+  auth Container 
+  driverClassName com.microsoft.sqlserver.jdbc.SQLServerDriver
+  name jdbc/bw
+  password eye123***  
+  url jdbc:sqlserver://localhost:1433;databaseName=portalBrunataMigration
+  username sa
+  </Resource>
+</tomee>

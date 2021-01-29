@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+	
+	<div id="topButtonBar">
+			
+		<p:commandButton styleClass="bs_btn edit" disabled="#{!contractInfo.contractValid}"
+			actionListener="#{contractInfo.save}" ajax="true" rendered="true"  onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+			update=":contractForm"  value="Wartungsvertrag speichern" />
+			
+		<p:commandButton styleClass="bs_btn edit"  ajax="true" id="validateService"  
+			actionListener="#{contractInfo.validateContractInformations}"
+			disabled="#{!contractInfo.disableNewBtnBS}"
+			style="margin-right:150px;"  onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+			update=":contractForm" value="Eingabe validieren" />
+			
+		
+		<p:commandButton 	styleClass="bs_btn edit"  
+							onclick="PF('newOfferPopup').show();"
+							ajax="true"  onstart="PF('bui').block();" 
+							oncomplete="PF('bui').unblock();"
+							disabled="#{contractInfo.serviceContract == null}"
+							value="Angebot" 
+							/>
+			
+		<p:commandButton 	styleClass="bs_btn edit"   
+							onclick="PF('newInvoicePopup').show();"
+							ajax="true"  
+							onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+							style="margin-right:150px;"
+							disabled="#{contractInfo.serviceContract == null}"
+							value="Rechnung" 
+							/>
+							
+		<p:commandButton 	styleClass="bs_btn edit"   
+							onclick="PF('newContractFiles').show();"
+							disabled="#{contractInfo.serviceContract == null}"
+							ajax="true"  onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+							style="margin-right:150px;"
+							value="Vertragsunterlagen" 
+							/>
+							
+		<p:commandButton styleClass="bs_btn edit"  ajax="true" rendered="false"  id="generateChecklistForService"
+							actionListener="#{contractInfo.generateHistEntries}" 
+							disabled="#{contractInfo.selectedService == null}"   onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+							update=":contractForm" value="Checkliste für alle Intervalle erstellen" />
+							
+		<p:commandButton 	styleClass="bs_btn edit"							
+							onclick="PF('renewContractPopup').show();" 
+							ajax="true" rendered="true"  
+							onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+							disabled="#{contractInfo.serviceContract == null}"
+							value="Wartungsvertrag verlängern" />
+
+
+	</div>
+
+</ui:composition>

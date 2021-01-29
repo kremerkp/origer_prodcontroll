@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+
+
+		<p:panel id="pnl_timerecordings" header="Zeiterfassung"
+			styleClass="job_table intervall_overview_customer" toggleable="false" style="margin-bottom:20px">
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<p:dataTable value="#{timerecordBean.timeHist}" id="timeHistTab"
+					filteredValue="#{timerecordBean.filteredHist}" var="time"
+					widgetVar="wv_timeHistTab" editable="true" paginator="true"					
+					selectionMode="multiple" paginatorPosition="bottom" rows="25"
+					editMode="cell" selection="#{timerecordBean.selectedHist}"
+					rowKey="#{time}" rowsPerPageTemplate="25,50,100">
+
+					<p:ajax event="cellEdit" listener="#{timerecordBean.onCellEdit}" />
+
+					<p:ajax event="rowSelect" update=":frmList:delButton" />
+
+
+
+					<p:column headerText="ID" rendered="false" filterBy="#{time.id}"
+						sortBy="#{time.id}" filterMatchMode="contains" >
+						<h:outputText value="#{time.id}" />
+					</p:column>
+
+					<p:column headerText="Zeit" width="80" styleClass="marginTop" sortBy="#{time.time}">
+
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{time.time} " />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputMask id="time" value="#{time.time}" mask="99:99:99" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Zeit in Sekunden" rendered="false" styleClass="oneFilterSmall"
+						filterBy="#{time.timeInSeconds}" sortBy="#{time.timeInSeconds}"
+						filterMatchMode="contains">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{time.timeInSeconds}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputNumber value="#{time.timeInSeconds}" decimalPlaces="0" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Vertrag" rendered="false"
+						filterBy="#{time.service.serviceContract.serviceContractNumber}"
+						sortBy="#{time.service.serviceContract.serviceContractNumber}"
+						filterMatchMode="contains">
+						<h:outputText
+							value="#{time.service.serviceContract.serviceContractNumber}" />
+					</p:column>
+
+					<p:column headerText="Servic-ID" filterBy="#{time.service.id}"
+						rendered="false" sortBy="#{time.service.id}"
+						filterMatchMode="contains">
+						<h:outputText value="#{time.service.id}" />
+					</p:column>
+
+					<p:column headerText="Wartungsvertrag#{applicationBean.gSp(20)}" width="180" styleClass="twoFilterSmall"
+						filterBy="#{time.service.serviceContract.serviceContractNumber}"
+						sortBy="#{time.service.serviceContract.serviceContractNumber}"
+						filterMatchMode="contains">
+						<h:outputText
+							value="#{time.service.serviceContract.serviceContractNumber}" />
+					</p:column>
+
+					<p:column headerText="Baustelle#{applicationBean.gSp(30)}" width="150" styleClass="twoFilterSmall"
+						filterBy="#{time.service.serviceContract.buildingSite.name}"
+						sortBy="#{time.service.serviceContract.buildingSite.name}"
+						filterMatchMode="contains">
+						<h:outputText
+							value="#{time.service.serviceContract.buildingSite.name}" />
+					</p:column>
+
+					<p:column headerText="Service Element#{applicationBean.gSp(30)}" width="150" styleClass="twoFilterSmall"
+						filterBy="#{time.serviceElement.elementnumber}"
+						sortBy="#{time.serviceElement.elementnumber}"
+						filterMatchMode="contains">
+						<h:outputText value="#{time.serviceElement.elementnumber}" />
+					</p:column>
+
+					<p:column headerText="Monteur#{applicationBean.gSp(50)}" width="180" styleClass="twoFilterSmall"
+						filterBy="#{time.mechanic.firstname} #{time.mechanic.lastname}"
+						sortBy="#{time.mechanic.lastname}" filterMatchMode="contains">
+						<h:outputText
+							value="#{time.mechanic.firstname} #{time.mechanic.lastname}" />
+					</p:column>
+
+					<p:column headerText="Datum#{applicationBean.gSp(10)}" styleClass="marginTopSort" width="80" sortBy="#{time.recordDate}">
+
+						<h:outputText value="#{time.recordDate}">
+							<f:convertDateTime pattern="dd.MM.yyyy" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Art der Erfassung#{applicationBean.gSp(10)}"  filterBy="#{time.type}" styleClass="twoFilterSmall"
+						width="140" sortBy="#{time.type}" filterMatchMode="exact">
+						<f:facet name="filter">
+							<p:selectOneMenu onchange="PF('wv_timeHistTab').filter()">
+								<f:selectItem itemLabel="Alle" itemValue="" />
+								<f:selectItem itemLabel="Fahrtz." itemValue="FZ" />
+								<f:selectItem itemLabel="Regiez." itemValue="RGZ" />
+								<f:selectItem itemLabel="Arbeitsz." itemValue="IZ" />
+								<f:selectItem itemLabel="Rüstz." itemValue="RZ" />
+								<f:selectItem itemLabel="Prüfz." itemValue="PZ" />
+								<f:selectItem itemLabel="Reparat." itemValue="RPZ" />
+							</p:selectOneMenu>
+						</f:facet>
+						<h:outputText value="#{time.type}" />
+					</p:column>
+
+					<p:column headerText="Bemerkung#{applicationBean.gSp(200)}" styleClass="oneFilterSmall2" filterBy="#{time.description}"
+						filterMatchMode="exact">
+						<h:outputText value="#{time.description}" />
+					</p:column>
+
+
+				</p:dataTable>
+				 
+			</h:panelGrid>
+			<p:commandButton style="t" value="Einträge löschen"
+				update="@form timeHistTab" 
+				rendered="#{sessionBean.isAdmin}"
+				disabled="#{timerecordBean.selectedHist == null}" actionListener="#{timerecordBean.deleteSelectedEntries}" id="delButton" />
+		</p:panel>
+
+	</h:form>
+
+</ui:composition>

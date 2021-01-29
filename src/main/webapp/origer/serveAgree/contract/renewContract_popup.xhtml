@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<div id="diagRenewContract">
+		<p:dialog header="Vertrag verlängern" widgetVar="renewContractPopup"
+			modal="true" height="350">
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<p:outputLabel for="sc_renew_number" value="Vertragsnr: " />
+
+				<p:inputText id="sc_renew_number" disabled="false"
+					value="#{contractInfo.serviceName}" />
+
+				<p:autoComplete var="c" itemValue="#{c}" rendered="false"
+					itemLabel="#{c.serviceContractNumber}"
+					converter="#{simpleConverter}" disabled="true"
+					completeMethod="#{applicationBean.completeServiceContractNumber}"
+					value="#{contractInfo.serviceContract}" scrollHeight="400"
+					dropdown="true" id="sc_renew_name" forceSelection="false"
+					styleClass="autocomplete_customer closed">
+					<p:ajax event="itemSelect"
+						listener="#{contractInfo.updateServiceContract()}" update="@form" />
+
+
+				</p:autoComplete>
+
+				<p:outputLabel for="cs_type2" value="Serviceart" />
+				<p:inputText disabled="#{contractInfo.disableEditModeContract}"
+					id="sc_renew_type"
+					value="#{contractInfo.genContractTypeContract}">
+				</p:inputText>
+
+
+
+				<p:outputLabel for="scb_desc" value="Beschreibung: " />
+				<p:inputTextarea id="sc_renew_desc" title="Beschreibung: "					
+					value="#{contractInfo.renewDescription}" mask="true">
+					<p:ajax />
+				</p:inputTextarea>
+
+				<p:outputLabel for="scb_startdate" value="Vertragsbeginn: " />
+				<p:calendar id="sc_renew_startdate" showTodayButton="true"
+					showWeek="true" navigator="true"					
+					value="#{contractInfo.renewStartDate}" mask="true"
+					locale="de">
+					<p:ajax  />
+				</p:calendar>
+
+				<p:outputLabel for="scb_enddate" value="Vertragsende: " />
+				<p:calendar id="sc_renew_enddate"					
+					showTodayButton="true" showWeek="true" navigator="true"
+					value="#{contractInfo.renewEndDate}" mask="true"
+					locale="de">
+					<p:ajax  />
+				</p:calendar>
+
+				<p:outputLabel for="sc_renew_contractSum" value="Auftragssumme" />
+				<p:inputNumber id="sc_renew_contractSum" symbol=" €"
+					symbolPosition="s" thousandSeparator="." decimalSeparator=","					
+					value="#{contractInfo.renewValue}">
+					<p:ajax></p:ajax>
+				</p:inputNumber>
+				
+				<p:outputLabel for="sc_renew_numberServices" value="Anz. Intervalle" />
+				<p:inputNumber id="sc_renew_numberServices" 					
+					value="#{contractInfo.renewNumberIntervals}"
+					emptyValue="1" minValue="1" decimalPlaces="0">
+					<p:ajax></p:ajax>
+				</p:inputNumber>
+			</h:panelGrid>
+			<f:facet name="footer"> 
+				<p:commandButton value="Vertrag verlängern"   onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+					onclick="PF('renewContractPopup').hide();"
+					actionListener="#{contractInfo.renewContract}"  
+					update="@form" />
+				<p:commandButton value="Abbrechen"
+					onclick="PF('renewContractPopup').hide();" />
+			</f:facet>
+		</p:dialog>
+	</div>
+
+</ui:composition>

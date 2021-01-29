@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<div id="diagServiceType">
+		<p:dialog header="Erstelle Service-Intervalle" widgetVar="addServiceType"
+			modal="true" height="200">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel for="scb_count" value="Anz. Intervalle" />
+					<p:spinner id="scb_count"
+						disabled="#{!contractInfo.contractValid}"
+						value="#{contractInfo.serviceIntervall}"  min="1"
+						max="99">
+						<p:ajax listener="#{contractInfo.createServiceOKFunction}"  update="buttonOK"/>
+					</p:spinner>
+
+					<p:outputLabel for="cs_latestServiceDate" value="Service bis" />
+					<p:calendar id="cs_latestServiceDate" 
+						disabled="#{!contractInfo.contractValid}"
+						showTodayButton="true" showWeek="true"  navigator="true"  onselect="#{contractInfo.createServiceOKFunction()}"
+						value="#{contractInfo.genServiceLatestServicedate}" mask="true"
+						locale="de">
+						<p:ajax listener="#{contractInfo.createServiceOKFunction}" 
+						process="@this"  update="buttonOK"/> 
+					</p:calendar>
+
+					<p:outputLabel for="cs_type" value="Serviceart" />
+					<p:selectOneMenu disabled="#{!contractInfo.contractValid}" required="false"
+						id="cs_type" value="#{contractInfo.genServiceTyp}">
+						<f:selectItem itemLabel="Auswahl Serviceart" itemValue="" />
+						<f:selectItems value="#{contractInfo.serviceTypeList}" />
+						<p:ajax listener="#{contractInfo.createServiceOKFunction}" update="buttonOK" /> 
+					</p:selectOneMenu>
+				</h:panelGrid>
+
+				<f:facet name="footer">
+					<p:commandButton value="ok"  
+						onstart="PF('bui').block();"
+						id="buttonOK"
+						disabled="#{!contractInfo.createServiceOK}" 
+						oncomplete="PF('bui').unblock();"
+						actionListener="#{contractInfo.addServiceTypeEntry}" 
+						onclick="PF('addServiceType').hide();" update="@form" />
+					<p:commandButton value="chancel"
+						onclick="PF('addServiceType').hide();" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</div>
+
+</ui:composition>

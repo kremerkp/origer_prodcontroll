@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="frmChecklistItem" styleClass="editForm">
+		<p:panelGrid styleClass="pnlStd frmOffers adminInput">
+			<p:row>
+				<p:column styleClass="header" colspan="2">
+					<p:outputLabel value="Rechnungen" />
+
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="error" colspan="2">
+					<p:messages />
+				</p:column>
+			</p:row>
+			<p:row rendered="false">
+				<p:column>
+
+					<p:outputLabel value="Aktiv" />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="active"
+						value="#{invoiceEditBean.invoice.active}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width:140px !important">
+
+					<p:outputLabel value="Name" />
+				</p:column>
+				<p:column>
+					<p:inputText id="invName" value="#{invoiceEditBean.invoice.name}"
+						required="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Rechnungsnummer" />
+				</p:column>
+				<p:column>
+					<p:inputText id="elements"
+						value="#{invoiceEditBean.invoice.number}" required="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Rechnungsdatum" />
+				</p:column>
+				<p:column>
+					<p:calendar id="invoiceDate"
+						value="#{invoiceEditBean.invoice.invoiceDate}" mask="true"
+						showTodayButton="true" showWeek="true" navigator="true"
+						required="true" 
+						locale="de"/>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Rechnungsbetrag" />
+				</p:column>
+				<p:column>
+					<p:inputNumber id="invoiceAmount" symbol=" €" symbolPosition="s"
+						thousandSeparator="." decimalSeparator=","
+						value="#{invoiceEditBean.invoice.amount}" required="true" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:outputLabel for="state" value="Status:" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu id="state"
+						value="#{invoiceEditBean.invoice.state}">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItem itemLabel="gesendet" itemValue="gesendet" />
+						<f:selectItem itemLabel="bezahlt" itemValue="bezahlt" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Wartungsvertrag" />
+				</p:column>
+				<p:column>
+					<p:autoComplete var="ser" itemValue="#{ser}" required="true"
+						itemLabel="#{ser.serviceContractNumber}"
+						converter="#{simpleConverter}"
+						completeMethod="#{invoiceEditBean.completeServiceContract}"
+						value="#{invoiceEditBean.serviceContract}" size="25"
+						scrollHeight="400" style="float:left" dropdown="true" id="serID">
+					</p:autoComplete>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Dateien Hochladen" />
+				</p:column>
+				<p:column>
+					<p:fileUpload
+						fileUploadListener="#{invoiceEditBean.handleFileUpload}"
+						fileLimit="10" fileLimitMessage="maximal 10 Dateien"
+						mode="advanced" dragDropSupport="true" sizeLimit="100000000"
+						multiple="true" process="@this,fileTable" update="fileTable"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|mp4)$/" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column colspan="2">
+
+					<p:dataTable var="file" id="fileTable"
+						value="#{invoiceEditBean.fileList}">
+						<p:column headerText="url">
+							<h:outputText value="#{file.url}" />
+						</p:column>
+
+						<p:column headerText="delete" width="30">
+							<p:commandButton action="#{invoiceEditBean.actionDelFile}"
+								update="@form" ajax="false" id="delFile"
+								icon="ui-icon-closethick" title="Icon Only">
+								<f:setPropertyActionListener target="#{invoiceEditBean.delFile}"
+									value="#{file.id}" />
+							</p:commandButton>
+						</p:column>
+						<p:column headerText="open" width="30">
+							<p:commandButton action="#{invoiceEditBean.actionOpenFile(file)}"
+								process="@this" update="@form" ajax="false" id="openFile"
+								icon="ui-icon-circle-arrow-s" title="Icon Only">
+								<p:fileDownload value="#{invoiceEditBean.file}" />
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+
+				</p:column>
+			</p:row>
+
+		</p:panelGrid>
+
+		<br clear="all" />
+
+		<p:spacer styleClass="seperator" />
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+
+			<p:commandButton actionListener="#{invoiceEditBean.save()}"
+				onstart="PF('w_dlgWait').show();"
+				oncomplete="PF('w_dlgWait').hide();" value="Speichern"
+				process="@form" update="@form" styleClass="clear" />
+			<p:commandButton actionListener="#{invoiceEditBean.saveAndClose()}"
+				value="Speichern und Schliessen" process="@form" update="@form"
+				styleClass="clear" />
+		</h:panelGroup>
+
+		<p:dialog widgetVar="w_dlgWait" modal="true" closable="false"
+			draggable="false" resizable="false" header="Speichern...">
+			<p>Bitte warten...</p>
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

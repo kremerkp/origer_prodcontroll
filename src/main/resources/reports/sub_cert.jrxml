@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_cert" pageWidth="595" pageHeight="842" orientation="Landscape" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" resourceBundle="reports/i18n/i18n" uuid="49e02ecc-08a5-4d55-a13f-c85715c9675f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="alternateStyle" mode="Opaque" forecolor="#FFFFFF" backcolor="#FFFFFF" radius="1">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "ok" )]]></conditionExpression>
+			<style forecolor="#10FF00"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "Ok" )]]></conditionExpression>
+			<style forecolor="#10FF00"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "defekt" )]]></conditionExpression>
+			<style forecolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "ueux" )]]></conditionExpression>
+			<style forecolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "en panne" )]]></conditionExpression>
+			<style forecolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "mangel" )]]></conditionExpression>
+			<style forecolor="#FF9900"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "Non con" )]]></conditionExpression>
+			<style forecolor="#FF9900"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "un" )]]></conditionExpression>
+			<style forecolor="#000000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "Sans" )]]></conditionExpression>
+			<style forecolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="elementComment" class="java.lang.String">
+		<fieldDescription><![CDATA[elementComment]]></fieldDescription>
+	</field>
+	<field name="urlFoto" class="java.lang.String">
+		<fieldDescription><![CDATA[urlFoto]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[description]]></fieldDescription>
+	</field>
+	<field name="elementDate" class="java.util.Date">
+		<fieldDescription><![CDATA[elementDate]]></fieldDescription>
+	</field>
+	<field name="functionalControl" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[functionalControl]]></fieldDescription>
+	</field>
+	<field name="elementOffer" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[elementOffer]]></fieldDescription>
+	</field>
+	<field name="elementRepair" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[elementRepair]]></fieldDescription>
+	</field>
+	<field name="elementName" class="java.lang.String">
+		<fieldDescription><![CDATA[elementName]]></fieldDescription>
+	</field>
+	<field name="elementOk" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[elementOk]]></fieldDescription>
+	</field>
+	<field name="elementMangel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[elementMangel]]></fieldDescription>
+	</field>
+	<field name="urlFoto2" class="java.lang.String">
+		<fieldDescription><![CDATA[urlFoto2]]></fieldDescription>
+	</field>
+	<field name="elementState" class="java.lang.String">
+		<fieldDescription><![CDATA[elementState]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="viewControl" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[viewControl]]></fieldDescription>
+	</field>
+	<field name="checklistEntry" class="java.lang.String">
+		<fieldDescription><![CDATA[checklistEntry]]></fieldDescription>
+	</field>
+	<field name="orientation" class="java.lang.String">
+		<fieldDescription><![CDATA[orientation]]></fieldDescription>
+	</field>
+	<field name="room" class="java.lang.String">
+		<fieldDescription><![CDATA[room]]></fieldDescription>
+	</field>
+	<field name="floor" class="java.lang.String">
+		<fieldDescription><![CDATA[floor]]></fieldDescription>
+	</field>
+	<variable name="description1" class="java.lang.Integer" resetType="Group" resetGroup="element Name" calculation="Count">
+		<variableExpression><![CDATA[$F{description}]]></variableExpression>
+	</variable>
+	<variable name="URL_FOTO" class="java.lang.String">
+		<variableExpression><![CDATA[$F{urlFoto} == "" ? "" : "https://maintenance.origer.lu:58443/" +  $F{urlFoto}]]></variableExpression>
+	</variable>
+	<group name="elementdate">
+		<groupExpression><![CDATA[$F{elementDate}]]></groupExpression>
+	</group>
+	<group name="date element">
+		<groupExpression><![CDATA[$F{elementDate}]]></groupExpression>
+	</group>
+	<group name="element Name">
+		<groupExpression><![CDATA[$F{elementName}]]></groupExpression>
+	</group>
+	<group name="element Name2">
+		<groupExpression><![CDATA[$F{elementName}]]></groupExpression>
+	</group>
+	<title>
+		<band height="57" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="556" height="40" uuid="00644a99-f23a-4373-862c-284926feebf8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{certificate.overview}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="37">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="7" width="80" height="30" backcolor="#F0F0F0" uuid="9d4d0783-cc26-4123-a1c7-111d644aaa74">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{certificate.elementNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="80" y="7" width="79" height="30" backcolor="#F0F0F0" uuid="d550a662-ec13-4329-971a-9365ec8d1270">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{certificate.controlDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="159" y="7" width="70" height="30" backcolor="#F0F0F0" uuid="afaad16b-4bc7-45b2-8728-4df0753ce702">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{certificate.floor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="229" y="7" width="70" height="30" backcolor="#F0F0F0" uuid="39688bd0-cdab-44eb-abb6-02623b8357aa">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{certificate.room}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="299" y="7" width="70" height="30" backcolor="#F0F0F0" uuid="249afc39-482d-4b15-be61-9ed27e050b4d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{certificate.elementStatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="369" y="7" width="90" height="30" backcolor="#F0F0F0" uuid="7fb408be-9938-41eb-8257-60e6a3da2c2f">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{certificate.comment}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="459" y="7" width="90" height="30" backcolor="#F0F0F0" uuid="1fcc3f95-026e-495d-bfcf-d7ddfe18d07a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.5" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{certificate.picture}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Prevent">
+			<printWhenExpression><![CDATA[$F{urlFoto} == null || $F{urlFoto}.length() == 0]]></printWhenExpression>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement stretchType="RelativeToTallestObject" x="80" y="0" width="79" height="30" uuid="0ee9f038-f2c0-4adb-93bf-e5ea4209eb9d"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{elementDate} == null ? "" : $F{elementDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="80" height="30" uuid="b3bb08f8-a996-4ac9-a3a8-8ea2d7332089"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{elementName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement stretchType="RelativeToTallestObject" x="159" y="0" width="70" height="30" uuid="a63b70b7-d298-477b-8fe1-21579aa297fe"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{floor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement x="229" y="0" width="70" height="30" uuid="a69f32bd-cdf5-4d9c-8eb8-b3454d0726cf"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{room}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="alternateStyle" stretchType="RelativeToTallestObject" x="299" y="0" width="70" height="30" uuid="708fdaf0-4459-406e-96f1-463f7a4060bc"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{elementState}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="369" y="0" width="90" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="213cc337-32a3-4894-a122-ba170c7a7b7a"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{elementComment}.trim()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="459" y="0" width="90" height="30" uuid="4b672a13-cd1a-42f0-9ead-2d2b7babdce7"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+		<band height="90" splitType="Prevent">
+			<printWhenExpression><![CDATA[$F{urlFoto} != null && $F{urlFoto}.length() > 0]]></printWhenExpression>
+			<textField>
+				<reportElement x="0" y="0" width="80" height="90" uuid="625122aa-dc80-4d06-8554-0eac0550192e"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{elementName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="80" y="0" width="79" height="90" uuid="b2581d39-a38f-4c29-92b1-a7d53989f134"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{elementDate} == null ? "" : $F{elementDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="159" y="0" width="70" height="90" uuid="0f765563-9ede-4d3e-8fb1-cc93ea8a3cb3"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{floor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement x="229" y="0" width="70" height="90" uuid="0f1aa746-9a85-461d-9eb7-1005340f8201"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{room}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="alternateStyle" x="299" y="0" width="70" height="90" uuid="b3d0027a-eb18-4d41-864a-151ac9451612"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{elementState}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="0" width="90" height="90" forecolor="#000000" backcolor="#FFFFFF" uuid="dae7506d-e442-426e-8914-b20113146a22"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{elementComment}.trim()]]></textFieldExpression>
+			</textField>
+			<image hAlign="Left" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="459" y="0" width="90" height="90" uuid="361a50a5-c9fc-4781-8d0f-a3eb27ecded2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<imageExpression><![CDATA["https://maintenance.origer.lu:58443" + $F{urlFoto}.replaceAll( "etc", "")]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

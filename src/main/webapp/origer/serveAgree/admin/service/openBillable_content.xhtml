@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<p:panel id="pnl_checklistsElementsTyps" header="zu verrechnende Regiezeiten"
+			styleClass="intervall_overview" toggleable="false"
+			style="margin-bottom:20px; width: 1800px;" >
+
+			<h:panelGrid columns="2" cellpadding="5">
+			  
+			
+			<p:dataTable value="#{timerecordBean.timeHistBillable}" id="timeHistTab"
+				filteredValue="#{timerecordBean.filteredHist}" var="time" widgetVar="wv_timeHistTab"
+				editable="true" paginator="true" paginatorPosition="bottom" selectionMode="multiple"
+				rows="25" editMode="cell" selection="#{timerecordBean.selectedHistBillable}"
+				rowKey="#{time}" rowsPerPageTemplate="25,50,100">
+
+				<p:ajax event="cellEdit" listener="#{timerecordBean.onCellEdit}" />
+
+				<p:column headerText="ID" rendered="false" filterBy="#{time.id}"
+					sortBy="#{time.id}" filterMatchMode="contains">
+					<h:outputText value="#{time.id}" />
+				</p:column>
+
+				<p:column headerText="Zeit#{applicationBean.gSp(20)}" styleClass="marginTopSort"  width="80"
+					sortBy="#{time.time}">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{time.time} " />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputMask id="time" value="#{time.time}" mask="99:99:99" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Zeit in Sekunden" rendered="false"
+					filterBy="#{time.timeInSeconds}" sortBy="#{time.timeInSeconds}"
+					filterMatchMode="contains">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{time.timeInSeconds}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputNumber value="#{time.timeInSeconds}" decimalPlaces="0" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Vertrag" width="150" rendered="false"
+					filterBy="#{time.service.serviceContract.serviceContractNumber}"
+					sortBy="#{time.service.serviceContract.serviceContractNumber}"
+					filterMatchMode="contains">
+					<h:outputText
+						value="#{time.service.serviceContract.serviceContractNumber}" />
+				</p:column>
+
+				<p:column headerText="Servic-ID" filterBy="#{time.service.id}" rendered="false"
+					sortBy="#{time.service.id}" filterMatchMode="contains">
+					<h:outputText value="#{time.service.id}" />
+				</p:column>
+
+				<p:column headerText="Wartungsvertrag#{applicationBean.gSp(20)}" styleClass="twoFilterSmall" width="180"
+					filterBy="#{time.service.serviceContract.serviceContractNumber}"
+					sortBy="#{time.service.serviceContract.serviceContractNumber}"
+					filterMatchMode="contains">
+					<h:outputText
+						value="#{time.service.serviceContract.serviceContractNumber}" />
+				</p:column>
+
+				<p:column headerText="Baustelle#{applicationBean.gSp(40)}" width="180" styleClass="twoFilterSmall"
+					filterBy="#{time.buildingSite.name}"
+					sortBy="#{time.buildingSite.name}"
+					filterMatchMode="contains">
+					<h:outputText
+						value="#{time.buildingSite.name}" />
+				</p:column>
+
+
+				<p:column headerText="Service Element#{applicationBean.gSp(20)}" width="150" styleClass="twoFilterSmall"
+					filterBy="#{time.serviceElement.elementnumber}"
+					sortBy="#{time.serviceElement.elementnumber}"
+					filterMatchMode="contains">
+					<h:outputText value="#{time.serviceElement.elementnumber}" />
+				</p:column>
+ 
+				<p:column headerText="Monteur#{applicationBean.gSp(40)}" width="180" styleClass="twoFilterSmall"
+					filterBy="#{time.mechanic.firstname} #{time.mechanic.lastname}"
+					sortBy="#{time.mechanic.lastname}" filterMatchMode="contains">
+					<h:outputText
+						value="#{time.mechanic.firstname} #{time.mechanic.lastname}" />
+				</p:column>
+
+				<p:column headerText="Datum#{applicationBean.gSp(40)}"  width="100" styleClass="marginTopSort"
+					sortBy="#{time.recordDate}" >
+
+					<h:outputText value="#{time.recordDate}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="verrechnet" filterBy="#{time.payed}" width="80" styleClass="twoFilterSmall"
+					sortBy="#{time.payed}" filterMatchMode="exact">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('wv_timeHistTab').filter()">
+							<f:converter converterId="javax.faces.Boolean" />
+							<f:selectItem itemLabel="Alle" itemValue="" />
+							<f:selectItem itemLabel="Aktiv" itemValue="true" />
+							<f:selectItem itemLabel="Inaktiv" itemValue="false" />
+						</p:selectOneMenu>
+					</f:facet>
+					
+					
+					<p:selectBooleanCheckbox  value="#{time.payed}" disabled="true" />
+				</p:column>
+
+				<p:column styleClass="oneFilterSmall2" headerText="Bemerkung" filterBy="#{time.description}" filterMatchMode="exact">
+										<h:outputText
+						value="#{time.description}" />
+				</p:column>			
+
+
+
+			</p:dataTable>
+		</h:panelGrid>
+ 
+			<p:contextMenu for="timeHistTab" rendered="true"> 
+				<p:menuitem value="als verrechnet markieren" update="@form" ajax="false"
+				actionListener="#{timerecordBean.setTimeBillable}" />
+				<p:menuitem value="als zu verrechnen markieren" update="@form" ajax="false"
+				actionListener="#{timerecordBean.setTimeBilled()}" />
+				<p:menuitem value="Bericht erstellen" update="@form" ajax="false" target="_blank"
+				actionListener="#{timerecordBean.generateReport()}" />
+			</p:contextMenu> 
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons" rendered="false"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="Angebot erstellen" ajax="false"
+					disabled="#{serviceBean.selectedService == null}" 
+					action="#{serviceBean.createNewOffer}" />
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

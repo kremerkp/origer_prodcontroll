@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="frmServiceTypes" styleClass="editForm">
+		<p:panelGrid styleClass="pnlStd frmOffers adminInput">
+			<p:row>
+				<p:column styleClass="header" colspan="2">
+					    <p:outputLabel value="Vertragsarten" />
+                        
+                    </p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="error" colspan="2">
+					<p:messages />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        
+                        <p:outputLabel value="Aktiv" />
+                    </p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="active"
+						value="#{contractTypeEditBean.contractType.active}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        
+                        <p:outputLabel value="Name (DE)" />
+                    </p:column>
+				<p:column>
+					<p:inputText id="itemName"  
+						value="#{contractTypeEditBean.contractType.name}"
+						required="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        
+                        <p:outputLabel value="Name (FR)" />
+                    </p:column>
+				<p:column>
+					<p:inputText id="itemNameFrench" 
+						value="#{contractTypeEditBean.contractType.nameFrench}"
+						required="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        
+                        <p:outputLabel value="Kurzname" />
+                    </p:column>
+				<p:column>
+					<p:inputText id="shortname" maxlength="2"  
+						value="#{contractTypeEditBean.contractType.shortname}"  
+						required="true"  />
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column>
+                        
+                        <p:outputLabel value="Beschreibung" />
+                    </p:column>
+				<p:column>
+					<p:inputText id="description" 
+						value="#{contractTypeEditBean.contractType.description}"  
+						required="true"  />
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+
+		<br clear="all" />
+
+		<p:spacer styleClass="seperator" />
+		<p:commandButton actionListener="#{contractTypeEditBean.save()}"
+			onstart="PF('w_dlgWait').show();"
+			oncomplete="PF('w_dlgWait').hide();" value="Speichern"
+			process="@form" update="@form" styleClass="clear" />
+		<p:commandButton actionListener="#{contractTypeEditBean.saveAndClose()}"
+			value="Speichern und Schliessen" process="@form" update="@form"
+			styleClass="clear" />
+
+		<p:dialog widgetVar="w_dlgWait" modal="true" closable="false"
+			draggable="false" resizable="false" header="Speichern...">
+			<p>Bitte warten...</p>
+		</p:dialog>
+	</h:form>
+
+</ui:composition>

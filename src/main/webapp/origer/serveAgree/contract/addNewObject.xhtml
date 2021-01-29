@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<div id="diagServiceType"> 
+		<p:dialog header="#{contractInfo.object} neu Erstellen?" widgetVar="newObjectPopup"
+			modal="true" height="250">
+			<h:panelGrid columns="2" cellpadding="5">
+			 <h:panelGrid id="elementAddGrid" columns="1" cellpadding="5">
+					<p:outputLabel  value="Es wird ein neues Objekt vom Type #{contractInfo.object} erstellt." />
+			  </h:panelGrid>
+				<f:facet name="footer"> 
+					<p:commandButton value="#{contractInfo.object} neu anlegen" 
+						onclick="PF('newObjectPopup').hide();"
+						actionListener="#{contractInfo.createNewObject()}"  
+						update="@form" />
+					<p:commandButton value="#{contractInfo.object} editieren"
+						actionListener="#{contractInfo.editNewObject()}"
+						update="@form" 
+						onclick="PF('newObjectPopup').hide();" />
+					<p:commandButton value="chancel"
+						onclick="PF('newObjectPopup').hide();" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</div>
+
+</ui:composition>

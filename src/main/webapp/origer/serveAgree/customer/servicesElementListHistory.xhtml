@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+		<p:panel id="pnl_servicesElementsTable" 
+			styleClass="servicesElementsTable_table" toggleable="false"
+			style="margin-bottom:20px; height: 70%">
+						
+			
+			<h:panelGroup layout="block" id="layButtons"
+						styleClass="margin-top">
+						<h3 style="margin-left: 10px; font-size: 20px; font-weight: normal; font-variant: small-caps;" >#{msg['offers.elements']}</h3>
+				<div style="text-align: right; margin-top: -53px; margin-right: 16px; ">					
+				
+					<p:commandButton id="bc_button_repair" icon="fa fa-weixin" title="#{msg['history.addDefect']}"
+											oncomplete="PF('repairPopup').show();"
+											rendered="#{sessionBean.isAdmin}" actionListener="#{serviceCustomerHistoryBean.resetValues}"
+											update=":defectForm"
+											disabled="#{!serviceCustomerHistoryBean.rowSelected}"
+											ajax="true"/>
+											
+					<p:commandButton id="bc_button_printHist" icon="fa fa-file-o" title="#{msg['history.printHist']}"
+											onclick="this.form.target='_blank'" 
+											actionListener="#{serviceCustomerHistoryBean.generateHistReport}" 
+											disabled="#{!serviceCustomerHistoryBean.rowSelected}"
+											ajax="false"/>
+											
+					<p:commandButton id="bc_button_printHistDetail" onclick="this.form.target='_blank'" icon="fa fa-files-o" title="#{msg['history.printHistDetail']}"
+											actionListener="#{serviceCustomerHistoryBean.generateHistReportDetail}"  
+											disabled="#{!serviceCustomerHistoryBean.rowSelected}"
+											ajax="false"/>
+											
+											
+							
+				</div>
+			</h:panelGroup>
+			
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:dataTable var="elements" paginator="true" 
+					paginatorPosition="bottom" rows="25" editable="true" id="elTab"
+					rowKey="#{elements}" rowsPerPageTemplate="25,50,100"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					selection="#{serviceCustomerHistoryBean.selectedElement}" selectionMode="single"
+					 value="#{serviceCustomerHistoryBean.serviceElements}">
+					<p:ajax event="rowSelect" process="@this" listener="#{serviceCustomerHistoryBean.onRowSelect}"  
+					update=":customerView:bc_button_repair 
+					:customerView:bc_button_printHist 
+					:customerView:bc_button_printHistDetail 
+					:customerView:elTab 
+					:customerView:histElTab 
+					:customerView:checkTab 
+					:customerView:layButtons" />
+
+					<p:column headerText="#{msg['history.barcode']}" filterBy="#{elements.elementnumber}"
+						 filterMatchMode="contains" styleClass="oneFilterSmall" >
+						<h:outputText value="#{elements.elementnumber}" />
+					</p:column>
+					
+					<p:column headerText="#{msg['history.last.date']}">
+						<h:outputText value="#{elements.lastControlDate}" rendered="#{sessionBean.isAdmin}">
+						 	<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
+						</h:outputText> 
+						
+						<h:outputText value="#{elements.lastControlDate}" rendered="#{!sessionBean.isAdmin}">
+						 	<f:convertDateTime pattern="dd.MM.yyyy" />
+						</h:outputText> 
+					</p:column>
+					
+					<p:column headerText="#{msg['history.status']}" filterBy="#{elements.lastState}" styleClass="#{serviceCustomerHistoryBean.styleState(elements.lastState)} oneFilterSmall"
+						filterMatchMode="contains"  >
+						<h:outputText value="#{elements.lastState}" />
+					</p:column>
+					
+					<p:column headerText="#{msg['history.room']}#{applicationBean.gSp(25)}" 
+						filterBy="#{elements.room}" sortBy="#{elements.room}"
+						filterMatchMode="contains" style="word-wrap: break-word !important; overflow-wrap: break-word !important;">
+						<h:outputText value="#{elements.room}"/>
+					</p:column>
+					
+					<p:column headerText="#{msg['history.floor']}" filterBy="#{elements.floor}" sortBy="#{elements.floor}"
+						filterMatchMode="contains">
+						<h:outputText value="#{elements.floor}" />
+					</p:column>
+					
+					<p:column headerText="#{msg['history.orientation']}" filterBy="#{elements.directionType.name}" sortBy="#{elements.directionType.name}"
+						filterMatchMode="contains">
+						<h:outputText rendered="#{sessionBean.userLocale.country == 'DE'}" 
+							value="#{elements.directionType.name}" />
+						<h:outputText rendered="#{sessionBean.userLocale.country == 'FR'}" 
+							value="#{elements.directionType.nameFrench}" />
+					</p:column>
+					
+				</p:dataTable>
+			</h:panelGrid>
+		</p:panel>
+
+</ui:composition>
+

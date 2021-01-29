@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subRepairDate" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="abb43c6b-72c1-4800-adc5-0d9f2fa5da94">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="startTime" class="java.util.Date">
+		<fieldDescription><![CDATA[startTime]]></fieldDescription>
+	</field>
+	<field name="repairs" class="java.util.List">
+		<fieldDescription><![CDATA[repairs]]></fieldDescription>
+	</field>
+	<field name="usedTime" class="java.lang.String">
+		<fieldDescription><![CDATA[usedTime]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
+		<fieldDescription><![CDATA[status]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<textField pattern="dd.MM.yyyy HH:mm">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="64" height="50" uuid="518a7071-2cd9-4d18-a592-1d983e53a160"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{startTime}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="64" y="0" width="330" height="50" uuid="dda12a68-0757-4e4f-a021-64b1c0749e4d"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{repairs})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reports/subRepair.jasper"]]></subreportExpression>
+			</subreport>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToBandHeight" x="444" y="0" width="64" height="50" uuid="300a27de-b132-43d6-b42f-dfc216a1fd4b"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{usedTime}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToBandHeight" x="394" y="0" width="50" height="50" uuid="0488e64f-07b4-4bf3-af40-ce6e3a670a91"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

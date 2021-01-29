@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    
+        <h1>Wartungen</h1>
+        <h:form id="frmList">
+            <script type="text/javascript">
+                markTopMenuActive('users');
+                markLeftMenuActive('users');
+            </script>
+            <p:dataTable 	value="#{serviceContractBean.data}" 
+            				filteredValue="#{serviceContractBean.filteredData}" 
+            				var="sc" 
+            				paginator="true" 
+            				paginatorPosition="bottom"
+            				styleClass="checklistTable listtable"
+                         	rows="20" 
+                         	selectionMode="single" 
+                         	rowKey="#{sc.id}" 
+                         	selection="#{serviceContractBean.selectedData}">
+                <p:ajax event="rowSelect" update=":frmList:layButtons" process="@this" />
+                <p:ajax event="rowUnselect" update="@form" process="@this" />
+                <p:ajax event="rowDblselect" listener="#{sc.openOffer()}" process="@this" />
+               
+                <p:column headerText="Vertragsnummer" filterBy="#{sc.serviceContractNumber}" filterMatchMode="contains" >
+                    #{sc.serviceContractNumber}                
+                </p:column>
+                
+                <p:column headerText="Anmerkung" filterBy="#{sc.description}" filterMatchMode="contains" >
+                    #{sc.description}                
+                </p:column>
+                
+                <p:column headerText="zu Realisieren" >
+                    #{sc.firstIntervallDate}                
+                </p:column>
+                
+                <p:column headerText="Baustelle" >
+                    #{sc.buildingSite.name}                
+                </p:column>
+                
+                <p:column headerText="Baustelle" >
+                    #{sc.buildingSite.name}                
+                </p:column>
+                
+                <p:column headerText="Techniker" >
+                    #{sc.technician.firstname} ", " #{sc.technician.lastname}                 
+                </p:column>
+                
+                <p:column headerText="Kunde" >
+                    #{sc.partner.company}                  
+                </p:column>
+                
+                <p:column headerText="Vertrags-Art" >
+                    #{sc.serviceType.name}                 
+                </p:column>
+                
+                <p:column headerText="Anfangsdatum" >
+                    #{sc.fromdate}                 
+                </p:column>
+                
+                <p:column headerText="Endedatum" >
+                    #{sc.todate}                 
+                </p:column>
+                
+                <p:column headerText="Vertragswert" >
+                    #{sc.servicesAmount}                 
+                </p:column>
+                
+                <p:column headerText="Zeit geplant" >
+                    #{sc.timePlannedTotal}                 
+                </p:column>
+                
+                <p:column headerText="Zeit bisher" >
+                    #{sc.timeSpentTotal}                 
+                </p:column>
+                
+                <p:column headerText="Interv. pro Jahr" >
+                    #{sc.intervall}                 
+                </p:column>
+      
+                <p:column headerText="Aktiv" styleClass="col_active" >
+                    <p:selectBooleanCheckbox disabled="true" value="#{sc.active}" />
+                </p:column>
+            </p:dataTable>
+
+            <h:panelGroup layout="block" id="layButtons" styleClass="margin-top layButtons">
+                <div>
+                    <p:commandButton value="neu" ajax="false" action="#{serviceContractBean.add()}" /> 
+                    <p:commandButton value="bearbeiten" ajax="false" action="#{serviceContractBean.edit()}" styleClass="ml15" 
+                    disabled="#{serviceContractBean.selectedData == null}" process="@this" />
+                </div>
+            </h:panelGroup>
+
+        </h:form>
+
+</ui:composition>

@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="frmOffers" styleClass="editForm">
+		<p:panelGrid styleClass="pnlStd frmOffers adminInput">
+			<p:row>
+				<p:column styleClass="header" colspan="2">
+                        Angebote
+                    </p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="error" colspan="2">
+					<p:messages />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        Aktiv
+                    </p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="active"
+						value="#{offersEditBean.offer.active}" 
+						/>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        Name
+                    </p:column>
+				<p:column>
+					<p:inputText id="itemName"
+						value="#{offersEditBean.offer.name}"
+						required="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        Angebotsdatum
+                    </p:column>
+				<p:column>
+					<p:calendar id="offerDate" mask="true"
+						value="#{offersEditBean.offer.offerdate}"
+						showTodayButton="true" showWeek="true"  navigator="true"  
+						required="true"  />
+				</p:column>
+			</p:row>
+			
+			
+			<p:row>
+				<p:column>
+                        Betrag
+                    </p:column>
+				<p:column>
+					<p:inputNumber id="itemAmount" thousandSeparator="." decimalSeparator="," symbol=" €" symbolPosition="s"
+						value="#{offersEditBean.offer.amount}"
+						required="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        Elemente
+                    </p:column>
+				<p:column>
+					<p:inputText id="elementNames"
+						value="#{offersEditBean.offer.checklistitems}"
+						required="true" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                         <p:outputLabel for="state" value="Status:" />
+                    </p:column>
+				<p:column>
+			        <p:selectOneMenu id="state" value="#{offersEditBean.offer.state}">
+			            <f:selectItem itemLabel="Select One" itemValue="" />
+			            <f:selectItem itemLabel="ok" itemValue="ok" />
+			            <f:selectItem itemLabel="abgelehnt" itemValue="abgelehnt" />
+			            <f:selectItem itemLabel="gesendet" itemValue="gesendet" />
+			        </p:selectOneMenu>
+				</p:column>
+			</p:row>
+			<p:row>
+			
+				<p:column>
+                        Wartungsvertrag
+                    </p:column>
+				<p:column>
+					<p:autoComplete var="ser" itemValue="#{ser}" required="true"
+						itemLabel="#{ser.serviceContractNumber}"
+						converter="#{simpleConverter}"
+						completeMethod="#{offersEditBean.completeServiceContract}"  
+						value="#{offersEditBean.service}" size="25" scrollHeight="400"
+						style="float:left" dropdown="true" id="serID">
+					</p:autoComplete>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+
+		<br clear="all" />
+
+		<p:spacer styleClass="seperator" />
+		<p:commandButton actionListener="#{offersEditBean.save()}"
+			onstart="PF('w_dlgWait').show();"
+			oncomplete="PF('w_dlgWait').hide();" value="Speichern"
+			process="@form" update="@form" styleClass="clear" />
+		<p:commandButton actionListener="#{offersEditBean.saveAndClose()}"
+			value="Speichern und Schliessen" process="@form" update="@form"
+			styleClass="clear" />
+
+		<p:dialog widgetVar="w_dlgWait" modal="true" closable="false"
+			draggable="false" resizable="false" header="Speichern...">
+			<p>Bitte warten...</p>
+		</p:dialog>
+	</h:form>
+
+</ui:composition>

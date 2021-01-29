@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+
+
+		<p:panel id="pnl_buildingSiteFiles" header="#{msg['customer.selection.contracts']}"
+			styleClass="buildingSiteFile_table" toggleable="false"
+			style="margin-bottom:20px">
+
+			<p:dataTable value="#{buildingSiteBean.buildingSiteFiles}"
+				filteredValue="#{buildingSiteBean.buildingSiteFilesFiltered}"
+				var="files" paginator="true" paginatorPosition="bottom" 
+				id="fileForBS" widgetVar="filesWid" styleClass="offer customer"
+				rows="20" editable="true" editMode="cell" selectionMode="single"
+				rowKey="#{files.id}"
+				selection="#{buildingSiteBean.buildingSiteFileSelected}">
+				
+				<p:ajax event="rowSelect" update=":frmList:layButtons"
+						process="@this" />
+
+
+				<p:column headerText="#{msg['contract.documents.site']}"
+					filterBy="#{files.buildingSite.code}"
+					styleClass="offer_customer_contract">
+					<h:outputText value="#{files.buildingSite.code}" />
+				</p:column>
+
+				<p:column headerText="#{msg['contract.documents.name']}" filterBy="#{files.name}"
+					styleClass="offer_customer_contract">
+					<h:outputText value="#{files.name}" />
+				</p:column>
+
+				<p:column headerText="#{msg['contract.documents.create.date']}" filterBy="#{files.createDate}"
+					styleClass="offer_customer_contract">
+					<h:outputText value="#{files.createDate}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="#{msg['contract.documents.type']}" filterBy="#{files.description}"
+					styleClass="offer_customer_contract">
+					<h:outputText value="#{files.description}"/>
+				</p:column>
+
+				<p:column headerText="Synchronisation zu Android" rendered="false"
+					styleClass="offer_customer_contract">
+					<p:selectBooleanCheckbox value="#{files.synchronizeAndroid}"
+						disabled="true" />
+				</p:column>
+
+				<p:column headerText="#{msg['contract.documents.open']}" width="30">
+					<p:commandButton
+						actionListener="#{offersEditBean.actionOpenFile(files)}"
+						update="@form" ajax="false" id="openFile"
+						icon="ui-icon-circle-arrow-s" title="Icon Only">
+						<p:fileDownload value="#{offersEditBean.file}" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+
+		<p:contextMenu for="fileForBS" widgetVar="cMenu"   >
+			<p:menuitem value="Datei mit Android synchronisieren" update="@form" icon="ui-icon-search"  actionListener="#{buildingSiteBean.setActive}"/>
+			<p:menuitem value="Datei nicht synchronisieren" update="@form" icon="ui-icon-search"  actionListener="#{buildingSiteBean.setInActive}"/>
+		</p:contextMenu>
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="#{msg['contract.documents.remove.filter']}" ajax="false"
+					action="#{buildingSiteBean.refreshSite()}" />
+				<p:commandButton id="deleteBtn" 
+				                 icon="ui-icon ui-icon-trash" 
+				                 value="#{msg['contract.documents.delete']}" 				                 
+				                 onclick="PF('deleteConfirm').show()"
+				                 disabled="#{buildingSiteBean.buildingSiteFileSelected == null}"
+								 rendered="#{sessionBean.isAdmin}">
+				</p:commandButton>
+				<p:confirmDialog message="Soll das ausgewählte Dokument wirklich gelöscht werden?"
+								 header="Hinweis" 
+				                 showEffect="fade"
+				                 hideEffect="explode" 
+				                 widgetVar="deleteConfirm">
+				    <p:commandButton value="Ja" 
+				                     action="#{buildingSiteBean.deleteFile}" 
+				                     oncomplete="PF('deleteConfirm').hide()" 
+				                     update=":frmList:fileForBS"
+				                     process="@this"/>
+				    <p:commandButton value="Nein" 
+				                     oncomplete="PF('deleteConfirm').hide()"/>
+				</p:confirmDialog>
+				<p:commandButton value="#{msg['contract.documents.contract.details']}" ajax="false"
+					action="#{buildingSiteBean.openBuildingSite()}" styleClass="ml15"
+					disabled="#{buildingSiteBean.buildingSiteFileSelected == null}"
+					rendered="#{false}"
+					process="@this" />
+			    			   
+
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

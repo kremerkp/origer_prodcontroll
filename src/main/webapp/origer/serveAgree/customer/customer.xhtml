@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="./../layout/basic_layout_tile-customer.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="content">
+		<h:form id="back">
+			<p:commandButton value="#{msg['customer.selection.return']}" id="back" ajax="false"
+				process="@this" update="@none" 
+				rendered="#{request.isUserInRole('admin')}"
+				action="#{tileNavigationBean.redirectServeAgreeStart}"
+				styleClass="ui-priority-primary backButton" />
+		</h:form>
+
+		<h:form id="customerView" styleClass="customerView">
+			<p:graphicImage  name="/img/logo-neu.png" styleClass="logotop" />
+			
+			
+			
+			<div class="customerselect" >
+			<p:outputLabel for="cc_lastname" value="Kunde festlegen: " rendered="false"/>
+			<p:autoComplete var="c" itemValue="#{c}" itemLabel="#{c.name}" rendered="#{request.isUserInRole('admin')}"
+				converter="#{simpleConverter}"
+				completeMethod="#{applicationBean.completeCustomerUser}"
+				value="#{tileNavigationBean.customer}"
+				scrollHeight="400" dropdown="true" id="cc_lastname"
+				forceSelection="false" styleClass="autocomplete_customer closed">
+			
+			</p:autoComplete>
+			
+			<br/><br/><br/>
+			
+			</div>			
+			<div class="tileNavigation">
+			
+				<p:commandButton value="#{msg['customer.selection.offers']}" id="tile_customer_offer"
+					ajax="false"
+					action="#{tileNavigationBean.homeOfferCustomerReporting()}"
+					styleClass="ui-priority-primary tile" />
+
+				<p:commandButton value="#{msg['customer.selection.status']}"
+					id="tile_customer_servicestate" ajax="false"
+					action="#{tileNavigationBean.homeServiceStateCustomerReporting()}"
+					styleClass="ui-priority-primary tile" />
+
+				<p:commandButton value="Wartungsnachweis" rendered="false"
+					id="tile_customer_serviceproof" ajax="false"
+					action="#{tileNavigationBean.homeServiceProofCustomerReporting()}"
+					styleClass="ui-priority-primary tile" />
+
+				<p:commandButton value="#{msg['customer.selection.contracts']}" id="tile_customer_files"
+					ajax="false"
+					action="#{tileNavigationBean.homeServiceFilesCustomerReporting()}"
+					styleClass="ui-priority-primary tile" />
+					
+				<p:commandButton value="#{msg['customer.selection.history']}" id="tile_customer_history"
+					ajax="false"
+					action="#{tileNavigationBean.homeServiceFilesCustomerHistory()}"
+					styleClass="ui-priority-primary tile" />
+
+			</div>			
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+

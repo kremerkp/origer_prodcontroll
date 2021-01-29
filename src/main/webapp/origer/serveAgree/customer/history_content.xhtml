@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="customerView" styleClass="customerView" >
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<div class="history">			
+
+			<div class="left2 elements"
+				style="height: 100%; margin-bottom: 20px;">
+				<div>
+					<div class="fb22">
+						<ui:include src="servicesListHistory.xhtml" />
+						<ui:include src="servicesElementListHistory.xhtml" />
+					</div>
+				</div>
+			</div>
+			<div class="right2">
+				<div>
+					<div class="fb_right21">
+						<ui:include src="serviceHistoryList.xhtml" />
+						<ui:include src="checkListForSelectedElementHistory.xhtml" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</h:form>
+
+</ui:composition>

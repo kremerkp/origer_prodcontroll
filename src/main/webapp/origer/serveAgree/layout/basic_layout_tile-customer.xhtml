@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/custom.css"/>
+        <h:outputStylesheet name="./css/primefaces.css"/>
+        <h:outputScript name="./js/default.js" />
+	<link rel="shortcut icon"
+		href="https://maintenance.origer.lu:58443/origer/filearchiv/material/fav_origer.png" />
+        <title>Base Layout</title>
+    </h:head>
+
+    <f:view locale="#{sessionBean.userLocale}">
+        <h:body styleClass="tileContent-nobg customerBody">
+
+			<div class="background-image"/>
+            <div id="content" class="center_content">
+                <h:panelGroup layout="block" rendered="false" styleClass="application-message">
+                    #{applicationBean.applicationMessage}
+                </h:panelGroup>
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+
+            <div id="bottom">
+                <ui:insert name="bottom">
+                	<ui:include src="/origer/serveAgree/bottom/bottom.xhtml" /> 
+                </ui:insert>
+            </div>
+
+            <ui:debug hotkey="l" />
+
+        </h:body>
+    </f:view>
+
+</html>

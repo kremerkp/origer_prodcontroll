@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subRepairReport" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="88bd0ded-7880-4f2e-a002-b79d2fd60d63">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="item" class="java.lang.String">
+		<fieldDescription><![CDATA[item]]></fieldDescription>
+	</field>
+	<field name="comment" class="java.lang.String">
+		<fieldDescription><![CDATA[comment]]></fieldDescription>
+	</field>
+	<field name="signature" class="java.lang.String">
+		<fieldDescription><![CDATA[signature]]></fieldDescription>
+	</field>
+	<field name="customer" class="java.lang.String">
+		<fieldDescription><![CDATA[customer]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="120" height="50" uuid="b7f695f0-64a3-48f9-a372-794edebf2b18"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{item}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement x="120" y="0" width="100" height="50" uuid="70ec8d54-0c23-406e-a400-a39606caa5e7"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{comment}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="220" y="0" width="110" height="50" uuid="7db317e0-0742-4f7a-b186-d84a9c29c310"/>
+				<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customer}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement stretchType="RelativeToBandHeight" x="241" y="1" width="88" height="28" isRemoveLineWhenBlank="true" uuid="361d3de4-f915-440a-b571-683afd55b067"/>
+				<imageExpression><![CDATA["https://maintenance.origer.lu:58443" + $F{signature}.replaceAll( "etc", "")]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

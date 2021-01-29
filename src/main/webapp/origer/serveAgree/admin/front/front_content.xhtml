@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<p:panel id="pnl_elementFront" header="Typ-Fassade"
+			styleClass="invoices_table" toggleable="false"
+			style="margin-bottom:20px">
+
+			<p:dataTable value="#{frontTypeBean.data}"
+				filteredValue="#{frontTypeBean.filteredData}" var="front"
+				paginator="true" paginatorPosition="bottom" rows="20" selectionMode="single"
+				rowKey="#{front.id}" selection="#{frontTypeBean.selectedData}">
+				<p:ajax event="rowSelect" update=":frmList:layButtons"
+					process="@this" />
+				<p:ajax event="rowUnselect" update="@form" process="@this" />
+				<p:ajax event="rowDblselect"
+					listener="#{frontTypeBean.openFrontType()}" process="@this" />
+
+				<p:column headerText="Name" filterBy="#{front.name}"
+					filterMatchMode="contains">
+                    #{front.name}                
+                </p:column>
+
+				<p:column headerText="Kurzname" filterBy="#{front.shortname}"
+					filterMatchMode="contains">
+                    #{front.shortname}                
+                </p:column>
+
+				<p:column headerText="Beschreibung" filterBy="#{front.description}"
+					filterMatchMode="contains">
+                    #{front.description}                
+                </p:column>
+
+				<p:column headerText="Aktiv" styleClass="col_active">
+					<p:selectBooleanCheckbox disabled="true" value="#{front.active}" />
+				</p:column>
+			</p:dataTable>
+
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="neu" ajax="false"
+					action="#{frontTypeBean.add()}" />
+				<p:commandButton value="bearbeiten" ajax="false"
+					action="#{frontTypeBean.edit()}" styleClass="ml15"
+					disabled="#{frontTypeBean.selectedData == null}" process="@this" />
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

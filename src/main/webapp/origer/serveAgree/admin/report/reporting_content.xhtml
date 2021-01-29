@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmReporting">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+
+
+		<p:panel id="pnl_reportRegie" header="Auswertung Regiezeit"
+			styleClass="reportPanel" toggleable="false"
+			style="margin-bottom:20px;">
+			<h:panelGrid id="grid_reportRegie" columns="2" cellpadding="5">
+				<p:outputLabel for="bsNr" value="Baustelle " />
+				<p:selectManyMenu id="bsNr"
+					converter="omnifaces.SelectItemsConverter" filter="true"
+					value="#{reportingBean.regieBuildingSiteListSelected}">
+					<f:selectItems value="#{reportingBean.regieBuildingSiteList}"
+						var="con" itemLabel="#{con.name}" />
+				</p:selectManyMenu>
+
+				<p:outputLabel for="buildingSiteContractNumber"
+					value="Vertragsnummer: " />
+				<p:selectManyMenu id="buildingSiteContractNumber" filter="true"
+					filterMatchMode="contains"
+					converter="omnifaces.SelectItemsIndexConverter"
+					value="#{reportingBean.regieServiceContractListSelected}">
+					<f:selectItems value="#{reportingBean.regieServiceContractList}"
+						var="con" itemLabel="#{con.serviceContractNumber}" />
+				</p:selectManyMenu>
+
+				<p:outputLabel for="contractType" value="Vertragsart: " />
+				<p:selectManyMenu id="contractType"
+					converter="omnifaces.SelectItemsConverter"
+					value="#{reportingBean.regieServiceTypeListSelected}">
+					<f:selectItems value="#{reportingBean.regieServiceTypeList}"
+						var="con" itemLabel="#{con.name}" />
+				</p:selectManyMenu>
+
+				<p:outputLabel for="cashType" value="Verrechnungsart:  " />
+				<p:selectManyMenu id="cashType"
+					converter="omnifaces.SelectItemsConverter"
+					value="#{reportingBean.regieBillingStateListSelected}">
+					<f:selectItems value="#{reportingBean.regieBillingStateList}"
+						var="con" itemLabel="#{con}" />
+				</p:selectManyMenu>
+
+				<p:outputLabel for="customer" value="Auswahl Kunde: " />
+				<p:selectManyMenu id="customer"
+					converter="omnifaces.SelectItemsConverter" filter="true"
+					value="#{reportingBean.custCustomerListSelected}">
+					<f:selectItems value="#{reportingBean.custCustomerList}" var="con"
+						itemLabel="#{con.firstname} - #{con.lastname}" />
+				</p:selectManyMenu>
+
+				<p:outputLabel for="regieTime" value="Zeitraum von:     " />
+				<h:panelGrid id="regieTime" columns="3">
+					<p:calendar id="fromTime" locale="de"
+						value="#{reportingBean.regieFromDate}" navigator="true"
+						pattern="dd/MM/yyyy" />
+					<p:outputLabel for="toTime" value="bis:"
+						style="margin-left: 10px; margin-right: 10px;" />
+					<p:calendar id="toTime" locale="de"
+						value="#{reportingBean.regieToDate}" navigator="true"
+						pattern="dd/MM/yyyy" />
+				</h:panelGrid>
+			</h:panelGrid>
+
+			<h:panelGrid id="grid_reportRegie3" columns="2">
+				<p:commandButton value="XLS-Bericht" id="xls_button"
+					onclick="this.form.target='_blank'"
+					actionListener="#{reportingBean.generateReportRegiezeitXLS}"
+					oncomplete="PF('synchJobs').hide()" ajax="false" />
+				<p:commandButton id="pdf_button" value="PDF-Bericht"
+					onclick="this.form.target='_blank'"
+					actionListener="#{reportingBean.generateReportRegiezeit}"
+					oncomplete="PF('synchJobs').hide()" ajax="false" />
+
+			</h:panelGrid>
+
+		</p:panel>
+
+		<p:panel id="pnl_reportContract"
+			header="Auswertung Vertrag (Soll-Ist)" styleClass="reportPanel"
+			toggleable="false" style="margin-bottom:20px">
+			<h:panelGrid id="grid_reportCustomer4" columns="2" cellpadding="5">
+				<p:outputLabel for="conContractType" value="Auswahl Verträge " />
+				<p:selectOneMenu id="conContractType"
+					converter="omnifaces.SelectItemsConverter" filter="true"
+					value="#{reportingBean.contContractListSelected}">
+					<f:selectItems value="#{reportingBean.contContractList}" var="con"
+						itemLabel="#{con.serviceContractNumber}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="fromTimeContract" value="Zeitraum von:" />
+				<h:panelGrid id="grid_reportContract3" columns="3">
+					<p:calendar id="fromTimeContract" locale="de"
+						value="#{reportingBean.contFromDate}" navigator="true"
+						pattern="dd/MM/yyyy" />
+					<p:outputLabel for="toTimeContract" value="bis:"
+						style="margin-left: 10px; margin-right: 10px;" />
+					<p:calendar id="toTimeContract" locale="de"
+						value="#{reportingBean.contToDate}" navigator="true"
+						pattern="dd/MM/yyyy" />
+				</h:panelGrid>
+			</h:panelGrid>
+
+
+			<h:panelGrid id="grid_reportContract" columns="2">
+				<p:commandButton value="Bericht" id="xls_button3"
+					onclick="this.form.target='_blank'"
+					actionListener="#{reportingBean.generateReportGesamtuebersicht}"
+					oncomplete="PF('synchJobs').hide()" ajax="false" />
+				<p:commandButton id="pdf_button3" value="PDF-Bericht"
+					onclick="this.form.target='_blank'" rendered="false"
+					actionListener="#{reportingBean.generateReportGesamtuebersicht}"
+					oncomplete="PF('synchJobs').hide()" ajax="false" />
+			</h:panelGrid>
+		</p:panel>
+
+
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList" styleClass="customerView" >
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<p:panel id="pnl_techContact" header="Kundenkontakte"
+			styleClass="invoices_table" toggleable="false"
+			style="margin-bottom:20px">
+
+			<p:dataTable value="#{customerBean.data}"
+				filteredValue="#{customerBean.filteredData}" var="cus"
+				paginator="true" paginatorPosition="bottom"  rows="20"
+				selectionMode="single" rowKey="#{cus}" styleClass="checklistTable"
+				selection="#{customerBean.selectedData}">
+				<p:ajax event="rowSelect" update=":frmList:layButtons"
+					process="@this" />
+				<p:ajax event="rowUnselect" update="@form" process="@this" />
+				<p:ajax event="rowDblselect"
+					listener="#{customerBean.openCustomer()}" process="@this" />
+
+				<p:column headerText="#{applicationBean.gSp(5)}Firma#{applicationBean.gSp(3)}" 
+					styleClass="marginTop"
+					filterBy="#{cus.company}" width="80"
+					sortBy="#{cus.company}" filterMatchMode="contains">
+					<h:outputText value="#{cus.company}"/>
+                                    
+                </p:column>
+				<p:column headerText="Vorname" 
+					styleClass="oneFilterSmall"
+					filterBy="#{cus.firstname}" width="80"
+					filterMatchMode="contains">
+					<h:outputText value="#{cus.firstname}"/>
+                                    
+                </p:column>
+				<p:column headerText="Nachname" styleClass="oneFilterSmall" filterBy="#{cus.lastname}" width="100"
+					filterMatchMode="contains">
+					<h:outputText value="#{cus.lastname}"/>
+                                    
+                </p:column>
+				<p:column headerText="Titel" styleClass="oneFilterSmall" filterBy="#{cus.title}" width="40"
+					filterMatchMode="contains">
+					<h:outputText value="#{cus.title}"/>
+                                    
+                </p:column>
+
+				<p:column headerText="Stadt" styleClass="oneFilterSmall" filterBy="#{cus.city}" width="80"
+					filterMatchMode="contains">
+					<h:outputText value="#{cus.city}"/>
+                                    
+                </p:column>
+
+				<p:column headerText="Land" styleClass="oneFilterSmall" filterBy="#{cus.country}" width="120"
+					filterMatchMode="contains">
+					<h:outputText value="#{cus.country}"/>
+                                    
+                </p:column>
+
+				<p:column headerText="Straße" styleClass="oneFilterSmall" filterBy="#{cus.street}" width="120"
+					filterMatchMode="contains">
+					<h:outputText value="#{cus.street}"/>
+                                    
+                </p:column>
+
+				<p:column headerText="Nr." styleClass="marginTop"  width="40" >
+					<h:outputText value="#{cus.streetNumber}"/>
+                </p:column>
+
+				<p:column headerText="Handy" styleClass="oneFilterSmall" filterBy="#{cus.mobil}"
+					filterMatchMode="contains">
+					<h:outputText value="#{cus.mobil}"/>
+                </p:column>
+
+				<p:column headerText="E-Mail" styleClass="oneFilterSmall" filterBy="#{cus.mail}"
+					filterMatchMode="contains">
+					<h:outputText value="#{cus.mail}"/>
+                </p:column>
+
+				<p:column headerText="Telefon" styleClass="oneFilterSmall" filterBy="#{cus.phone}"
+					filterMatchMode="contains">
+					<h:outputText value="#{cus.phone}"/>
+                                    
+                </p:column>
+
+				<p:column headerText="Aktiv" styleClass="col_active" rendered="false" >
+					<p:selectBooleanCheckbox disabled="true" value="#{cus.active}" />
+				</p:column>
+			</p:dataTable>
+
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="neu" ajax="false" rendered="false"
+					action="#{customerBean.add()}" />
+				<p:commandButton value="bearbeiten" ajax="false"
+					action="#{customerBean.edit()}" styleClass="ml15"
+					disabled="#{customerBean.selectedData == null}" process="@this" />
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

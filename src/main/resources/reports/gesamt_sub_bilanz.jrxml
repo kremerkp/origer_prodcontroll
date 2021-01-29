@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2017-03-07T10:39:37 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="gesamt_sub_bilanz" language="javascript" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8013464d-9091-4b55-9ad6-c5dd0313954d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="net.sf.jasperreports.chart.pie.ignore.duplicated.key" value="true"/>
+	<parameter name="Pagecount" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Page Count from Main Report]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="actualTime" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[actualTime]]></fieldDescription>
+	</field>
+	<field name="estimatedTime" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[estimatedTime]]></fieldDescription>
+	</field>
+	<field name="monteure" class="java.lang.String">
+		<fieldDescription><![CDATA[monteure]]></fieldDescription>
+	</field>
+	<field name="serviceInterval" class="java.lang.Integer">
+		<fieldDescription><![CDATA[serviceInterval]]></fieldDescription>
+	</field>
+	<field name="contractValue" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[contractValue]]></fieldDescription>
+	</field>
+	<field name="serviceContract" class="java.lang.String">
+		<fieldDescription><![CDATA[serviceContract]]></fieldDescription>
+	</field>
+	<field name="targetTime" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[targetTime]]></fieldDescription>
+	</field>
+	<field name="chartData" class="java.util.List">
+		<fieldDescription><![CDATA[chartData]]></fieldDescription>
+	</field>
+	<variable name="targetTime1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{targetTime}]]></variableExpression>
+	</variable>
+	<variable name="actualTime1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{actualTime}]]></variableExpression>
+	</variable>
+	<variable name="estimatedTime1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{estimatedTime}]]></variableExpression>
+	</variable>
+	<variable name="contractValue1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{contractValue}]]></variableExpression>
+	</variable>
+	<variable name="acc_page" class="java.lang.Integer">
+		<variableExpression><![CDATA[$P{Pagecount} + $V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<group name="Intervall">
+		<groupHeader>
+			<band height="50"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="1">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="60">
+			<staticText>
+				<reportElement x="325" y="30" width="100" height="30" uuid="cea094bc-2790-4634-94e7-060e577de406"/>
+				<text><![CDATA[Static Text]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="30" splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30"/>
+	</pageFooter>
+</jasperReport>

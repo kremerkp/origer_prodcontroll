@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<div id="diagServiceType">
+		<p:dialog header="Elemente hinzufügen" widgetVar="addSubContract"
+			modal="true" height="250">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:panelGrid id="offerAddSubContract" columns="1" cellpadding="5">
+					<p:outputLabel
+						value="Es wird ein neuer Vertrag erstellt." />
+				</h:panelGrid>
+				<f:facet name="footer">
+					<p:commandButton value="ok" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						onclick="PF('addSubContract').hide();" 
+						actionListener="#{contractInfo.ac_createNewContract()}" process="@this"
+						update=":contractForm:pnl_servicesTable :contractForm:elTab :contractForm:pnl_serviceContractBase " />
+					<p:commandButton value="Abbrechen" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						onclick="PF('addSubContract').hide();" 
+						actionListener="#{contractInfo.cancel_new_contract()}"  process="@this" 
+						update="@form"/>
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</div>
+
+</ui:composition>

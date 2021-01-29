@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<div id="diagServiceType">
+		<p:dialog header="Elemente hinzufügen"
+			widgetVar="addServiceElements" modal="true" height="300" width="1000">
+			<p:scrollPanel mode="native" 
+			style="width:100%;
+				height:95%; 
+				overflow-y: scroll !important;
+    			overflow-x: hidden !important;
+    			margin: 5px;">				
+
+					<p:dataTable var="addElements" value="#{contractInfo.addElements}" rowStyleClass="#{contractInfo.lastRow(index)}"
+						id="addElements"   
+						styleClass="addElements" widgetVar="dn" paginator="false"
+						style="width: 95%; margin: 10px;"
+						rowIndexVar="index">
+
+						<p:column style="width: 100px;" styleClass="total"  >
+							<h:outputText														
+								value="Gesamt:" 
+								rendered="#{!addElements.showDeleteButton}"/>
+						</p:column>
+
+
+						<p:column headerText="Anzahl" width="50" styleClass="dn_amount">							
+							<p:inputText 
+								value="#{addElements.amount}" 
+								id="dn_amount"
+								rendered="#{addElements.showDeleteButton}"
+								style="width: 90%;">
+								<p:ajax 
+									event="keyup" 
+									update="contractForm:addElements"
+									listener="#{contractInfo.updateElementTotal()}"/>									
+							</p:inputText>	
+							<h:outputText 					
+								id="ot_total_elements"			
+								value="#{addElements.amount}" 
+								rendered="#{!addElements.showDeleteButton}"/>						
+						</p:column>
+
+						<p:column headerText="Stockwerk" width="80" styleClass="dn_floor">
+							<h:outputText 								
+								value="" 
+								rendered="#{!addElements.showDeleteButton}"/>														
+							<p:inputText 
+								rendered="#{addElements.showDeleteButton}"
+								value="#{addElements.floor}"
+								id="dn_floor"
+								maxlength="3"
+								style="width: 90%;">
+								<p:ajax 
+									event="blur"/>	
+							</p:inputText>							
+						</p:column>
+
+						<p:column headerText="Checkliste" styleClass="dn_text">
+								
+									<p:autoComplete var="c" itemValue="#{c}" itemLabel="#{c.name}"
+										converter="#{simpleConverter}"
+										completeMethod="#{contractInfo.completeChecklist}"
+										value="#{addElements.checklist}" scrollHeight="400"
+										dropdown="true" id="elementChecklist" forceSelection="false"
+										styleClass="autocomplete_customer closed"
+										style="width: 90%;">
+										<p:ajax event="itemSelect" 
+											listener="#{contractInfo.updateChecklists()}" 
+											update="contractForm:addElements"
+											disabled="#{addElements.showDeleteButton}"/>
+										<p:ajax event="itemSelect" 											
+											update="contractForm:addElements"
+											disabled="#{!addElements.showDeleteButton}"/>
+									</p:autoComplete>
+							
+						</p:column>
+
+						<p:column style="width:32px;text-align: center;" width="80"
+							headerText="" styleClass="add_delete_note">
+							<p:commandButton 
+								styleClass="btn_add_remove"
+								icon="fa fa-minus"										
+								action="#{contractInfo.removeElementLine(index)}"
+								rendered="#{addElements.showDeleteButton}"
+								update="contractForm:addElements">															
+							</p:commandButton>
+							<p:commandButton
+								styleClass="btn_add_remove"
+								icon="fa fa-plus"					
+								action="#{contractInfo.addElementLine(index)}"								
+								update="contractForm:addElements">								
+							</p:commandButton>							
+							
+						</p:column>					
+
+					</p:dataTable>			
+					
+			</p:scrollPanel>
+			<f:facet name="footer">
+					<p:commandButton value="ok" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						onclick="PF('addServiceElements').hide();"
+						actionListener="#{contractInfo.generateElementsForInterval()}"
+						update="@form" />
+					<p:commandButton value="Cancel"
+						onclick="PF('addServiceElements').hide();" />
+				</f:facet>			
+		</p:dialog>
+	</div>
+
+</ui:composition>

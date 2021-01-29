@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+	function getAC_BuildingSite() {
+		// contractForm:bsNr
+		var var_ac_buildingSite_code = jQuery('#contractForm\\:bsNr_input')
+				.val();
+		console.log(var_ac_buildingSite_code );
+		// set hiddenField;
+		document.getElementById("contractForm:ac_buildingSite_code").value = var_ac_buildingSite_code;
+	}
+
+	</script>
+
+	<h:inputHidden id="ac_buildingSite_code" value="#{contractInfo.buildingSiteCode}"   />
+	
+	<p:panel id="pnl_buildingSite"  header="Baustellen Informationen"
+		styleClass="buildingSite_formular" toggleable="true">
+		<h:panelGrid id="grid" columns="2" cellpadding="5">
+			<p:outputLabel for="bsNr" value="Suche: " />
+			<p:autoComplete var="c" itemValue="#{c}" itemLabel="#{c.code}"
+				converter="#{simpleConverter}"
+				completeMethod="#{applicationBean.completeBuildingSite}" 
+				value="#{contractInfo.buildingSiteObject}" 
+				
+				disabled="#{!contractInfo.newBuildingSite}"
+				
+				scrollHeight="400" dropdown="true" id="bsNr"  
+				forceSelection="false" styleClass="autocomplete_customer closed">
+				<p:ajax event="itemSelect" listener="#{contractInfo.updateBuildingSite()}" update="@form" />
+				<p:ajax event="blur" onsuccess="getAC_BuildingSite()" />  
+			</p:autoComplete> 
+
+			<p:outputLabel for="bsNumber" value="Baus.Nr.:" />
+			<p:inputText id="bsNumber" required="true"
+				disabled="#{contractInfo.disableEditModeBS}"
+				value="#{contractInfo.buildingSiteCode}">
+				<p:ajax></p:ajax>
+			</p:inputText>
+			
+			<p:outputLabel for="bsDes" value="Baustellenbez:" />
+			<p:inputText id="bsDes" required="true"
+				disabled="#{contractInfo.disableEditModeBS}"
+				value="#{contractInfo.buildingSiteName}">
+				<p:ajax></p:ajax>
+			</p:inputText>
+
+			<p:outputLabel for="bsStreet" value="Straße:" />
+			<p:inputText id="bsStreet" required="true"
+				disabled="#{contractInfo.disableEditModeBS}"
+				value="#{contractInfo.buildingSiteStreet}">
+				<p:ajax></p:ajax>
+			</p:inputText>
+
+			<p:outputLabel for="bsStreetNr" value="Hausnummer:" />
+			<p:inputText id="bsStreetNr"
+				disabled="#{contractInfo.disableEditModeBS}"
+				value="#{contractInfo.buildingSiteStreetNumber}">
+				<p:ajax></p:ajax>
+			</p:inputText>
+
+			<p:outputLabel for="bsStreetzip" value="PLZ:" />
+			<p:inputText id="bsStreetzip"
+				disabled="#{contractInfo.disableEditModeBS}" required="true"
+				value="#{contractInfo.buildingSiteZip}">
+				<p:ajax></p:ajax>
+			</p:inputText>
+
+			<p:outputLabel for="bsStreetTown" value="Ort:" />
+			<p:inputText id="bsStreetTown"
+				disabled="#{contractInfo.disableEditModeBS}"
+				value="#{contractInfo.buildingSiteTown}">
+				<p:ajax></p:ajax>
+			</p:inputText>
+					
+			<p:outputLabel for="bsCountry" value="Land:" />
+			
+			<p:autoComplete var="c" itemValue="#{c}" itemLabel="#{c.name} - #{c.alpha2}"
+				converter="#{simpleConverter}"
+				completeMethod="#{applicationBean.completeCountries}"
+				value="#{contractInfo.buildingCountry}" 
+				disabled="#{contractInfo.disableEditModeBS}"
+				scrollHeight="400" dropdown="true" id="bsCountry"
+				forceSelection="false" styleClass="autocomplete_customer closed">
+				<p:ajax event="itemSelect" listener="#{contractInfo.updateCountries()}"  />
+			</p:autoComplete>
+
+			<p:outputLabel for="bsStreetPhone" value="Phone:" />
+			<p:inputText id="bsStreetPhone"
+				disabled="#{contractInfo.disableEditModeBS}" required="true"
+				value="#{contractInfo.buildingSitePhoneNumber}">
+				<p:ajax></p:ajax>
+			</p:inputText>
+
+		</h:panelGrid>
+		
+			<p:commandButton id="newBs" value=" neu "  style="margin-left: 10px;"
+			actionListener="#{contractInfo.ac_createNewBuildingSite()}" 
+			disabled="#{!contractInfo.disableNewBtnBS}" 
+			update="@form"
+			 /> 
+			 
+			<p:commandButton id="editBs" value=" bearbeiten "  style="margin-left: 10px;"
+			actionListener="#{contractInfo.ac_editBuildingSite()}" 
+			disabled="#{!contractInfo.disableEditBtnBS}" 
+			update="@form"
+			 /> 
+			
+			<p:commandButton id="newBs_save" 
+			value=" speichern "  style="margin-left: 10px;"
+			actionListener="#{contractInfo.ac_createNewBuildingSite_save()}"
+			disabled="#{!contractInfo.disableSaveBtnBS}" 
+			update="@form" />
+			
+			
+	</p:panel>
+
+</ui:composition>
+

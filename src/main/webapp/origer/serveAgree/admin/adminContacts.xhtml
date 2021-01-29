@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="./../layout/basic_layout_tile.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="content">
+		<h:form id="back">
+			<p:commandButton value="Zurück" id="back" ajax="false"
+				process="@this" update="@none"
+				action="#{tileNavigationBean.homeAdmin()}"
+				styleClass="ui-priority-primary backButton" />
+		</h:form>
+
+		<h:form>
+			<div class="tileNavigation">
+				<p:commandButton value="Benutzer" id="tile_user" ajax="false"
+					action="#{tileNavigationBean.homeAdminUser()}"
+					styleClass="ui-priority-primary tile" />
+					
+				<p:commandButton value="Kunden" id="tile_customers"
+					ajax="false" 
+					action="#{tileNavigationBean.homeCustomerAdmin()}"
+					styleClass="ui-priority-primary tile" />
+					
+				<p:commandButton value="Techniker" id="tile_technician"
+					ajax="false" 
+					action="#{tileNavigationBean.homeTechnicianAdmin()}"
+					styleClass="ui-priority-primary tile" />
+					
+				<p:commandButton value="Länder" id="tile_country"
+					ajax="false" 
+					action="#{tileNavigationBean.homeCountryAdmin()}"
+					styleClass="ui-priority-primary tile" />
+				
+
+			</div>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+

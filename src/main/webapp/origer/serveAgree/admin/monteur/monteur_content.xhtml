@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<p:panel id="pnl_techContact" header="Monteur"
+			styleClass="invoices_table" toggleable="false"
+			style="margin-bottom:20px">
+
+			<p:dataTable value="#{monteurBean.data}"
+				filteredValue="#{monteurBean.filteredData}" var="tec"
+				paginator="true" paginatorPosition="bottom"
+				styleClass="checklistTable" rows="20"
+				selectionMode="single" rowKey="#{tec}"
+				selection="#{monteurBean.selectedData}">
+				<p:ajax event="rowSelect" update=":frmList:layButtons"
+					process="@this" />
+				<p:ajax event="rowUnselect" update="@form" process="@this" />
+				<p:ajax event="rowDblselect"
+					listener="#{monteurBean.openMonteur()}" process="@this" /> 
+
+				<p:column headerText="#{applicationBean.gSp(5)}Firma#{applicationBean.gSp(3)}" styleClass="marginTop" filterBy="#{tec.company}" width="80"
+					sortBy="#{tec.company}" filterMatchMode="contains">
+					<h:outputText value="#{tec.company}"/>
+                </p:column>
+				<p:column styleClass="oneFilterSmall" headerText="Vorname" filterBy="#{tec.firstname}" width="80"
+					filterMatchMode="contains" style=" text-align:center;">
+					<h:outputText value="#{tec.firstname}"/>
+                </p:column>
+				<p:column styleClass="oneFilterSmall" headerText="Nachname" filterBy="#{tec.lastname}" width="100"
+					filterMatchMode="contains" style=" text-align:center;">
+					<h:outputText value="#{tec.lastname}"/>
+                </p:column>
+				<p:column styleClass="oneFilterSmall" headerText="Titel" filterBy="#{tec.title}" width="40"
+					filterMatchMode="contains">
+					<h:outputText value="#{tec.title}"/>
+                </p:column>
+
+				<p:column styleClass="oneFilterSmall" headerText="Stadt" filterBy="#{tec.city}" width="80"
+					filterMatchMode="contains">
+					<h:outputText value="#{tec.city}"/>
+                </p:column>
+
+				<p:column styleClass="oneFilterSmall" headerText="Land" filterBy="#{tec.country}" width="120"
+					filterMatchMode="contains">
+					<h:outputText value="#{tec.country}"/>
+                </p:column>
+
+				<p:column styleClass="oneFilterSmall" headerText="Strasse" filterBy="#{tec.street}" width="120"
+					filterMatchMode="contains">
+					<h:outputText value="#{tec.street}"/>
+                </p:column>
+
+				<p:column styleClass="oneFilterSmall" headerText="Nr." width="40" >
+				<h:outputText value="#{tec.streetNumber}"/>
+                </p:column>
+
+				<p:column styleClass="oneFilterSmall" headerText="Handy" filterBy="#{tec.mobil}" 
+					filterMatchMode="contains">
+					<h:outputText value="#{tec.mobil}"/>
+                </p:column>
+
+				<p:column styleClass="oneFilterSmall" headerText="E-Mail" filterBy="#{tec.mail}" 
+					filterMatchMode="contains">
+					<h:outputText value="#{tec.mail}"/>
+                </p:column>
+
+				<p:column styleClass="oneFilterSmall" headerText="Telefon" filterBy="#{tec.phone}"
+					filterMatchMode="contains">
+					<h:outputText value="#{tec.phone}"/>
+                </p:column>
+
+				<p:column headerText="Aktiv" styleClass="col_active oneFilterSmall" rendered="false" >
+					<p:selectBooleanCheckbox disabled="true" value="#{tec.active}" />
+				</p:column>
+			</p:dataTable>
+
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="neu" ajax="false" rendered="true"
+					action="#{monteurBean.add()}" />
+				<p:commandButton value="bearbeiten" ajax="false"
+					action="#{monteurBean.edit()}" styleClass="ml15"
+					disabled="#{monteurBean.selectedData == null}" process="@this" />
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

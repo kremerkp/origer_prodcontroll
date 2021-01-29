@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/origer3">
+    <ResourceLink global="jdbc/origer" name="jdbc/origer" type="javax.sql.DataSource"/>
+    <ResourceLink global="mail/origer" name="mail/origer" type="javax.mail.Session"/>
+    <Realm className="org.apache.catalina.realm.DataSourceRealm" 
+    	dataSourceName="jdbc/origer" 
+    	digest="MD5" 
+    	localDataSource="true" 
+    	resourceName="ORIGERRealm" 
+    	roleNameCol="role_name" 
+    	userCredCol="password" 
+    	userNameCol="username" 
+    	userRoleTable="view_users_roles" 
+    	userTable="users"/>
+    	
+    <Parameter name="javamelody.admin-emails" override="false" value="kkremer@eye-t.lu"/>
+    <Parameter name="javamelody.mail-session" override="false" value="mail/origer"/>
+    <Parameter name="javamelody.mail-periods" override="false" value="day,week,month"/>
+</Context>

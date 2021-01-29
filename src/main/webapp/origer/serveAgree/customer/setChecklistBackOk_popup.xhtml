@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<div id="diagChecklistBackOk">
+		<p:dialog header="Checklisteneintrag zurücksetzen auf ok" widgetVar="wv_diagChecklistBackOk"
+			modal="true" height="150">			
+			<h:form id="checklistComment">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel for="in_add_comment" value="Kommentar: " />
+	
+					<p:inputText id="in_add_comment" 
+						value="#{serviceCustomerHistoryBean.addCommentOk}"> 
+						<p:ajax/>
+					</p:inputText>					
+					<p:outputLabel id="sc_repair_error" />
+				</h:panelGrid>
+			</h:form>
+			
+			<f:facet name="footer"> 
+				<p:commandButton value="Eintrag erstellen"
+					onclick="PF('wv_diagChecklistBackOk').hide();" update=":customerView:pnl_checklistForSelectedElement :customerView:pnl_servicesHistoryTable :customerView:pnl_servicesElementsTable"
+					actionListener="#{serviceCustomerHistoryBean.setChecklistEntryOk}"/> 
+				<p:commandButton value="Abbrechen"
+					onclick="PF('wv_diagChecklistBackOk').hide();" />
+				<p:commandButton value="Markierung aufheben"
+					onclick="PF('wv_diagChecklistBackOk').hide();"  actionListener="#{serviceCustomerHistoryBean.resetChecklistEntryOk}" />
+			</f:facet>
+		</p:dialog>
+	</div>
+
+</ui:composition>

@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<p:panel id="pnl_services" header="#{msg['offers.overview']}" 
+			styleClass="offer_customer_table" toggleable="false" 
+			style="margin-bottom:20px; width:1700px!important;">
+			<h:panelGrid columns="2" cellpadding="5" styleClass="assocGrid" style="vertical-alignment: top!important;" >
+				<p:dataTable value="#{offersBean.data}" style="width:1100px!important;"
+					filteredValue="#{offersBean.filteredData}" var="offer"
+					paginator="true" paginatorPosition="bottom" widgetVar="offerTable"
+					styleClass="offer customer" rows="20" selectionMode="single"
+					rowKey="#{offer.id}" selection="#{offersBean.selectedOffer}">
+
+					<p:ajax event="rowSelect" update=":frmList:layButtons :frmList:targetEntries"
+						listener="#{offersBean.setContract()}" process="@this" />
+					<p:ajax event="rowUnselect" update="@form" process="@this" />
+
+					<p:column headerText="#{msg['offers.contract']}"
+						filterBy="#{offer.serviceContract.serviceContractNumber}"
+						styleClass="offer_customer_contract oneFilterSmall">
+						<h:outputText
+							value="#{offer.serviceContract.serviceContractNumber}" />
+
+					</p:column>
+
+					<p:column headerText="#{msg['offers.site']}"
+						styleClass="offer_customer_site marginTop">
+						<h:outputText value="#{offer.serviceContract.buildingSite.name}" />
+					</p:column>
+
+					<p:column headerText="#{msg['offers.date']}" sortable="#{offer.offerdate}"
+						styleClass="offer_customer_date marginTop">
+						<p:outputLabel value="#{offer.offerdate}">
+							<f:convertDateTime pattern="dd.MM.yyyy" />
+						</p:outputLabel>
+					</p:column>
+
+					<p:column headerText="#{msg['offers.name']}" filterBy="#{offer.name}"
+						styleClass="offer_customer_name oneFilterSmall"
+						filterMatchMode="contains">
+						<h:outputText value="#{offer.name}" />
+					</p:column>
+					<p:column headerText="#{msg['offers.elements']}" filterBy="#{offer.elementsInOffer}" rendered="true"
+						styleClass="offer_customer_elements oneFilterSmall">
+						<h:outputText value="#{offer.elementsInOffer}" />
+					</p:column>
+					<p:column headerText="#{msg['offers.state']}" filterBy="#{offer.state}"
+						filterMatchMode="exact"
+						styleClass="#{offer.state} status oneFilterSmall">
+						<f:facet name="filter">
+							<p:selectOneMenu onchange="PF('offerTable').filter()">
+								<f:selectItem itemLabel="#{msg['offers.all']}" itemValue="" />
+								<f:selectItem itemLabel="#{msg['offers.ok_dismiss']}" itemValue="#{msg['offers.ok_dismiss']}" />
+								<f:selectItem itemLabel="#{msg['offers.process']}" itemValue="#{msg['offers.process']}" />
+								<f:selectItem itemLabel="#{msg['offers.rejected']}" itemValue="#{msg['offers.rejected']}" />
+								<f:selectItem itemLabel="#{msg['offers.ok']}" itemValue="#{msg['offers.ok']}" />
+							</p:selectOneMenu>
+						</f:facet>
+
+						<p:outputLabel value="#{offer.state}" rendered="true" />
+						
+						<p:panel rendered="false">
+						
+						<p:graphicImage 
+							rendered="#{offersBean.renderStateOk(offer.state)}"
+							value="/resources/img/green.png" width="24" height="24">
+						</p:graphicImage>
+
+						<p:graphicImage
+							rendered="#{offersBean.renderStateSend(offer.state)}"
+							value="/resources/img/wait.png" width="24" height="24">
+						</p:graphicImage>
+
+						<p:graphicImage
+							rendered="#{offersBean.renderStateDismissed(offer.state)}"
+							value="/resources/img/no.png" width="24" height="24">
+						</p:graphicImage>
+						</p:panel>
+
+					</p:column>
+					<p:column headerText="#{msg['offers.download']}"
+						styleClass="marginTop offer_customer_download">
+						<ul style="list-style-type: circle">
+							<p:repeat var="file" id="fileTable" styleClass="filesdownload"
+								value="#{offer.files}">
+
+								<li><p:commandLink
+										actionListener="#{offersBean.actionOpenFile(file)}"
+										update="@form" ajax="false" id="openFile" value="#{file.name}"
+										icon="ui-icon-circle-arrow-s" title="Icon Only">
+										<p:fileDownload value="#{offersBean.file}" />
+									</p:commandLink></li>
+								<br />
+							</p:repeat>
+						</ul>
+					</p:column>
+
+				</p:dataTable>
+				<p:dataTable id="targetEntries" var="ent" styleClass="offer target entries" 
+					style="width: 550px!important; min-width: 0;" rowKey="#{ent}"
+					value="#{offersBean.offerElements}">
+
+					<f:facet name="header">
+						<h:outputText
+							value="#{msg['offers.elementOffer']}" />
+					</f:facet>
+
+					<p:column headerText="#{msg['offers.element.name']}" width="50px;"
+						filterBy="#{ent.element.elementnumber}">
+						<h:outputText value="#{ent.element.elementnumber}" />
+					</p:column>
+
+					<p:column headerText="#{msg['offers.lastControl']}" width="90px;"
+						filterBy="#{ent.lastControlDate}">
+						<h:outputText value="#{ent.lastControlDate}" rendered="#{sessionBean.isAdmin}" />
+						<h:outputText value="#{ent.lastControlDate}" rendered="#{!sessionBean.isAdmin}" >
+							<f:convertDateTime type="date" pattern="yyyy-MM-dd"/>						
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="#{msg['offers.stateService']}" width="60px;" styleClass="#{serviceCustomerHistoryBean.styleState(ent.lastState)} oneFilterSmall"
+						filterBy="#{ent.lastState}">
+						<h:outputText value="#{ent.lastState}" />
+					</p:column>
+
+
+					<p:column headerText="#{msg['history.offer']}" styleClass="mini" width="20">
+						<p:selectBooleanCheckbox value="#{ent.createOffer}"
+							disabled="true" />
+					</p:column>
+					<p:column headerText="#{msg['offers.state']}" rendered="true" styleClass="mini"
+						width="20">
+						<h:outputText value="#{ent.offerState}" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons" rendered="false"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="Filter aufheben" ajax="false"
+					action="#{offersBean.refreshSite()}" />
+				<p:commandButton value="neu" ajax="false"
+					action="#{offersBean.add()}" />
+				<p:commandButton value="bearbeiten" ajax="false"
+					action="#{offersBean.edit()}" styleClass="ml15"
+					disabled="#{offersBean.selectedOffer == null}" process="@this" />
+				<p:commandButton value="Vertragsdetails" ajax="false"
+					actionListener="#{offersBean.goToContract()}" styleClass="ml15"
+					disabled="#{offersBean. serviceContract == null}" process="@this" />
+			</div>
+		</h:panelGroup>
+
+
+	</h:form>
+
+</ui:composition>

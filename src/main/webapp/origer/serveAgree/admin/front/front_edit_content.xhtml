@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+    
+        <h:form id="frmCat">
+            <p:panelGrid styleClass="pnlStd frmUsers">
+                <p:row>
+                    <p:column styleClass="header" colspan="2">
+                        Fassaden-Typen
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column styleClass="error" colspan="2">
+                        <p:messages  />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                    	<p:outputLabel value="Aktiv" styleClass="test" />
+                    </p:column>
+                    <p:column>
+                        <p:selectBooleanCheckbox  id="active" value="#{frontTypeEditBean.frontType.active}" />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                    	<p:outputLabel value="Name" styleClass="test" />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="name" value="#{frontTypeEditBean.frontType.name}" />
+                    </p:column>
+                </p:row>
+                <p:row rendered="true" >
+                    <p:column>
+                    	<p:outputLabel value="Kurzname" styleClass="test" />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="shortname" value="#{frontTypeEditBean.frontType.shortname}" />
+                    </p:column>
+                </p:row>
+                <p:row  >
+                    <p:column>
+                    	<p:outputLabel value="Beschreibung" styleClass="test" />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="desc" value="#{frontTypeEditBean.frontType.description}" />
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+
+            <br clear="all" />
+
+            <p:spacer styleClass="seperator" />
+            <p:commandButton actionListener="#{frontTypeEditBean.save()}" onstart="PF('w_dlgWait').show();"  oncomplete="PF('w_dlgWait').hide();"
+                             value="Speichern" process="@form" update="@form" styleClass="clear" />
+            <p:commandButton actionListener="#{frontTypeEditBean.saveAndClose()}" value="Speichern und Schliessen" process="@form" update="@form" styleClass="clear" />
+
+            <p:dialog widgetVar="w_dlgWait" modal="true" closable="false" draggable="false" resizable="false" header="Speichern...">
+                <p>Bitte warten...</p>
+            </p:dialog>
+
+        </h:form>
+
+</ui:composition>

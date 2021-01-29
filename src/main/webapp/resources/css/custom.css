@@ -1,0 +1,1590 @@
+/*
+	LOGIN
+*/
+html, body {
+	height: 100%;
+}
+
+div#langSetting{
+    text-align: left!important;
+    margin: 10px!important;	
+}
+
+
+#contractForm\3a pnl_serviceContractBase {
+	margin-bottom: 50px;
+}
+
+.wordwrap {
+	word-wrap: break-word !important; /* IE 5.5-7 */
+	white-space: -moz-pre-wrap !important; /* Firefox 1.0-2.0 */
+	white-space: pre-wrap !important; /* current browsers */
+	
+}
+
+.wordwrap>span {
+	word-wrap: break-word !important; /* IE 5.5-7 */
+	white-space: -moz-pre-wrap !important; /* Firefox 1.0-2.0 */
+	white-space: pre-wrap !important; /* current browsers */
+	
+}
+
+th.wordwrap>span {
+	word-wrap: break-word !important; /* IE 5.5-7 */
+	white-space: -moz-pre-wrap !important; /* Firefox 1.0-2.0 */
+	white-space: pre-wrap !important; /* current browsers */
+}
+
+body.login td {
+	white-space: normal !important;
+}
+
+#frmLogin\3a username {
+	color: white;
+	margin-top: 1px;
+}
+
+#frmList\3a pnl_userContact_content {
+	text-align: left;
+}
+
+#frmLogin\3a password {
+	color: white;
+	margin-top: 1px;
+}
+
+#contractForm\3a bsStreetPhone {
+	margin-bottom: 23px;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+}
+
+body.tileContent-nobg div.bottom {
+	background-color: green !important;
+}
+
+body.logo_bottom_right {
+	background-image: url("#{resource['img/logo-neu.png']}");
+	background-repeat: no-repeat;
+	background-position: top 5px left 15px;
+	background-size: 200px;
+	height: 70px;
+	margin-right: 0px;
+}
+
+div.logo-login {
+	background-image: url("#{resource['img/logo-neu.png']}");
+	background-repeat: no-repeat;
+	background-position: center top 25px !important;
+	background-size: 450px;
+	height: 200px;
+	margin-right: 0px;
+}
+
+div.logo-login img {
+	width: 250px;
+	margin: 0px auto 0;
+}
+
+#frmLogin  .ui-widget-content {
+	background-color: transparent !important;
+	color: white;
+}
+
+#frmLogin\3a tblLogin {
+	border: 1px solid rgba(0, 0, 0, 0.8); ! important;
+	background-color: rgba(0, 0, 0, 0.56);
+}
+
+#frmLogin td.loginLabel {
+	width: 100px;
+}
+
+td.ui-panelgrid-cell.loginLabel {
+	padding-left: 60px;
+}
+
+td.ui-panelgrid-cell.inputCol {
+	padding-right: 60px;
+}
+
+td.ui-panelgrid-cell.username {
+	padding-top: 30px;
+}
+
+td.ui-panelgrid-cell.login_username {
+	padding-top: 30px;
+}
+
+button#frmLogin\:btnLogin {
+	text-align: center;
+	width: 150px;
+	float: left;
+	padding: 0;
+	margin: 0;
+	margin-left: 230px;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+}
+
+button#frmLogin\:btnLogin:hover {
+	background: rgba(0, 0, 0, 0.74) !important;
+	color: white !important;
+}
+
+#frmLogin td.inputCol input {
+	width: 200px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 2px solid rgba(0, 0, 0, 0.66);
+}
+
+#frmLogin\3a btnLogin {
+	height: 40px;
+	width: 200px;
+	width: 200px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 2px solid rgba(0, 0, 0, 0.26);
+	background-color: rgba(19, 19, 19, 0.8) !important
+}
+
+#frmLogin\:btnLogin {
+	margin-bottom: 15px;
+	margin-top: 15px;
+	margin-right: 15px;
+}
+
+#frmLogin\:username, #frmLogin\:password {
+	padding-rigth: 25px;
+}
+
+/*
+Button Focus
+*/
+div.ui-state-focus {
+	border-color: rgba(142, 179, 124) !important;
+	border-width: 2px !important;
+}
+
+input.ui-state-focus {
+	border-color: rgba(142, 179, 124) !important;
+	border-width: 2px !important;
+}
+
+button.ui-state-focus {
+	border-color: rgba(142, 179, 124) !important;
+	border-width: 2px !important;
+}
+
+div button.ui-state-default {
+	border-width: 4px !important;
+	border-radius: 40px !important;
+	-moz-border-radius: 40px !important;
+	-webkit-border-radius: 40px !important;
+	border-color: rgba(0, 0, 0, 0.3);
+	!
+	important;
+}
+
+div#tileStart button.ui-state-default span {
+	height: 120px;
+	font-size: 16px;
+	margin-top: 50px;
+}
+
+div button.ui-state-default:hover {
+	background: rgba(0, 0, 0, 0.54) !important;
+	border-color: rgba(0, 0, 0, 0.66); ! important;
+	color: white !important;
+}
+
+p.error-msg {
+	border: 2px solid rgba(255, 0, 0, 0.32) !important;
+	background: rgba(255, 184, 184, 0.14) !important;
+	border-radius: 5px !important;
+	-moz-border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+}
+
+/*
+bodies 
+*/
+body.login {
+	/* 	background-image: url("#{resource['img/bg.jpg']}"); */
+	/*background-image: url("#{resource['img/bg-4.jpg']}");*/
+	/* 	background-image: url("#{resource['img/bg3.jpg']}"); */
+}
+
+#customerView\3a j_id_i {
+	margin-top: -127px;
+}
+
+body.customerBody {
+	text-align: center;
+	height: 100%;
+	/*background-image: url("#{resource['img/bg-4.jpg']}") !important;*/
+}
+
+body.customerBody form#customerView {
+	display: inline-block;
+	max-width: 1000px;
+	padding: 175px 30px;
+}
+
+body.tileContent div.content {
+	text-align: center;
+	height: 100%;
+	background-image: url("#{resource['img/logo-neu.png']}") !important;
+	background-repeat: no-repeat !important;
+	background-position: center top 50px !important;
+}
+
+body.tileContent {
+	/* 	background-image: url("#{resource['img/bg.jpg']}"); */
+	/*background-image: url("#{resource['img/bg-neu.jpg']}");*/
+	text-align: center;
+	height: 100%;
+	/*background-image: url("#{resource['img/bg-4.jpg']}");*/
+}
+
+body.tileContent form#tileStart {
+	display: inline-block;
+	max-width: 1000px;
+	padding: 25px 30px;
+}
+
+button.intervalluebersicht {
+	margin-top: 30px;
+}
+
+body.tileContent-nobg {
+	background: white;
+}
+
+/*
+fluid grid
+
+*/
+div#fluidGrid .ui-widget-header {
+	border: none;
+	background: none;
+}
+
+.pe-fluidgrid-item {
+	width: 160px;
+	height: 60px;
+}
+
+.pe-fluidgrid-item input {
+	width: 150px;
+}
+
+.pe-fluidgrid-item.calendar input {
+	width: 120px;
+}
+
+.pe-fluidgrid-item.select .ui-selectonemenu {
+	width: 134px !important;
+}
+
+.dynaFormLabel {
+	font-weight: bold;
+	margin-bottom: 7px;
+}
+
+#back {
+	text-align: center;
+}
+/*
+Back Button 
+*/
+#back\3a back {
+	height: 50px;
+	width: 50%;
+	margin-bottom: 10px;
+	margin-rigth: 10px;
+}
+
+/*
+Add new Service Contract Panel
+*/
+div.infoContract_style div {
+	background: rgba(255, 255, 255, 0.53);
+}
+
+div.buildingSite_formular {
+	margin-left: 5px;
+	margin-top: 10px;
+	margin-bottom: 1px;
+	rgba
+	(0,
+	0,
+	0,
+	0);
+}
+
+div.buildingSite_formular {rgba (0, 0, 0, 0);
+	width: 360px;
+	float: left;
+}
+
+div.buildingSite_formular2 {
+	width: 100%;
+}
+
+div.buildingSite_formular {
+	width: 360px;
+}
+
+div.intervall_overview_customer {
+	width: 1900px;
+	margin-left: 2px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+div.intervall_overview {
+	width: 1900px;
+	margin-left: 2px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+div.buildingSite_table {
+	width: 100%;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+div.ui-panel-content ui-widget-content input {
+	border-radius: 5px !important;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.wrapper div {
+	float: left;
+}
+
+div.ui-g-6, div.ui-g-4 {
+	border: 0px solid black;
+}
+
+div.buildingSite_formular .bs_btn {
+	width: 80px;
+}
+
+.fb_right {
+	width: 100%;
+}
+
+.left .ui-state-default, .ui-widget-content .ui-state-default,
+	.ui-widget-header .ui-state-default {
+	border: 1px solid #a8a8a8;
+	background: rgba(19, 19, 19, 0.1) !important;
+	font-weight: bold;
+	color: #4f4f4f;
+	text-shadow: none;
+}
+
+.left  .ui-state-focus {
+	border: 1px solid #a8a8a8;
+	background: rgba(19, 19, 19, 0.0) !important;
+	font-weight: bold;
+	color: #4f4f4f;
+	text-shadow: none;
+}
+
+.left {
+	width: 750px;
+	display: inline-table;
+	border: 0px solid grey;
+	margin-right: 5px;
+}
+
+.right {
+	display: inline-table;
+	width: calc(100% - 779px);
+	border: 0px solid grey;
+	margin-right: 15px;
+}
+
+.fb1 {
+	width: 370px;
+	display: inline-block;
+}
+
+.fb2 {
+	width: 370px;
+}
+
+input.ui-inputfield, .ui-widget-content input.ui-inputfield,
+	.ui-widget-header input.ui-inputfield {
+	box-shadow: none;
+	border-radius: 5px !important;
+	padding: 3px !important;
+	height: 15px;
+	padding: 1px;
+}
+
+#topButtonBar {
+	min-height: 40px;
+	width: 99%;
+	background-color: rgba(0, 0, 0, 0) !important;
+}
+
+#topButtonBar .bs_btn {
+	margin: 5px 10px 0 10px;
+}
+
+#contract_edit_buildingSite\3a pnl_buildingSite {
+	margin-bottom: 1px !important;
+}
+
+.ui-datepicker {
+	width: 22em !important;
+	padding: .2em .2em 0;
+	display: none;
+}
+
+#contractForm\3a scb_count_input,
+	#contractForm\3a numberOfElements_input {
+	margin-right: 20px !important;
+	width: 150px;
+}
+
+#contractForm\3a cc_lastname_input, #contractForm\3a bsNr_input,
+	#contractForm\3a scb_name_input, #contractForm\3a bsCountry_input,
+	#contractForm\3a tc_lastname_input,
+	#contractForm\3a elementChecklist_input {
+	margin-right: 33px !important;
+	width: 170px;
+}
+
+.ui-datepicker table {
+	font-size: 1.2em !important;
+}
+
+.ui-datepicker .ui-datepicker-title {
+	font-size: 1.4em !important;
+}
+
+.ui-datepicker .ui-datepicker-header {
+	background: #e3e3e3 !important;
+	border-bottom: none !important;
+}
+
+/*TABLE LAYOUT*/
+.ui-paginator-page.ui-state-default.ui-state-active.ui-corner-all
+{
+	background: #1E663E !important;
+	color: white;
+	box-shadow: 0 0 8px #fff0;
+}
+
+div.listtable th.ui-state-default {
+	background: #8c8c8c !important;
+	color: white;
+}
+
+div.listtable input.ui-state-default {
+	background: white !important;
+	color: #2e4a1e !important;
+}
+
+/* div.listtable { */
+/* 	width: 1300px !important; */
+/* } */
+th.col_active {
+	width: 70px;
+}
+
+th.col_small {
+	width: 120px;
+}
+
+th.col_less_small {
+	width: 180px;
+}
+
+.editForm .ui-autocomplete .ui-autocomplete-dropdown {
+	position: absolute;
+	height: 100%;
+	width: 4.4em;
+	right: -70px !important;
+	top: -1px !important;
+}
+
+button.ui-autocomplete-dropdown {
+	right: -5px !important;
+	top: -1px;
+}
+
+.editForm span input {
+	margin-left: 0px !important;
+}
+
+table.adminInput {
+	width: 526px !important;
+}
+
+/*
+ui-picklist-item
+*/
+li.ui-picklist-item {
+	background: white !important;
+}
+
+li.ui-picklist-item.ui-state-hover {
+	background: #e4e4e4 !important;
+	border: none;
+	box-shadow: none;
+}
+
+li.ui-picklist-item.ui-corner-all.ui-sortable-handle.ui-state-highlight
+	{
+	background: #94b384 !important;
+	color: #2c2c2c;
+	text-shadow: none;
+}
+
+div.picklistItems {
+	width: 1000px !important;
+}
+
+div.picklistItems button {
+	width: 30px !important;
+}
+
+div.picklistItems div.ui-picklist-buttons {
+	width: 5% !important;
+}
+
+div.ui-chkbox.ui-widget {
+	padding: 2px 5px 2px 2px !important;
+}
+
+div.ui-picklist-list-wrapper {
+	width: 50% !important;
+	margin-bottom: 20px;
+}
+
+ul.ui-picklist-list {
+	
+}
+/* datalist*/
+div.ui-datalist {
+	text-shadow: none;
+}
+
+div.ui-datalist-content {
+	background: none;
+}
+
+tr.ui-state-highlightdiv.ui-datalist-content {
+	color: white;
+}
+
+div.ui-fileupload div.ui-fileupload-buttonbar {
+	border-radius: 0;
+	background: none !important;
+}
+
+div.ui-fileupload-buttonbar {
+	border: none;
+}
+
+div.ui-fileupload-content {
+	min-height: 100px;
+	border: none;
+	background: rgba(187, 187, 187, 0.37);
+}
+
+table.adminInput tr td div.ui-selectonemenu {
+	width: 80% !important;
+	border-radius: 8px;
+	padding: 5px;
+}
+
+.editForm div.ui-selectonemenu label {
+	background: rgba(187, 187, 187, 0.0) !important;
+}
+
+.editForm div.ui-selectonemenu div.ui-selectonemenu-trigger.ui-state-default.ui-corner-right
+	{
+	border: none;
+}
+
+.editForm div.ui-selectonemenu div.ui-selectonemenu-trigger.ui-state-default.ui-corner-right>span
+	{
+	margin-top: 8px;
+}
+
+div.ui-menu.ui-menu-dynamic {
+	float: left;
+	font-size: 20px !important;
+}
+
+div.ui-menu ui-menuitem-text {
+	margin-left: 10px;
+}
+
+.ui-icon-circle-close {
+	-ms-transform: scale(2); /* IE 9 */
+	-webkit-transform: scale(2); /* Chrome, Safari, Opera */
+	transform: scale(2);
+}
+
+#frmList\3a j_id_m\3a j_id_t {
+	width: 50px;
+}
+
+#frmList\3a j_id_m\3a j_id_v {
+	width: 60px;
+}
+
+.ui-selectonemenu .ui-selectonemenu-label {
+	background-color: rgba(0, 128, 0, 0) !important;
+	border: none !important;
+}
+
+div.offer_customer_table {
+	width: 100%;
+}
+
+div.offer_customer_table td {
+	white-space: normal !important;
+}
+
+.ui-datatable tbody td.wrap {
+	white-space: normal;
+}
+
+div.buildingSite_table td {
+	white-space: normal;
+}
+
+div.offer.customer {
+	width: 100%;
+}
+
+.stateLoader {
+	position: absolute;
+	border: none !important;
+	background-color: rgba(0, 0, 0, 0.1);
+	left: 50%;
+	top: 50%;
+	z-index: 2;
+}
+
+span.ui-button-icon-left.ui-icon.ui-c.ui-icon-triangle-1-s {
+	display: none;
+}
+
+.dropDownIcon {
+	background-image: url('img/arrow_down_48.png') !important;
+	background-repeat: no-repeat;
+	background-position: 44% 75%;
+}
+/*
+Customer 
+*/
+th.offer_customer_contract {
+	width: 130px !important;
+}
+
+div.filesdownload thead {
+	display: none;
+}
+
+th.offer_customer_site {
+	width: 130px !important;
+}
+
+th.offer_customer_date {
+	width: 120px !important;
+}
+
+td.offer_customer_date {
+	width: 90px !important;
+}
+
+th.offer_customer_name {
+	width: 140px !important;
+}
+
+th.offer_customer_elements {
+	width: 120px !important;
+}
+
+#frmList\3a th.offer_customer_download {
+	width: 300px !important;
+}
+
+th.status {
+	width: 120px !important;
+}
+
+.gesendet {
+	background-color: orange !important;
+}
+
+td[class^='Refus']{
+	background-color: red !important;
+	color: white;	
+}
+
+td[class*='Ok\/Refus']{
+	background-color: #f99a00 !important;
+	color: black !important;
+}
+
+td[class*='trait']{
+	background-color: #483D8B !important;
+	color: white !important;	
+}
+
+
+
+.abgelehnt{
+	background-color: red !important;
+	color: white;
+}
+
+.ok {
+	background-color: green !important;
+	color: white !important;
+}
+
+.nicht.abgeschlossen, .En.traite\.{
+	background-color: #483D8B !important;
+	color: white !important;	
+}
+.ok\/abgelehnt{
+	background-color: #f99a00 !important;
+	color: black !important;	
+}
+
+.mangel {
+	background-color: orange !important;
+	color: black !important;
+}
+
+.defekt {
+	background-color: red !important;
+	color: white !important;
+}
+
+.left2 {
+	width: 600px;
+	display: inline-table;
+	border: 1px solid grey;
+	margin-right: 5px;
+}
+
+.fb21 {
+	width: 580px;
+	float: left;
+}
+#customerView > div.left2.elements{
+	vertical-align: top;
+}
+
+.fb22 {
+	width: 600px;
+}
+
+div.history .right2 {
+	display: inline-table;
+	width: calc(100% - 625px);
+	border: none;
+	margin-right: 15px;
+}
+
+.right2 {
+	display: inline-table;
+	width: calc(100% - 632px);
+	border: 1px solid grey;
+	margin-right: 15px;
+}
+
+right22 {
+	width: calc(100% - 586px) !important;
+}
+
+.fb_right2 {
+	width: 90%;
+}
+
+.left2 .ui-state-default, .ui-widget-content .ui-state-default,
+	.ui-widget-header .ui-state-default {
+	border: 1px solid #a8a8a8;
+	background: rgba(19, 19, 19, 0.1) !important;
+	font-weight: bold;
+	color: #4f4f4f;
+	text-shadow: none;
+}
+
+.left2  .ui-state-focus {
+	border: 1px solid #a8a8a8;
+	background: rgba(19, 19, 19, 0.0) !important;
+	font-weight: bold;
+	color: #4f4f4f;
+	text-shadow: none;
+}
+
+td.historyDownload tr.ui-datatable-empty-message td {
+	display: none;
+}
+
+th.historyDownload {
+	width: 250px;
+}
+
+th.pictures {
+	width: 125px;
+}
+
+th.nameCol {
+	width: 150px;
+}
+
+th.checkedItem {
+	width: 30px;
+}
+
+div.left2.elements {
+	border: none;
+}
+
+div.right2 {
+	border: none;
+}
+
+#frmList\3a pnl_services {
+	border: none;
+}
+
+#frmList\3a pnl_services_content {
+	/*width: 1000px;*/
+	
+}
+
+#frmList\3a pnl_services_state {
+	width: 100%;
+}
+
+.ui-widget-overlay {
+	background: #1f2226;
+	opacity: .60;
+	filter: Alpha(Opacity = 60);
+}
+
+html.progress, html.progress * {
+	cursor: progress !important;
+}
+
+div.blockUI.blockMsg.blockPage.pe-blockui.ui-widget.ui-corner-all.ui-widget-content.ui-draggable
+	{
+	z-index: 1011;
+	position: fixed;
+	width: auto;
+	top: 40% !important;
+	left: 45% !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.ui-lightbox-nav-right {
+	display: none !important;
+}
+
+.ui-lightbox-nav-left {
+	display: none !important;
+}
+
+div.invoices_table {
+	width: 1600px !important;
+}
+
+div.monteur_table {
+	width: 1600px !important;
+}
+
+div.techTable {
+	width: 1600px !important;
+}
+
+div.offers_table {
+	width: 1315px !important;
+}
+
+div.sc_table {
+	width: 98% !important;
+}
+
+button.historie_synch {
+	
+}
+
+button.historie_synch.red {
+	background-color: #a11836 !important;
+	color: white !important;
+}
+
+button.historie_synch>span {
+	color: white !important;
+}
+
+button.newBarocdeStyle>span {
+	color: white !important;
+}
+
+button.newBarocdeStyle {
+	background-color: #69041d !important;
+}
+
+th.tec {
+	width: 120px;
+}
+
+th.techn {
+	width: 30px;
+}
+
+th.cust {
+	width: 120px;
+}
+
+th {
+	white-space: pre-wrap !important;
+}
+
+div.contract_intervalls div.ui-corner-top {
+	height: 40px;
+}
+
+div.contract_intervalls div.ui-corner-top div.margin-top {
+	margin-top: -22px;
+}
+
+div.contract_elements div.ui-corner-top {
+	height: 40px;
+}
+
+div.contract_elements div.ui-corner-top div.margin-top {
+	margin-top: -22px;
+}
+
+div.vertragsdaten {
+	padding-bottom: 21px;
+}
+
+#contractForm\3a newTech {
+	margin-top: 12px;
+}
+
+td {
+	white-space: pre-wrap !important;
+}
+
+th.baust {
+	width: 110px;
+}
+
+th.code {
+	width: 80px;
+}
+
+div.buildingSite_table {
+	text-align: left;
+}
+
+td.active, td.latest {
+	width: 80px !important;
+	text-align: center;
+}
+
+th.totElement, th.elChecked {
+	text-align: right;
+}
+
+td.totElement, td.elChecked {
+	text-align: right;
+}
+
+th.wartNr {
+	width: 90px;
+}
+
+th.serKat {
+	width: 100px;
+}
+
+th.latest, th.sumContract {
+	width: 90px;
+}
+
+th.intYear {
+	width: 60px;
+}
+
+th.c_servArt {
+	width: 120px;
+}
+
+div.imagebox td {
+	text-align: center;
+}
+
+div.imagebox a {
+	text-decoration: none;
+}
+
+th.totElement, th.elChecked, th.year, th.intervallP, th.amountT, th.amountI
+	{
+	width: 40px;
+}
+
+th.active {
+	width: 80px;
+}
+
+div.jqplot-point-label.jqplot-series-0.jqplot-point-0 {
+	left: 50px !important;
+}
+
+div.jqplot-axis.jqplot-xaxis {
+	display: none !important;
+}
+
+canvas.jqplot-grid-canvas {
+	display: none;
+}
+
+div.jqplot-axis.jqplot-yaxis {
+	display: none;
+}
+
+#frmList\3a pnl_serviceTypes {
+	width: 1020px;
+}
+
+tr.activeIntervall {
+	background-color: #9ebda1 !important;
+}
+
+tr.notActiveIntervall {
+	background-color: #efefef !important;
+}
+
+th input {
+	float: left !important;
+}
+
+#tileStart\3a j_id_1h {
+	
+}
+
+#customerView>div {
+	margin-top: 30px !important;
+}
+
+.img-center {
+	text-align: center;
+}
+
+div.jqplot-point-label {
+	color: black;
+	font-size: 12px !important;
+}
+
+form#back {
+	margin-top: 20px;
+	margin-bottom: 12px;
+}
+
+form#frmList div {
+	border-radius: 5px;
+	margin: auto;
+	text-align: center;
+}
+
+div.ui-datatable-tablewrapper {
+	text-align: left !important;
+}
+
+th.of_date {
+	text-align: center;
+}
+
+td.of_date {
+	text-align: center;
+}
+
+td.of_amount {
+	text-align: right;
+}
+
+td.centerCol {
+	text-align: center;
+}
+
+td.leftCol {
+	text-align: left;
+}
+
+td.rightCol {
+	text-align: right;
+}
+
+td.center {
+	text-align: center;
+}
+
+td.left {
+	text-align: left;
+}
+
+td.right {
+	text-align: right;
+}
+
+div.listtable th.ui-state-default {
+	color: #4f4f4f;
+	background-color: rgba(19, 19, 19, 0.1) !important;
+	text-shadow: none;
+}
+
+th.offer_customer_date {
+	width: 100px;
+}
+
+div.jqplot-series-1 {
+	display: none !important;
+}
+
+#frmOffers {
+	margin-bottom: 30px;
+}
+
+#frmList {
+	margin-bottom: 30px;
+}
+
+tr.ui-state-highlight {
+	color: green !important;
+}
+
+tr.ui-state-highlight table th {
+	color: white !important;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight,
+	.ui-widget-header .ui-state-highlight {
+	text-shadow: none !important;
+}
+
+canvas.jqplot-highlight-canvas {
+	display: none !important;
+}
+
+div.jqplot-highlighter-tooltip {
+	display: none !important;
+}
+
+#tileStart\3a tile_customer {
+	position: absolute;
+	bottom: 10px;
+	right: 0px;
+	width: 175px !important;
+	height: 80px !important;
+	transition: all 1000ms ease;
+	border-radius: 15px !important;
+	background-color: #005c35 !important;
+}
+
+#tileStart\3a tile_logout {
+	position: absolute;
+	bottom: 10px;
+	left: 15px;
+	width: 175px !important;
+	height: 80px !important;
+	transition: all 1000ms ease;
+	border-radius: 15px !important;
+	background-color: black !important;
+}
+
+#tileStart\3a tile_logout:hover {
+	position: absolute;
+	bottom: 10px;
+	right: 15px;
+	transition: all 1000ms ease;
+	color: white !important;
+	width: 175px !important;
+	height: 80px !important;
+	background-color: #050505cc !important;
+}
+
+#tileStart\3a tile_logout:hover>span {
+	display: block !important;
+}
+
+#tileStart\3a tile_customer:hover>span {
+	display: block !important;
+}
+
+body.bg {
+	overflow: hidden;
+}
+
+#tileStart\3a tile_customer:hover {
+	position: absolute;
+	bottom: 10px;
+	right: 0px;
+	transition: all 1000ms ease;
+	width: 175px !important;
+	height: 80px !important;
+	background-color: #009a3f !important;
+}
+
+#tileStart\3a tile_customer:hover>span {
+	color: white !important;
+}
+
+div.customerselect .ui-state-focus {
+	color: black !important;
+}
+
+#customerView\3a cc_lastname_panel {
+	font-size: 28px;
+	color: white;
+}
+
+#customerView\3a cc_lastname_input {
+	width: 300px;
+	height: 50px !important;
+	font-size: 28px !important;
+	color: white;
+}
+
+div.offer.customer  td.status {
+	text-align: center !important;
+}
+
+.ui-tooltip .ui-tooltip-text {
+	padding: 0 !important;
+}
+
+th {
+	vertical-align: top;
+}
+
+div.reportPanel {
+	float: left !important;
+	width: 700px !important;
+	padding: 5px;
+	margin: 5px;
+}
+
+div.ui-tooltip-text.ui-shadow.ui-corner-all {
+	padding: 5px !important;
+	font-size: 15px;
+}
+
+th.oneSortFilterBreak span.ui-column-title {
+	display: inline-block !important;
+	height: 30px !important;
+	margin-top: 3px;
+}
+
+th.oneFilter span.ui-column-title {
+	display: inline-block !important;
+	height: 48px !important;
+	margin-top: 3px;
+}
+
+th.oneFilterSmall span.ui-column-title {
+	display: inline-block !important;
+	height: 31px !important;
+	margin-top: 3px;
+}
+
+th.oneFilterSmall2 span.ui-column-title {
+	display: inline-block !important;
+	height: 38px !important;
+	margin-top: 3px;
+}
+
+th.twoFilterSmall span.ui-column-title {
+	display: inline-block !important;
+	height: 22px !important;
+	margin-top: 3px;
+}
+
+th.marginTop  span.ui-column-title {
+	display: inline-block !important;
+	margin-top: 3px!important;
+}
+
+th.marginTopSort  span.ui-column-title {
+	display: inline-block !important;
+	height: 23px !important;
+	margin-top: 3px!important;
+}
+
+
+
+th.oneDrop  span.ui-column-title {
+	display: inline-block !important;
+	height: 50px !important;
+	margin-top: 3px;
+}
+
+th.oneSortFilter span.ui-column-title {
+	display: inline-block !important;
+	height: 43px !important;
+	margin-top: 3px;
+}
+
+th.twoSortFilter span.ui-column-title {
+	display: inline-block !important;
+	height: 32px !important;
+	margin-top: 3px!important;
+}
+
+span.ui-sortable-column-icon {
+	margin: 0px 0 0px 2px !important;
+}
+
+th.bool{
+	width: 50px!important; 
+}
+
+th.buttonCol{
+	width: 100px!important;
+}
+div.selectSourceElements tbody {
+	vertical-align: top!important;
+}
+
+#frmChecklist\3a sourceEntries{
+	width: 600px;
+}
+
+div.ui-datatable-tablewrapper tbody{
+	    border: 1px solid #a8a8a8!important;
+}
+#frmChecklist\3a selectSourceElements{
+	width: 1148px;
+}
+
+#frmChecklist\3a pnl_assocChecklist tbody{
+	vertical-align: top!important;
+}
+
+#frmChecklist\3a pnl_assocChecklist div.srcTable{
+	width: 850px;
+}
+
+#frmChecklist\3a pnl_assocChecklist_fr tbody{
+	vertical-align: top!important;
+}
+
+#frmChecklist\3a pnl_assocChecklist_fr div.srcTable{
+	width: 850px;
+}
+span.input300 input{
+	width: 300px!important;
+}
+
+table.frmNewOffer{
+	float: left;
+}
+
+#frmNewOffer\3a pnl_assocChecklist{
+	float: left;
+	margin-left: 10px;
+}
+
+div.checklistForSelectedElement_table{
+	float: left;
+}
+
+table.historyHeader span.fa-comments, .deleteButton span.fa-remove {
+	margin-top: -6px;
+    margin-left: 6px;
+
+}
+
+td.col_ele{
+	text-align: left;
+	font-weight: bolder;
+	width: 350px;
+}
+
+table.historyHeader tr{
+	border-style: none;  
+	background: none;
+}
+td.col_button{
+	 text-align: right;
+}
+table.historyHeader td{
+	border-style: none!important;  
+}
+
+table.assocGrid td{
+	vertical-align: top!important;
+}
+
+div.entries div.ui-datatable-header{
+	height: 67px;
+}
+
+td.setBack{
+	background-color: rgb(192, 214, 198);
+	color: black; 
+}
+#customerView\3a checkTab .ui-chkbox-box{
+	opacity: 1!important;
+	border: 1px solid black; 
+}
+
+
+table.historyHeader td[class^='Refus']{	
+	background-color: #fff0 !important;
+	color: #4f4f4f !important;
+	border-bottom: 7px solid red!important;
+}
+
+table.historyHeader td[class*='Ok\/Refus']{
+	background-color: #fff0 !important;
+	color: #4f4f4f !important;
+	border-bottom: 7px solid #f99a00!important;
+}
+
+table.historyHeader td[class*='trait']{	
+	background-color: #fff0 !important;
+	color: #4f4f4f !important;
+	border-bottom: 7px solid #483D8B!important;
+}
+
+
+
+table.historyHeader .abgelehnt{
+	background-color: rgba(0, 0, 0, 0) !important;
+	color: #4f4f4f !important;
+	border-bottom: 7px solid red!important;
+}
+
+table.historyHeader .ok {
+	background-color: rgba(0, 0, 0, 0) !important;
+	color: #4f4f4f !important;
+	border-bottom: 7px solid green!important;
+}
+
+table.historyHeader .nicht.abgeschlossen, .En.traite\.{
+	background-color: rgba(0, 0, 0, 0) !important;
+	color: #4f4f4f !important;
+	border-bottom: 7px solid #483D8B!important;	
+	
+}
+table.historyHeader .ok\/abgelehnt{
+	background-color: rgba(0, 0, 0, 0) !important;
+	color: #4f4f4f !important;
+	border-bottom: 7px solid #f99a00!important;
+
+}
+
+table.historyHeader .mangel {
+	background-color: rgba(0, 0, 0, 0) !important;
+	color: #4f4f4f !important;
+	border-bottom: 7px solid orange!important;
+	
+}
+
+table.historyHeader .defekt {
+	background-color: rgba(0, 0, 0, 0) !important;
+	color: #4f4f4f !important;
+	border-bottom: 7px solid red!important; 
+}
+
+
+
+
+div.deliverynote .ui-cell-editor-input input {
+	width: 100% !important;
+	margin: 0;
+	height: 26px;
+	background: #9f9f9f;
+	color: black;
+	font-weight: bold;
+}
+
+
+div.deliverynote tr {
+	border-bottom: 1px solid #a8a8a8;
+}
+
+
+div.projectTable thead th, div.deliverynote thead th {
+	background: #134d5f !important;
+	height: 30px !important;
+	border: 1px solid #b1b1b1 !important;
+}
+
+div.projectTable thead td, div.deliverynote thead td {
+	border: 1px solid #b1b1b1 !important;
+}
+
+div.projectTable thead span, div.deliverynote thead span {
+	color: white !important;
+	font-size: 16px !important;
+}
+
+div.projectTable tbody td, div.deliverynote tbody td {
+	border: 1px solid #d2d2d2 !important;
+}
+
+div.deliverynote .ui-datatable-even {
+	background: white !important;
+}
+
+div.deliverynote .ui-datatable-odd {
+	background: #eaeaea !important
+}
+
+div.deliverynote .ui-widget-content:hover {
+	background: #bababa !important
+}
+
+button.btn_add_remove
+{
+	height: 30px;
+	width: 30px;
+	border: none !important;	
+}
+
+button.btn_add_remove.ui-button-text
+{
+	display: none;
+}
+
+td.dn_text>span>input
+{
+	width: 90%;
+}

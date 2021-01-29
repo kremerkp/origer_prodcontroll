@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmReporting">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+
+		<p:panel id="pnl_reportRegie" header="Auswertung Reparaturzeit"
+			styleClass="reportPanel" toggleable="false"
+			style="margin-bottom:20px;">
+			<h:panelGrid id="grid_reportRegie" columns="2" cellpadding="5">
+				<p:outputLabel for="bsNr" value="Baustelle " />
+				<p:selectOneMenu id="bsNr"
+					converter="omnifaces.SelectItemsConverter" filter="true"
+					value="#{reportingBean.selectedSiteRepair}">
+					<p:ajax event="change" update="buildingSiteRepair pdf_button"
+						listener="#{reportingBean.generateRepairList}" 
+						/>
+					<f:selectItems value="#{reportingBean.regieBuildingSiteList}"
+						var="con" itemLabel="#{con.name}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="buildingSiteRepair" value="Reparaturen: " />
+				<p:selectManyMenu id="buildingSiteRepair" filter="true"
+					filterMatchMode="contains"
+					converter="omnifaces.SelectItemsIndexConverter"
+					value="#{reportingBean.repairSelectedList}">
+					<p:ajax update="pdf_button"/>
+					<f:selectItems value="#{reportingBean.repairList}" var="con"
+						itemLabel="#{con.entryDate}"/>
+				</p:selectManyMenu>
+
+			</h:panelGrid>
+
+			<h:panelGrid id="grid_reportRegie3" columns="2">				
+				<p:commandButton id="pdf_button" value="PDF-Bericht"
+					onclick="this.form.target='_blank'"
+					actionListener="#{reportingBean.generateRepairReport}"
+					oncomplete="PF('synchJobs').hide()" ajax="false" 
+					disabled="#{empty reportingBean.repairSelectedList}"/>
+
+			</h:panelGrid>
+
+		</p:panel>	
+
+	</h:form>
+
+</ui:composition>

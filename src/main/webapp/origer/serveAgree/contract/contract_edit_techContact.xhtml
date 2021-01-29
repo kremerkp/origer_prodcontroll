@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		function getAC_Technician() {
+			// contractForm:bsNr
+			var var_ac_buildingSite_code = jQuery(
+					'#contractForm\\:tc_lastname_input').val();
+			console.log(var_ac_buildingSite_code);
+			// set hiddenField;
+			document.getElementById("contractForm:ac_technician").value = var_ac_buildingSite_code;
+
+			console.log("geht");
+		}
+	</script>
+
+	<h:inputHidden id="ac_technician" value="#{contractInfo.techLastename}" />
+
+
+	<p:panel id="pnl_techContact" header="Techniker"
+		styleClass="buildingSite_formular" toggleable="true">
+		<h:panelGrid columns="2" cellpadding="5">
+
+			<p:outputLabel for="tc_lastname" value="Suche: " />
+
+			<p:autoComplete var="c" itemValue="#{c}" itemLabel="#{c.lastname}"
+				converter="#{simpleConverter}"
+				completeMethod="#{applicationBean.completeTechnician}"
+				value="#{contractInfo.technicalContact}"
+				disabled="#{contractInfo.disableEditModeTechnician}"
+				scrollHeight="400"
+				dropdown="true" id="tc_lastname" forceSelection="false"
+				styleClass="autocomplete_customer closed">
+				<p:ajax event="itemSelect" update="@form"
+					listener="#{contractInfo.updateTechnician()}" />
+				<p:ajax event="blur" onsuccess="getAC_Technician()" />
+			</p:autoComplete>
+			
+			<p:outputLabel for="tc_last" value="Nachname: " />
+			<p:inputMask id="tc_last" required="true"
+				disabled="#{contractInfo.disableEditModeTechnician}"
+				value="#{contractInfo.techLastename}">
+				<p:ajax></p:ajax>
+			</p:inputMask>			
+
+			<p:outputLabel for="tc_firstname" value="Vorname: " />
+			<p:inputMask id="tc_firstname" required="true"
+				disabled="#{contractInfo.disableEditModeTechnician}"
+				value="#{contractInfo.techFirstname}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+			
+			<p:outputLabel for="tc_shortname" value="Kürzel: " />
+			<p:inputMask id="tc_shortname" required="true"
+				disabled="#{contractInfo.disableEditModeTechnician}"
+				value="#{contractInfo.techShortname}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+			
+
+			<p:outputLabel for="tc_mail" value="e-Mail" />
+			<p:inputMask id="tc_mail"
+				disabled="#{contractInfo.disableEditModeTechnician}" required="true"
+				value="#{contractInfo.techMailAdress}">
+				<p:ajax></p:ajax>
+				<f:validateRegex
+					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			</p:inputMask>
+
+			<p:outputLabel for="tc_phone" value="Telefon" />
+			<p:inputMask id="tc_phone"
+				disabled="#{contractInfo.disableEditModeTechnician}" required="true"
+				value="#{contractInfo.techPhoneNumber}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+
+			<p:outputLabel for="tc_mobil" value="Handy" />
+			<p:inputMask id="tc_mobil"
+				disabled="#{contractInfo.disableEditModeTechnician}"
+				value="#{contractInfo.techMobilNumber}">
+				<p:ajax></p:ajax>
+			</p:inputMask>
+
+		
+		</h:panelGrid>
+		
+			<p:commandButton id="newTech" value=" neu "
+				actionListener="#{contractInfo.ac_createNewTechnician()}"  style="margin-left: 10px;"
+				disabled="#{!contractInfo.disableNewBtnTechnician}" update="@form" />
+				
+			<p:commandButton id="editTech_save" value=" bearbeiten"  
+				actionListener="#{contractInfo.ac_editTechnician()}"  style="margin-left: 10px;"
+				disabled="#{contractInfo.technicalContact.lastname == null or !contractInfo.disableEditBtnTechnician}" update="@form" />
+				
+			<p:commandButton id="newTech_save" value=" speichern "   style="margin-left: 10px;"
+				actionListener="#{contractInfo.ac_createNewTechnician_save()}"
+				disabled="#{!contractInfo.disableSaveBtnTechnician}" update="@form" />
+				
+			
+	</p:panel>
+
+</ui:composition>
+

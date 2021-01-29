@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2017-02-15T17:35:34 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_cert" pageWidth="595" pageHeight="842" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="49e02ecc-08a5-4d55-a13f-c85715c9675f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="alternateStyle" mode="Opaque" forecolor="#FFFFFF" backcolor="#FFFFFF" radius="1">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "ok" )]]></conditionExpression>
+			<style forecolor="#10FF00"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "defekt" )]]></conditionExpression>
+			<style forecolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "mangel" )]]></conditionExpression>
+			<style forecolor="#FF9900"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{elementState}.contains( "unge" )]]></conditionExpression>
+			<style forecolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="elementComment" class="java.lang.String">
+		<fieldDescription><![CDATA[elementComment]]></fieldDescription>
+	</field>
+	<field name="urlFoto" class="java.lang.String">
+		<fieldDescription><![CDATA[urlFoto]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[description]]></fieldDescription>
+	</field>
+	<field name="elementDate" class="java.util.Date">
+		<fieldDescription><![CDATA[elementDate]]></fieldDescription>
+	</field>
+	<field name="functionalControl" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[functionalControl]]></fieldDescription>
+	</field>
+	<field name="elementOffer" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[elementOffer]]></fieldDescription>
+	</field>
+	<field name="elementRepair" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[elementRepair]]></fieldDescription>
+	</field>
+	<field name="elementName" class="java.lang.String">
+		<fieldDescription><![CDATA[elementName]]></fieldDescription>
+	</field>
+	<field name="elementOk" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[elementOk]]></fieldDescription>
+	</field>
+	<field name="elementMangel" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[elementMangel]]></fieldDescription>
+	</field>
+	<field name="urlFoto2" class="java.lang.String">
+		<fieldDescription><![CDATA[urlFoto2]]></fieldDescription>
+	</field>
+	<field name="elementState" class="java.lang.String">
+		<fieldDescription><![CDATA[elementState]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="viewControl" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[viewControl]]></fieldDescription>
+	</field>
+	<field name="checklistEntry" class="java.lang.String">
+		<fieldDescription><![CDATA[checklistEntry]]></fieldDescription>
+	</field>
+	<variable name="description1" class="java.lang.Integer" resetType="Group" resetGroup="element Name" calculation="Count">
+		<variableExpression><![CDATA[$F{description}]]></variableExpression>
+	</variable>
+	<group name="elementdate">
+		<groupExpression><![CDATA[$F{elementDate}]]></groupExpression>
+	</group>
+	<group name="date element">
+		<groupExpression><![CDATA[$F{elementDate}]]></groupExpression>
+	</group>
+	<group name="element Name">
+		<groupExpression><![CDATA[$F{elementName}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement x="0" y="0" width="100" height="30" uuid="73577b35-04d0-4d73-aa23-bc195f78e3d6"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{elementName}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="0" width="100" height="30" uuid="46f68fe3-a432-45fd-b852-8277036bb237"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{elementDate} == null ? "" :  $F{elementDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement key="" style="alternateStyle" x="200" y="0" width="100" height="30" forecolor="rgba(255, 255, 255, 0.0)" backcolor="rgba(255, 255, 255, 0.0)" uuid="0ce48469-30c2-4a66-aa47-db45d49fe27d"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{elementState}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="300" y="0" width="100" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="fe2dab91-8681-4a98-a30c-9434b03e3a4d"/>
+					<box>
+						<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{elementComment}.trim()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="556" height="40" uuid="32d96356-b79a-4e28-8c34-59178c4139be"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Detailübersicht Element ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="37">
+			<staticText>
+				<reportElement x="0" y="7" width="100" height="30" uuid="3898587f-3d03-4644-a21e-8aaef7d3d1a5"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Element-Nr.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="7" width="100" height="30" uuid="6433f36f-94dc-478f-a1ba-6071721f0dd1"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kontrolldatum]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="7" width="100" height="30" uuid="27afc20b-02a8-40f7-a761-fb9ae71aa98a"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status Element]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="7" width="100" height="30" uuid="602f1fc5-a1e3-4c63-8681-e36322f62270"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#C7C7C7"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kommentar]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+</jasperReport>

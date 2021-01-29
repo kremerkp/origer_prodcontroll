@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<div id="diagRepairContract">
+		<p:dialog header="Defekt erfassen" widgetVar="repairPopup"
+			modal="true" height="150">			
+			<h:form id="defectForm">
+				<h:panelGrid columns="2" cellpadding="5">
+							
+	
+					<p:outputLabel for="sc_repair_customer_name" value="Kundenname: " />
+	
+					<p:inputText id="sc_repair_customer_name" 
+						value="#{serviceCustomerHistoryBean.repairCustomerName}">
+						<p:ajax/>
+					</p:inputText>
+	
+					<p:outputLabel for="sc_repair_desc" value="Beschreibung: " />
+					<p:inputTextarea id="sc_repair_desc" title="Beschreibung: "					
+						value="#{serviceCustomerHistoryBean.repairComment}" mask="true">
+						<p:ajax />
+					</p:inputTextarea>
+					
+					<p:outputLabel id="sc_repair_error" />
+							
+				</h:panelGrid>
+			</h:form>
+			
+			<f:facet name="footer"> 
+				<p:commandButton value="Eintrag erstellen"
+					onclick="PF('repairPopup').hide();" update=":customerView:pnl_servicesElementsTable :customerView:pnl_servicesHistoryTable :customerView:pnl_checklistForSelectedElement"
+					actionListener="#{serviceCustomerHistoryBean.generateRepairEntries}"/>
+				<p:commandButton value="Abbrechen"
+					onclick="PF('repairPopup').hide();" />
+			</f:facet>
+		</p:dialog>
+	</div>
+
+</ui:composition>

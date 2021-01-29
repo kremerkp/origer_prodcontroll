@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:outputScript target="head">
+	    $ = jQuery;
+	    // Then you can use it
+	    $(window).load(function() {
+	        $("div.jqplot-point-label").append(" % ");
+	    });
+	</h:outputScript>
+
+	<p:dialog id="addDescServiceReadyId" header="Wartung Abschließen"
+		widgetVar="addDescServiceReady" modal="true" height="147">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel
+				value="Bitte Kommentar eingeben, warum Service geschlossen wird" />
+			<br />
+			<p:inputTextarea cols="50" rows="5" value="#{serviceBean.comment}">
+				<p:ajax event="keyup" update="clickMe" />
+			</p:inputTextarea>
+		</h:panelGrid>
+		<f:facet name="footer">
+			<p:commandButton value="ok"
+				disabled="#{serviceBean.comment.length() le 5}" id="clickMe"
+				action="#{serviceBean.setServiceReady}"
+				onclick="PF('addNewService').hide();" update="@form" />
+		</f:facet>
+	</p:dialog>
+
+	<p:dialog id="addCommentForService"
+		header="Bemerkung für die Wartung erstellen"
+		widgetVar="addCommentService" modal="true" height="147">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel value="Bitte geben sie Ihren Kommentar ein." />
+			<br />
+			<p:inputTextarea cols="50" rows="5" id="commentService"
+				value="#{serviceBean.commentService}">
+				<p:ajax event="keyup" update="clickOnMe" />
+			</p:inputTextarea>
+		</h:panelGrid>
+		<f:facet name="footer">
+			<p:commandButton value="ok"
+				disabled="#{serviceBean.commentService.length() le 5}"
+				id="clickOnMe" action="#{serviceBean.setServiceComment}"
+				onclick="PF('addCommentService').hide();" update="@form" />
+		</f:facet>
+	</p:dialog>
+
+	<p:panel id="pnl_services" header="Intervallübersicht"
+		styleClass="intervall_overview" toggleable="false"
+		style="margin-bottom:20px">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:contextMenu for="intervalls" rendered="#{sessionBean.isAdmin}">
+				<p:menuitem value="Service auf fertigstellt setzen"
+					oncomplete="PF('addDescServiceReady').show();"
+					update="intervalls @form" />
+
+
+				<p:menuitem value="Service auf zu bearbeiten setzen"
+					update="intervalls"
+					actionListener="#{serviceBean.setServiceOnWork}" />
+
+				<p:menuitem value="Service aktiv setzen" update="intervalls"
+					actionListener="#{serviceBean.setServiceActive}" />
+
+				<p:menuitem value="Service Inaktiv setzen" update="intervalls"
+					actionListener="#{serviceBean.setServiceInactive}" />
+
+				<p:menuitem value="Bemerkung für Baustelle" 
+					onclick="PF('addCommentService').show();"
+					 />
+			</p:contextMenu>
+
+			<p:dataTable var="sv" value="#{serviceBean.serviceList}"
+				rowStyleClass="#{sv.active == true ? 'activeIntervall' : 'notActiveIntervall'}"
+				paginator="true" widgetVar="intervallTable" selectionMode="single"
+				rowKey="#{sv.id}" resizableColumns="true"
+				styleClass="intervalluebersicht"
+				filteredValue="#{serviceBean.serviceListfiltered}"
+				draggableColumns="true" paginatorPosition="bottom" id="intervalls"
+				rowsPerPageTemplate="25,50,100"
+				selection="#{serviceBean.selectedService}" rows="25">
+				<p:ajax event="rowDblselect" listener="#{serviceBean.openService}"
+					process="@this" />
+				<p:ajax event="rowSelect" listener="#{serviceBean.setCommentForSelectedService}" 
+					process="@this" update=":searchForm:commentService" />
+					
+					
+				<p:column headerText="" width="5"  >
+					<h:outputText id="fade" value="#{sv.comment.length() gt 0 ? '**' : ''}">
+						<f:convertNumber type="currency" currencySymbol="€" locale="de-DE" />
+					</h:outputText>
+					
+				   <p:tooltip id="toolTipFade" for="fade" value="#{sv.comment}" position="top"/>
+				</p:column>
+
+				<p:column headerText="Baustellen-Nr" styleClass="code twoSortFilter"
+					filterBy="#{sv.serviceContract.buildingSite.code}"
+					sortBy="#{sv.serviceContract.buildingSite.code}">
+					<h:outputText value="#{sv.serviceContract.buildingSite.code}" />
+				</p:column>
+
+				<p:column headerText="Bezeichnung Baustelle" styleClass="baust twoSortFilter"
+					filterBy="#{sv.serviceContract.buildingSite.name}"
+					sortBy="#{sv.serviceContract.buildingSite.name}">
+					<h:outputText value="#{sv.serviceContract.buildingSite.name}" />
+				</p:column>
+
+				<p:column headerText="&#160;Wartung-Nr&#160;" rendered="true"
+					styleClass="wartNr twoSortFilter"
+					filterBy="#{sv.serviceContract.serviceContractNumber}"
+					sortBy="#{sv.serviceContract.serviceContractNumber}">
+					<h:outputText value="#{sv.serviceContract.serviceContractNumber}" />
+				</p:column>
+
+
+				<p:column headerText="&#160;Vertrags-Art&#160;&#160;" styleClass="serKat twoSortFilter"
+					filterBy="#{sv.serviceType.name}" sortBy="#{sv.serviceType.name}">
+					<h:outputText value="#{sv.serviceType.name}" />
+				</p:column>
+
+				<p:column headerText="#{applicationBean.gSp(10)}Kunde#{applicationBean.gSp(10)}" styleClass="cust twoSortFilter"
+					filterBy="#{sv.partner.company}" sortBy="#{sv.partner.company}">
+					<h:outputText
+						value="#{sv.partner.company} " />
+				</p:column>
+
+				<p:column headerText="Tech." styleClass="techn twoSortFilter"
+					filterBy="#{sv.technician.shortname}"
+					sortBy="#{sv.technician.shortname}">
+					<h:outputText value="#{sv.technician.shortname}" />
+				</p:column>
+
+
+				<p:column headerText="Jahr" styleClass="year oneFilter"
+					filterBy="#{sv.latestServiceDate}" filterMatchMode="contains">
+					<h:outputText value="#{sv.latestServiceDate}">
+						<f:convertDateTime pattern="yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Intervall" styleClass="intYear twoSortFilter"
+					filterBy="#{sv.intervall}" sortBy="#{sv.intervall}">
+					<h:outputText value="#{sv.intervall} von #{sv.countPerType}" />
+				</p:column>
+
+				<p:column headerText="Int. ak." filterBy="#{sv.active}"
+					styleClass="active oneDrop" width="90" filterMatchMode="equals">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('intervallTable').filter()">
+							<f:converter converterId="javax.faces.Boolean" />
+							<f:selectItem itemLabel="Alle" itemValue="" />
+							<f:selectItem itemLabel="Aktiv" itemValue="true" />
+							<f:selectItem itemLabel="Inaktiv" itemValue="false" />
+						</p:selectOneMenu>
+
+					</f:facet>
+					<p:selectBooleanCheckbox disabled="true" value="#{sv.active}" />
+				</p:column>
+
+				<p:column headerText="Int. ab." filterBy="#{sv.ready}"
+					styleClass="active oneDrop" width="90" filterMatchMode="equals">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('intervallTable').filter()">
+							<f:converter converterId="javax.faces.Boolean" />
+							<f:selectItem itemLabel="Alle" itemValue="" />
+							<f:selectItem itemLabel="Fertig" itemValue="true" />
+							<f:selectItem itemLabel="Offen" itemValue="false" />
+						</p:selectOneMenu>
+
+					</f:facet>
+					<p:selectBooleanCheckbox disabled="true" value="#{sv.ready}" />
+				</p:column>
+
+				<p:column headerText="E.Soll" styleClass="totElement marginTop">
+					<h:outputText value="#{sv.totalElements}" />
+				</p:column>
+
+				<p:column headerText="E.Ist" styleClass="elChecked marginTop">
+					<h:outputText value="#{sv.elememtsChecked}" />
+				</p:column>
+
+				<p:column headerText="Intervall % " styleClass="marginTop" >  
+					<p:chart type="bar" model="#{sv.horizontalBarModel}"
+						style="height:75px" />
+				</p:column>
+
+				<p:column headerText="Start" styleClass="latest marginTop" sortBy="#{sv.latestServiceDate}" >
+					<h:outputText value="#{sv.latestServiceDate}">
+						<f:convertDateTime pattern="#{applicationBean.dateWithoutTime}" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Soll - Std.#{applicationBean.gSp(5)}" sortBy="#{sv.targetAmount}"
+					styleClass="amountT twoSort">
+					<h:outputText value="#{sv.targetAmount}" />
+				</p:column>
+
+				<p:column headerText="Ist - Std.#{applicationBean.gSp(5)}" sortBy="#{sv.acctualTime}"
+					styleClass="amountI twoSort">
+					<h:outputText value="#{sv.acctualTime}" />
+				</p:column>
+
+				<p:column headerText="Summe Intervall" filterBy="#{sv.serviceAmount}"
+					sortBy="#{sv.serviceAmount}" styleClass="wrap sumContract twoSortFilter">
+					<h:outputText value="#{sv.serviceAmount}">
+						<f:convertNumber type="currency" currencySymbol="€" locale="de-DE" />
+					</h:outputText>
+
+				</p:column>				
+
+			</p:dataTable>
+			
+
+		</h:panelGrid>
+	</p:panel>
+</ui:composition>
+

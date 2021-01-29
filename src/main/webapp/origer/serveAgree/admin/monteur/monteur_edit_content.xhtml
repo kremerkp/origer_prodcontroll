@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="frmCustomerEdit" styleClass="editForm">
+		<p:panelGrid styleClass="pnlStd frmChecklist adminInput">
+			<p:row>
+				<p:column styleClass="header" colspan="2">
+					<p:outputLabel value="Stammdaten Monteur" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="error" colspan="2">
+					<p:messages />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Aktiv" />
+
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="active"
+						value="#{monteurEditBean.mont.active}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Firma" />
+				</p:column>
+				<p:column>
+					<p:inputText id="compName" value="#{monteurEditBean.mont.company}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Vorname" />
+				</p:column>
+				<p:column>
+					<p:inputText id="firstname"
+						value="#{monteurEditBean.mont.firstname}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Nachname" />
+				</p:column>
+				<p:column>
+					<p:inputText id="lastname" value="#{monteurEditBean.mont.lastname}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Title" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu id="console" value="#{monteurEditBean.mont.title}">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItem itemLabel="Herr" itemValue="Herr" />
+						<f:selectItem itemLabel="Frau" itemValue="Frau" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Land" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu id="country"
+						value="#{monteurEditBean.mont.country}"
+						converter="omnifaces.SelectItemsConverter" effect="fold"
+						editable="true">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItems value="#{monteurEditBean.countryList}" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Stadt" />
+				</p:column>
+				<p:column>
+					<p:inputText id="city" value="#{monteurEditBean.mont.city}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Straße" />
+				</p:column>
+				<p:column>
+					<p:inputText id="street" value="#{monteurEditBean.mont.street}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Nr" />
+				</p:column>
+				<p:column>
+					<p:inputText id="streetnumber"
+						value="#{monteurEditBean.mont.streetNumber}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Handy" />
+				</p:column>
+				<p:column>
+					<p:inputText id="handynumber" value="#{monteurEditBean.mont.mobil}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Mail" />
+				</p:column>
+				<p:column>
+					<p:inputText id="mail" value="#{monteurEditBean.mont.mail}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Telefon" />
+				</p:column>
+				<p:column>
+					<p:inputText id="phone" value="#{monteurEditBean.mont.phone}" />
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+
+		<br clear="all" />
+
+		<p:spacer styleClass="seperator" />
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<p:commandButton actionListener="#{monteurEditBean.save()}"
+				rendered="false" onstart="PF('w_dlgWait').show();"
+				oncomplete="PF('w_dlgWait').hide();" value="Speichern"
+				process="@form" update="@form" styleClass="clear" />
+			<p:commandButton actionListener="#{monteurEditBean.saveAndClose()}"
+				value="Speichern und Schliessen" process="@form" update="@form"
+				styleClass="clear" />
+		</h:panelGroup>
+
+		<p:dialog widgetVar="w_dlgWait" modal="true" closable="false"
+			draggable="false" resizable="false" header="Speichern...">
+			<p>Bitte warten...</p>
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

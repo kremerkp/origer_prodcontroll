@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="./../layout/basic_layout_tile.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="content">
+		<h:form id="back">
+			<p:commandButton value="Zurück" id="back" ajax="false"
+				process="@this" update="@none"
+				action="#{tileNavigationBean.homeAdmin()}"
+				styleClass="ui-priority-primary backButton" />
+		</h:form>
+
+		<h:form>
+			<div class="tileNavigation">
+				<p:commandButton 
+					value="Rechnungen" 
+					id="tile_inv"
+					ajax="false" 
+					action="#{tileNavigationBean.homeInvoices()}"
+					styleClass="ui-priority-primary tile" 
+					/>
+
+				<p:commandButton value="Angebote" id="tile_offers"
+					ajax="false" action="#{tileNavigationBean.homeOffers()}"
+					styleClass="ui-priority-primary tile" />
+					
+				<p:commandButton value="Vertragsunterlagen und Pläne" id="tile_serviceMaterial"
+					ajax="false" action="#{tileNavigationBean.homeMaterial()}"
+					styleClass="ui-priority-primary tile" />
+					
+				<p:commandButton value="Wartungsverträge" id="tile_serviceContract"
+					ajax="false" action="#{tileNavigationBean.homeServiceContractAdmin()}"
+					styleClass="ui-priority-primary tile" />
+					
+					
+				<p:commandButton value="Wartungen" id="tile_services"
+					ajax="false" action="#{tileNavigationBean.homeServiceAdmin()}"
+					styleClass="ui-priority-primary tile" />
+					
+				<p:commandButton value="Baustellen" id="tile_buildingSite"
+					ajax="false"
+					action="#{tileNavigationBean.homeBuildingSiteAdmin()}" 
+					styleClass="ui-priority-primary tile" />
+					
+				<p:commandButton value="Vertrags-Arten" id="tile_serviceTypes"
+					ajax="false" 
+					action="#{tileNavigationBean.homeServiceTypeAdmin()}"
+					styleClass="ui-priority-primary tile" />
+
+			</div>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="frmCustomerEdit" styleClass="editForm">
+		<p:panelGrid styleClass="pnlStd frmChecklist adminInput">
+			<p:row>
+				<p:column styleClass="header" colspan="2">
+					<p:outputLabel value="Stammdaten Techniker" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="error" colspan="2">
+					<p:messages />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Aktiv" />
+
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="active"
+						value="#{technicianEditBean.customer.active}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Firma" />
+				</p:column>
+				<p:column>
+					<p:inputText id="compName"
+						value="#{technicianEditBean.customer.company}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Vorname" />
+				</p:column>
+				<p:column>
+					<p:inputText id="firstname"
+						value="#{technicianEditBean.customer.firstname}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Nachname" />
+				</p:column>
+				<p:column>
+					<p:inputText id="lastname"
+						value="#{technicianEditBean.customer.lastname}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Kurzname" />
+				</p:column>
+				<p:column>
+					<p:inputText id="shortname"
+						value="#{technicianEditBean.customer.shortname}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Title " />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu id="console"
+						value="#{technicianEditBean.customer.title}">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItem itemLabel="Herr" itemValue="Herr" />
+						<f:selectItem itemLabel="Frau" itemValue="Frau" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Land" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu id="country"
+						value="#{technicianEditBean.customer.country}"
+						converter="omnifaces.SelectItemsConverter" effect="fold"
+						editable="true">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItems value="#{technicianEditBean.countryList}" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Stadt" />
+				</p:column>
+				<p:column>
+					<p:inputText id="city" value="#{technicianEditBean.customer.city}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Straße" />
+				</p:column>
+				<p:column>
+					<p:inputText id="street"
+						value="#{technicianEditBean.customer.street}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Nr" />
+				</p:column>
+				<p:column>
+					<p:inputText id="streetnumber"
+						value="#{technicianEditBean.customer.streetNumber}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Handy" />
+				</p:column>
+				<p:column>
+					<p:inputText id="handynumber"
+						value="#{technicianEditBean.customer.mobil}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Mail" />
+				</p:column>
+				<p:column>
+					<p:inputText id="mail" value="#{technicianEditBean.customer.mail}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Telefon" />
+				</p:column>
+				<p:column>
+					<p:inputText id="phone"
+						value="#{technicianEditBean.customer.phone}" />
+				</p:column>
+			</p:row>
+
+
+
+		</p:panelGrid>
+
+		<br clear="all" />
+
+		<p:spacer styleClass="seperator" />
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<p:commandButton actionListener="#{technicianEditBean.save()}"
+				onstart="PF('w_dlgWait').show();"
+				oncomplete="PF('w_dlgWait').hide();" value="Speichern"
+				process="@form" update="@form" styleClass="clear" />
+			<p:commandButton
+				actionListener="#{technicianEditBean.saveAndClose()}"
+				value="Speichern und Schliessen" process="@form" update="@form"
+				styleClass="clear" />
+		</h:panelGroup>
+
+		<p:dialog widgetVar="w_dlgWait" modal="true" closable="false"
+			draggable="false" resizable="false" header="Speichern...">
+			<p>Bitte warten...</p>
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

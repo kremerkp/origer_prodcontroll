@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+
+		<p:panel id="pnl_checklists" header="Checklisten"
+			styleClass="invoices_table" toggleable="false"
+			style="margin-bottom:20px">
+			<div id="langSetting">
+				<p:commandButton value="FR" update="@form"
+					actionListener="#{checklistBean.setLangFR}"></p:commandButton>
+				<p:commandButton value="DE" update="@form"
+					actionListener="#{checklistBean.setLangDE}"></p:commandButton>
+			</div>
+			<p:dataTable value="#{checklistBean.checklistData}"
+				filteredValue="#{checklistBean.filteredChecklist}" var="checkList"
+				paginator="true" paginatorPosition="bottom" rows="3"
+				selectionMode="single" rowKey="#{checkList.id}"
+				selection="#{checklistBean.selectedChecklist}">
+
+				<p:ajax event="rowSelect" update=":frmList:layButtons"
+					process="@this" />
+				<p:ajax event="rowUnselect" update="@form" process="@this" />
+				<p:ajax event="rowDblselect"
+					listener="#{checklistBean.openChecklist}" process="@this" />
+				<p:column headerText="Name" filterable="true"
+					filterBy="#{checkList.name}" styleClass="col_small leftCol">
+					<h:outputText value="#{checkList.name}" />
+				</p:column>
+				<p:column headerText="Checklist Elemente"
+					styleClass="col_big leftCol">
+					<p:dataTable value="#{checkList.assocChecklistEntries}" var="it">
+
+						<p:column rendered="#{!checklistBean.langFr}"
+							headerText="Bestandteil" styleClass="innerTable">
+							<p:outputLabel value="#{it.checklistItem.checkListItemCategory.name}" />
+						</p:column>
+
+						<p:column rendered="#{checklistBean.langFr}" headerText="Èlèment"
+							styleClass="innerTable">
+							<p:outputLabel value="#{it.checklistItem.checkListItemCategory.nameFrench}" />
+						</p:column>
+
+						<p:column rendered="#{!checklistBean.langFr}"
+							headerText="zu überprüfen" styleClass="innerTable">
+							<p:outputLabel value="#{it.checklistItem.name}" />
+						</p:column>
+
+						<p:column rendered="#{checklistBean.langFr}"
+							headerText="pour vérifier" styleClass="innerTable">
+							<p:outputLabel value="#{it.checklistItem.nameFrench}" />
+						</p:column>
+
+						<p:column rendered="#{!checklistBean.langFr}" headerText="FK"
+							width="50px" styleClass="innerTable bool">
+							<p:selectBooleanCheckbox disabled="#{checklistBean.changeSKFK}" value="#{it.fc}" />
+						</p:column>
+
+						<p:column rendered="#{checklistBean.langFr}" headerText="FK"
+							width="50px" styleClass="innerTable bool">
+							<p:selectBooleanCheckbox disabled="#{checklistBean.changeSKFK}" value="#{it.fc}" />
+						</p:column>
+
+						<p:column rendered="#{!checklistBean.langFr}" headerText="SK"
+							width="50px" styleClass="innerTable bool">
+							<p:selectBooleanCheckbox disabled="#{checklistBean.changeSKFK}" value="#{it.vc}" />
+						</p:column>
+
+						<p:column rendered="#{checklistBean.langFr}" headerText="SK"
+							width="50px" styleClass="innerTable bool">
+							<p:selectBooleanCheckbox disabled="#{checklistBean.changeSKFK}" value="#{it.vc}" />
+						</p:column>
+
+					</p:dataTable>
+				</p:column>
+				<p:column headerText="Aktiv" rendered="false" styleClass="col_active centerCol">
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{checkList.active}" />
+				</p:column>
+				
+				<p:column rendered="false" headerText="FK/SK" styleClass="col_active buttonCol">
+										<p:commandButton value="#{checklistBean.getButtonLabel()}" ajax="true" update="@form"
+							action="#{checklistBean.switchSK}" /> 
+				</p:column>
+							
+			</p:dataTable>
+
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="neu" ajax="false"
+					action="#{checklistBean.addAs()}" />
+				<p:commandButton value="bearbeiten" ajax="false"
+					action="#{checklistBean.editAs()}" styleClass="ml15"
+					disabled="#{checklistBean.selectedChecklist == null}" process="@this" />
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

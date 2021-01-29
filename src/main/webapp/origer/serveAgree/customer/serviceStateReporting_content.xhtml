@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:outputScript target="head">
+	    $ = jQuery;
+	    // Then you can use it
+	    $(window).load(function() {
+	        $("div.jqplot-point-label").append(" % ");
+	    });
+	</h:outputScript>
+
+	<h:form id="customerView" styleClass="customerView" >
+		<p:messages autoUpdate="true" closable="true" showDetail="true"
+			showIcon="true" id="p_msg" />
+		<p:panel id="pnl_services_state" header="#{msg['customer.selection.status']}"
+			styleClass="intervall_overview_customer" toggleable="false"
+			style="margin-bottom:20px">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:dataTable var="sv" value="#{serviceBean.serviceList}"
+					paginator="true" selectionMode="single" rowKey="#{sv.id}"
+					filteredValue="#{serviceBean.serviceListfiltered}"
+					paginatorPosition="bottom" widgetVar="intervallTable"
+					selection="#{serviceBean.selectedService}" rows="15">
+
+					<p:ajax event="rowSelect" update=":customerView:serviceProtocol" process="@this" />
+
+					<p:column headerText="#{msg['maintenance.status.description']}" 
+					styleClass="code twoSortFilter"
+						filterBy="#{sv.serviceContract.buildingSite.name}"
+						sortBy="#{sv.serviceContract.buildingSite.name}">
+						<h:outputText value="#{sv.serviceContract.buildingSite.name}" />
+					</p:column>
+
+					<p:column headerText="#{msg['maintenance.status.technician']}#{applicationBean.gSp(15)}" styleClass="tec twoSortFilter"
+						filterBy="#{sv.technician.lastname}"
+						sortBy="#{sv.technician.lastname}" style=" text-align:center;">
+						<h:outputText
+							value="#{sv.technician.lastname}, #{sv.technician.firstname} " />
+					</p:column>
+
+					<p:column headerText="#{msg['maintenance.status.customer']}#{applicationBean.gSp(25)} " filterBy="#{sv.partner.lastname}"
+						styleClass="cust twoSortFilter" sortBy="#{sv.partner.company}" style=" text-align:center;">
+						<h:outputText
+							value="#{sv.partner.company} " />
+					</p:column>
+
+					<p:column headerText="#{msg['maintenance.status.contract.type']}#{applicationBean.gSp(25)} " styleClass="serKat twoSortFilter"
+						filterBy="#{sv.serviceType.name}" sortBy="#{sv.serviceType.name}">
+						<h:outputText rendered="#{sessionBean.userLocale.country == 'DE'}" 
+							value="#{sv.serviceType.name}" />
+						<h:outputText rendered="#{sessionBean.userLocale.country == 'FR'}" 
+							value="#{sv.serviceType.nameFrench}" />
+					</p:column>
+
+					<p:column headerText="#{msg['maintenance.status.year']}" filterBy="#{sv.latestServiceDate}"
+						styleClass="year oneFilter">
+						<h:outputText value="#{sv.latestServiceDate}">
+							<f:convertDateTime pattern="yyyy" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="#{msg['maintenance.status.interval']}#{applicationBean.gSp(25)}" filterBy="#{sv.intervall}"
+						styleClass="intYear twoSortFilter" sortBy="#{sv.intervall}">
+						<h:outputText value="#{sv.intervall} von #{sv.countPerType}" rendered="#{sessionBean.userLocale.country == 'DE'}"/>
+						<h:outputText value="#{sv.intervall} de #{sv.countPerType}" rendered="#{sessionBean.userLocale.country == 'FR'}"/>
+					</p:column>
+
+					<p:column headerText="#{msg['maintenance.status.interval.active']}" filterBy="#{sv.active}"
+						styleClass="active oneDrop" width="90" filterMatchMode="equals">
+						<f:facet name="filter">
+							<p:selectOneMenu onchange="PF('intervallTable').filter()">
+								<f:converter converterId="javax.faces.Boolean" />
+								<f:selectItem itemLabel="#{msg['offers.all']}" itemValue="" />
+								<f:selectItem itemLabel="#{msg['maintenance.status.active']}" itemValue="true" />
+								<f:selectItem itemLabel="#{msg['maintenance.status.inactive']}" itemValue="false" />
+							</p:selectOneMenu>
+
+						</f:facet>
+						<p:selectBooleanCheckbox disabled="true" value="#{sv.active}" />
+					</p:column>
+
+					<p:column headerText="#{msg['maintenance.status.interval.done']}"
+						filterBy="#{sv.ready}" width="90" styleClass="active oneDrop"
+						filterMatchMode="equals">
+						<f:facet name="filter">
+							<p:selectOneMenu onchange="PF('intervallTable').filter()">
+								<f:converter converterId="javax.faces.Boolean" />
+								<f:selectItem itemLabel="#{msg['offers.all']}" itemValue="" />
+								<f:selectItem itemLabel="#{msg['maintenance.status.done']}" itemValue="true" />
+								<f:selectItem itemLabel="#{msg['maintenance.status.open']}" itemValue="false" />
+							</p:selectOneMenu>
+
+						</f:facet>
+						<p:selectBooleanCheckbox disabled="true" value="#{sv.ready}" />
+					</p:column>
+
+					<p:column headerText="#{msg['maintenance.status.elements.total']}" width="72" styleClass="totElement marginTop">
+						<h:outputText value="#{sv.totalElements}" />
+					</p:column>
+
+					<p:column headerText="#{msg['maintenance.status.elements.checked']}" width="72" styleClass="elChecked marginTop">
+						<h:outputText value="#{sv.elememtsChecked}" />
+					</p:column>
+
+					<p:column headerText="#{msg['maintenance.status.interval.percentage']}" width="350" styleClass="marginTop" > 
+						<p:chart type="bar" model="#{sv.horizontalBarModel}"
+							style="height:75px" />
+					</p:column>
+
+					<p:column headerText="#{msg['maintenance.status.latest.start']}" styleClass="latest marginTop" sortBy="#{sv.latestServiceDate}" >
+						<h:outputText value="#{sv.latestServiceDate}">
+							<f:convertDateTime pattern="#{applicationBean.dateWithoutTime}" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="#{msg['maintenance.status.certificate']}" styleClass="latest marginTop" width="80" >
+						<h:commandLink target="_new" actionListener="#{serviceBean.createCertification(sv)}"  >  
+							<p:graphicImage rendered="#{sv.ready}" width="60" value="/resources/img/material/cert2.png" />
+						</h:commandLink>
+					</p:column>
+					
+					<p:column headerText="#{msg['maintenance.status.received']}" styleClass="latest marginTop" width="80" >
+						<h:commandLink target="_new" actionListener="#{serviceBean.createApprovalReport(sv)}"  >  
+							<p:graphicImage rendered="#{sv.ready}" width="60" value="/resources/img/material/abnahme.png" />
+						</h:commandLink>
+					</p:column>
+					
+					<p:column headerText="#{msg['maintenance.status.comment']}" styleClass="latest marginTop" width="120" >
+						<h:outputText value="#{sv.description}">
+							<f:convertDateTime pattern="#{sv.description}" />
+						</h:outputText>
+					</p:column>
+					
+					
+
+				</p:dataTable>
+
+			</h:panelGrid>
+			
+							<p:commandButton id="serviceProtocol"
+					disabled="#{serviceBean.selectedService == null}"
+					value="#{msg['maintenance.status.to.maintenance.confirmation']}"
+					action="#{serviceBean.serviceProtocol()}" />
+		</p:panel>
+	</h:form>
+</ui:composition>
+

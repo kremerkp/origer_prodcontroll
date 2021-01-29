@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+		<p:panel id="pnl_servicesElementsTable" header=""
+			styleClass="servicesElementsTable_table" toggleable="false"
+			style="margin-bottom:20px; height: 70%">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:dataTable var="elements" paginator="true" 
+					paginatorPosition="bottom" rows="25" editable="true" id="elTab"
+					rowKey="#{elements}" rowsPerPageTemplate="25,50,100"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+					selection="#{serviceProofReporting.selectedElement}" selectionMode="single"
+					 value="#{serviceProofReporting.serviceElements}">
+					<p:ajax event="rowSelect" process="@this" listener="#{serviceProofReporting.onRowSelect}"  update=":customerView:checkTab" />
+
+					<p:column headerText="#{msg['history.barcode']}" styleClass="oneFilterSmall" filterBy="#{elements.elementnumber}"
+						filterMatchMode="contains">
+						<h:outputText value="#{elements.elementnumber}" />
+					</p:column>
+					
+					<p:column headerText="#{msg['history.last.date']}" styleClass="marginTop">
+						<h:outputText value="#{elements.lastControlDate}" rendered="#{sessionBean.isAdmin}">
+						 	<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
+						</h:outputText> 
+						<h:outputText value="#{elements.lastControlDate}" rendered="#{!sessionBean.isAdmin}">
+						 	<f:convertDateTime pattern="dd.MM.yyyy" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="#{msg['history.status']}" filterBy="#{elements.lastState}" styleClass="#{serviceCustomerHistoryBean.styleState(elements.lastState)} oneFilterSmall"
+						filterMatchMode="contains">
+						<h:outputText value="#{elements.lastState}" />
+					</p:column>
+					
+					<p:column headerText="#{msg['history.room']}#{applicationBean.gSp(5)}"
+					 	style="word-wrap: break-word !important; overflow-wrap: break-word !important;"
+						filterBy="#{elements.room}" sortBy="#{elements.room}" 
+						filterMatchMode="contains">
+						<h:outputText value="#{elements.room}" />
+					</p:column>
+					
+					<p:column headerText="#{msg['history.floor']}" filterBy="#{elements.floor}" sortBy="#{elements.floor}"
+						filterMatchMode="contains">
+						<h:outputText value="#{elements.floor}" />
+					</p:column>
+					
+					<p:column headerText="#{msg['history.orientation']}" filterBy="#{elements.directionType.name}" sortBy="#{elements.directionType.name}"
+						filterMatchMode="contains">
+						<h:outputText value="#{elements.directionType.name}" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+		</p:panel>
+
+</ui:composition>
+

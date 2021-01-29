@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="./../layout/basic_layout_tile_nologo.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="content">
+		<h:form id="back">
+			<p:hotkey bind="ctrl+z"
+				action="#{tileNavigationBean.redirectServeAgreeStart}" />
+
+			<p:commandButton value="zur Intervallübersicht" id="back"
+				ajax="false" process="@this" update="@none"
+				action="#{tileNavigationBean.homeSearch}"
+				styleClass="ui-priority-primary backButton" />
+		</h:form>
+		
+		<h:form id="contractForm">
+			<pe:blockUI widgetVar="bui" >
+				<p:graphicImage name="/img/ajax-loader.gif"
+					style="margin-right: 12px; vertical-align: middle;" />
+				<h:outputText value="bitte warten..." styleClass="wordwrap"  />
+			</pe:blockUI>
+
+
+			<div>
+				<ui:include src="contract_topButtonBar.xhtml" />
+			</div>
+
+
+			<ui:include src="contract_dialogs.xhtml" />
+
+			<ui:include src="addServiceType_dialogs.xhtml" />
+
+			<ui:include src="addElements_popup.xhtml" />
+
+			<ui:include src="addNewObject.xhtml" />
+			
+			<ui:include src="addNewSubContract.xhtml" /> 
+
+			<ui:include src="addInvoice_popup.xhtml" />
+ 
+			<ui:include src="addOffer_popup.xhtml" /> 
+ 
+			<ui:include src="delElements_popup.xhtml" />
+			
+			<ui:include src="newContractFiles_popup.xhtml"/>
+
+			<ui:include src="assignElements_popup.xhtml" />
+			
+			<ui:include src="renewContract_popup.xhtml"/>							
+
+			<p:messages autoUpdate="true" closable="true" showDetail="true"
+				showIcon="true" id="p_msg" />
+				
+			<div style="width: 1900px; margin: 0 auto; overflow-y: hidden;">	
+				<div class="left customer" style="height: 100%; margin-bottom: 20px;">
+					<div>
+						<div class="fb2">
+							<ui:include src="contract_edit_buildingSite.xhtml" />
+							<ui:include src="contract_edit_techContact.xhtml" />
+							
+						</div>
+						<div class="fb1 cust">
+							<ui:include src="contract_edit_customerContact.xhtml" />
+							<ui:include src="contract_edit_serviceContractBase.xhtml" />
+						</div>
+					</div>
+				</div>
+				<div class="right">
+					<div>
+						<div class="fb_right">
+							<ui:include src="contract_edit_servicesTable.xhtml" />
+						</div>
+					</div>
+					<div>
+						<div class="fb_right">
+							<ui:include src="contract_edit_servicesElementsTable.xhtml" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>		
+
+	</ui:define>
+
+</ui:composition>
+

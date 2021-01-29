@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<p:panel id="pnl_checklistsElementsTyps" header="Elemente drucken"
+			styleClass="invoices_table" toggleable="false"
+			style="margin-bottom:20px">
+
+			<p:dataTable value="#{serviceElementBean.serviceElements}"
+				filteredValue="#{serviceElementBean.filteredServiceElements}" id="printBarcodes" 
+				var="elements" paginator="true" paginatorPosition="bottom" rows="25"
+				rowKey="#{elements}" rowsPerPageTemplate="25,50,100"
+				selection="#{serviceElementBean.selectedServiceElements}">
+
+				<p:column selectionMode="multiple"
+					style="width:16px;text-align:center" />
+
+				<p:column headerText="Baustelle#{applicationBean.gSp(30)}" styleClass="twoFilterSmall" filterBy="#{elements.baustelle}"
+					sortBy="#{elements.baustelle}" filterMatchMode="contains">
+					<h:outputText value="#{elements.baustelle}" />
+				</p:column>
+ 
+				<p:column headerText="Vertragsnummer#{applicationBean.gSp(30)}" styleClass="twoFilterSmall"
+					filterBy="#{elements.wartungsvertrag}"
+					sortBy="#{elements.wartungsvertrag}" filterMatchMode="contains">
+					<h:outputText value="#{elements.wartungsvertrag}" />
+				</p:column>
+
+				<p:column headerText="Barcode#{applicationBean.gSp(30)}" styleClass="twoFilterSmall" filterBy="#{elements.elementnumber}"
+					sortBy="#{elements.elementnumber}" filterMatchMode="contains">
+					<h:outputText value="#{elements.elementnumber}" />
+				</p:column>
+
+				<p:column headerText="Typ#{applicationBean.gSp(100)}" styleClass="twoFilterSmall" filterBy="#{elements.elementType.name}"
+					sortBy="#{elements.elementType.name}" filterMatchMode="contains">
+					<h:outputText value="#{elements.elementType.name}" />
+				</p:column>
+
+				<p:column headerText="Stockwerk#{applicationBean.gSp(30)}" styleClass="twoFilterSmall" filterBy="#{elements.floor}"
+					sortBy="#{elements.floor}">
+					<h:outputText value="#{elements.floor}" />
+				</p:column>
+
+				<p:column headerText="Ausrichtung#{applicationBean.gSp(30)}"
+					filterBy="#{elements.directionType.name}" styleClass="twoFilterSmall" 
+					sortBy="#{elements.directionType.name}">
+					<h:outputText value="#{elements.directionType.name}" />
+				</p:column>
+
+				<p:column headerText="Zimmer#{applicationBean.gSp(30)}" styleClass="twoFilterSmall" filterBy="#{elements.room}"
+					sortBy="#{elements.room}">
+					<h:outputText value="#{elements.room}" />
+				</p:column>
+
+				<p:column headerText="Fassade" rendered="false"
+					filterBy="#{elements.frontType.name}"
+					sortBy="#{elements.frontType.name}">
+					<h:outputText value="#{elements.frontType.name}" />
+
+				</p:column>
+
+				<p:column headerText="Bemerkung">
+					<h:outputText value="#{elements.description}" />
+
+				</p:column>
+
+				<p:column headerText="Checkliste#{applicationBean.gSp(30)}"
+					sortBy="#{elements.checklist.name}" styleClass="twoFilterSmall" 
+					filterBy="#{elements.checklist.name}">
+					<h:outputText value="#{elements.checklist.name}" />
+				</p:column>
+
+			</p:dataTable>
+
+			<p:contextMenu for="printBarcodes">
+				<p:menuitem value="als gedruckt markieren" update="@form" ajax="false"
+				actionListener="#{serviceElementBean.setBarcodesPrinted()}" />
+			</p:contextMenu> 
+
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="markierte Elemente drucken" ajax="false"
+					action="#{serviceElementBean.generateBarcodeReport()}" />
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,357 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>	
+
+	<p:dialog header="Type zuweisen" widgetVar="assignTypeDialog"
+		modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+		<p:outputPanel id="assignType" style="text-align:center;">
+			<p:panelGrid columns="2" columnClasses="label,value">
+
+				<p:selectOneMenu id="custAll" filter="true"
+					value="#{contractInfo.elementTypeForAll}"
+					converter="omnifaces.SelectItemsConverter" effect="fold"
+					editable="true">
+					<f:selectItem itemLabel="Select One" itemValue="" />
+					<f:selectItems value="#{contractInfo.elementTypeList}" />
+				</p:selectOneMenu>
+
+				<p:commandButton id="ca_button" value="Type zuweisen"
+					actionListener="#{contractInfo.assignTypeToAllSelectedElements()}"
+					oncomplete="PF('assignTypeDialog').hide()" ajax="true"
+					update="@form" process="@form" />
+
+				<p:commandButton id="ca_button_cha" value="abbruch"
+					oncomplete="PF('assignTypeDialog').hide()" />
+
+			</p:panelGrid>
+		</p:outputPanel>
+	</p:dialog>
+
+	<p:dialog header="Ausrichtung zuweisen"
+		widgetVar="assignDirctionDialog" modal="true" showEffect="fade"
+		hideEffect="fade" resizable="false">
+		<p:outputPanel id="assignDirection" style="text-align:center;">
+			<p:panelGrid columns="2" columnClasses="label,value">
+
+				<p:selectOneMenu id="dirAll" filter="true"
+					value="#{contractInfo.directionForAll}"
+					converter="omnifaces.SelectItemsConverter" effect="fold"
+					editable="true">
+					<f:selectItem itemLabel="Select One" itemValue="" />
+					<f:selectItems value="#{contractInfo.directionList}" />
+				</p:selectOneMenu>
+
+				<p:commandButton id="as_button" value="Ausrichtung zuweisen"
+					actionListener="#{contractInfo.assignDirectionToAllSelectedElements()}"
+					oncomplete="PF('assignDirctionDialog').hide()" ajax="true"
+					update="@form" process="@form" />
+
+				<p:commandButton id="as_button_cha" value="abbruch"
+					oncomplete="PF('assignDirctionDialog').hide()" />
+
+			</p:panelGrid>
+		</p:outputPanel>
+	</p:dialog>
+	
+	<p:dialog header="Bemerkung zuweisen"
+		widgetVar="assignCommentDialog" modal="true" showEffect="fade"
+		hideEffect="fade" resizable="false">
+		<p:outputPanel id="assignComment" style="text-align:center;">
+			<p:panelGrid columns="2" columnClasses="label,value">
+				<p:inputText id="commentInput" value="#{contractInfo.addComment}" />
+
+				<p:commandButton id="comm_button" value="Kommentar zuweisen"
+					actionListener="#{contractInfo.assignCommentToAllSelectedElements()}"
+					oncomplete="PF('assignDirctionDialog').hide()" ajax="true"
+					update="@form" process="@form" />
+
+				<p:commandButton id="comm_button_cha" value="abbruch"
+					oncomplete="PF('assignDirctionDialog').hide()" />
+
+			</p:panelGrid>
+		</p:outputPanel>
+	</p:dialog>
+	
+	<p:dialog header="Stockwerk zuweisen"
+		widgetVar="assignFloorDialog" modal="true" showEffect="fade"
+		hideEffect="fade" resizable="false">
+		<p:outputPanel id="assignFloor" style="text-align:center;">
+			<p:panelGrid columns="2" columnClasses="label,value">
+				<p:inputText id="floorInput" value="#{contractInfo.addFloor}" />
+
+				<p:commandButton id="floor_button" value="Stockwerk zuweisen"
+					actionListener="#{contractInfo.assignFloorToAllSelectedElements()}"
+					oncomplete="PF('assignDirctionDialog').hide()" ajax="true"
+					update="@form" process="@form" />
+
+				<p:commandButton id="floor_button_cha" value="abbruch"
+					oncomplete="PF('assignFloorDialog').hide()" />
+
+			</p:panelGrid>
+		</p:outputPanel>
+	</p:dialog>
+	
+	<p:dialog header="Zimmer zuweisen"
+		widgetVar="assignRoomDialog" modal="true" showEffect="fade"
+		hideEffect="fade" resizable="false">
+		<p:outputPanel id="assignRoom" style="text-align:center;">
+			<p:panelGrid columns="2" columnClasses="label,value">
+				<p:inputText id="roomInput" value="#{contractInfo.addRoom}" />
+
+				<p:commandButton id="room_button" value="Kommentar zuweisen"
+					actionListener="#{contractInfo.assignRoomToAllSelectedElements()}"
+					oncomplete="PF('assignDirctionDialog').hide()" ajax="true"
+					update="@form" process="@form" />
+
+				<p:commandButton id="room_button_cha" value="abbruch"
+					oncomplete="PF('assignDirctionDialog').hide()" />
+
+			</p:panelGrid>
+		</p:outputPanel>
+	</p:dialog>
+
+	
+	<p:dialog header="DIN zuweisen" widgetVar="assignDINDialog" rendered="true"
+		modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+		<p:outputPanel id="assignDIN" style="text-align:center;">
+			<p:panelGrid columns="2" columnClasses="label,value">
+
+				<p:selectOneMenu id="DINAll" filter="true"
+					value="#{contractInfo.DINForAll}"
+					converter="omnifaces.SelectItemsConverter" effect="fold"
+					editable="true"> 
+					<f:selectItem itemLabel="Select One" itemValue="" />
+					<f:selectItems value="#{contractInfo.DINList}" />
+				</p:selectOneMenu>
+
+				<p:commandButton id="din_button" value="DIN zuweisen"
+					actionListener="#{contractInfo.assignDINToAllSelectedElements()}"
+					oncomplete="PF('assignFrontDialog').hide()" ajax="true"
+					update="@form" process="@form" />
+
+				<p:commandButton id="fr_button_cha" value="abbruch"
+					oncomplete="PF('assignFrontDialog').hide()" />
+
+			</p:panelGrid>
+		</p:outputPanel>
+	</p:dialog>
+
+
+
+	<p:panel id="pnl_servicesElementsTable" header=""
+		styleClass="buildingSite_table" toggleable="false"
+		style="margin-bottom:20px; height: 70%">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:dataTable var="elements" paginator="true" editable="true" editMode="cell" 
+			    paginatorPosition="bottom" rows="25"  id="elTab"
+				rowKey="#{elements}" rowsPerPageTemplate="25,50,100,10000" styleClass="contract_elements"
+				selection="#{contractInfo.selectedServiceElements}" 
+				
+				value="#{contractInfo.serviceElementList}">
+
+				<p:ajax event="rowSelect" update="layButtons" listener="#{contractInfo.elementsSelected}" process="@this" />
+				<p:ajax event="rowSelectCheckbox" update="layButtons" listener="#{contractInfo.elementsSelected}" process="@this" />
+				<p:ajax event="rowUnselect" update="layButtons" listener="#{contractInfo.elementsSelected}" process="@this" />
+				<p:ajax event="rowUnselectCheckbox" update="layButtons" listener="#{contractInfo.elementsSelected}" process="@this" />
+				<p:ajax event="toggleSelect" update="layButtons" process="@this" />
+				<p:ajax event="cellEdit" listener="#{contractInfo.onCellEditElement}" update="@this :contractForm:p_msg" />
+				 
+				
+				<f:facet name="header">
+					<h:panelGroup layout="block" id="layButtons"
+						styleClass="margin-top">
+						<div>
+							<p:commandButton id="bc_button" value="Barcodes drucken"
+								onclick="this.form.target='_blank'" onstart="PF('bui').block();" 
+								oncomplete="PF('bui').unblock();"
+								actionListener="#{contractInfo.generateBarcodeReport()}"
+								disabled="#{contractInfo.elementsSelected()}"
+								ajax="false" update="@form" process="@form" />
+
+							<p:commandButton id="bc_button_del"
+								value="ausgewählte elemente löschen"
+								actionListener="#{contractInfo.delteSericeElementsFromService}"
+								disabled="#{contractInfo.elementsSelected()}" 
+								ajax="false" update=":contractForm:pnl_servicesElementsTable :contractForm:p_msg"
+								process="@form" />
+
+							<p:commandButton id="bc_button_checklistItems"
+								value="Checkliste für ausgewählte Elemente erstellen" onstart="PF('bui').block();" oncomplete="PF('bui').unblock();"
+								actionListener="#{contractInfo.updateServiceHistoryElements}"
+								disabled="#{contractInfo.elementsSelected()}"
+								ajax="true" update=":contractForm:pnl_servicesElementsTable :contractForm:p_msg"
+								process="@form" />														
+
+						</div>
+					</h:panelGroup>
+				</f:facet>
+
+				<p:column selectionMode="multiple"
+					style="width:16px;text-align:center" />
+
+				<p:column headerText="Barcode" filterBy="#{elements.elementnumber}" sortBy="#{elements.elementnumber}"
+					filterMatchMode="contains">
+					<h:outputText value="#{elements.elementnumber}" />
+				</p:column>
+
+				<p:column headerText="Typ" filterBy="#{elements.elementType.name}" sortBy="#{elements.elementType.name}"
+					filterMatchMode="contains">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{elements.elementType.name}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu id="cust" filter="true"
+								value="#{elements.elementType}"
+								converter="omnifaces.SelectItemsConverter" effect="fold"
+								editable="true">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{contractInfo.elementTypeList}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Stockwerk" filterBy="#{elements.floor}" sortBy="#{elements.floor}" >
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{elements.floor}" />
+						</f:facet> 
+						<f:facet name="input">
+							<p:inputText id="floorInput" value="#{elements.floor}" maxlength="3" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Ausrichtung" filterBy="#{elements.directionType.name}" sortBy="#{elements.directionType.name}" > 
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{elements.directionType.name}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu id="dirType" filter="true"
+								value="#{elements.directionType}"
+								converter="omnifaces.SelectItemsConverter" effect="fold"
+								editable="true">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{contractInfo.directionList}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="DIN-Typ" filterBy="#{elements.dinType.name}" sortBy="#{elements.dinType.name}" > 
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{elements.dinType.name}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu id="dinType" filter="true"
+								value="#{elements.dinType}"
+								converter="omnifaces.SelectItemsConverter" effect="fold"
+								editable="true">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{contractInfo.dinTypeList}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+
+				<p:column headerText="Zimmer" filterBy="#{elements.room}" sortBy="#{elements.room}"
+					style="word-wrap: break-word !important; overflow-wrap: break-word !important;">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{elements.room}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="roomInput" value="#{elements.room}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Fassade" rendered="false" filterBy="#{elements.frontType.name}" sortBy="#{elements.frontType.name}" >
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{elements.frontType.name}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu id="frontType" filter="true"
+								value="#{elements.frontType}"
+								converter="omnifaces.SelectItemsConverter" effect="fold"
+								editable="true">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{contractInfo.frontList}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Bemerkung" style="word-wrap: break-word !important; overflow-wrap: break-word !important;">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{elements.description}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="descInput" value="#{elements.description}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+
+				<p:column headerText="Checkliste" sortBy="#{elements.serviceChecklist.name}" filterBy="#{elements.serviceChecklist.name}">
+					<p:cellEditor >
+						<f:facet name="output">
+							<h:outputText value="#{elements.checklist.name}" />
+						</f:facet>
+						<f:facet name="input"  >
+							<p:selectOneMenu id="checkListInput" 
+								value="#{elements.checklist}" label=""
+								converter="omnifaces.SelectItemsConverter" effect="fold"
+								editable="true">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItems value="#{checklistEditBean.allChecklist}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				
+				<p:column headerText="erstellt" styleClass="center" >
+					<p:selectBooleanCheckbox style="text-align:center;" disabled="true" value="#{elements.checklistHistoryExists}" />
+				</p:column>
+
+			</p:dataTable>
+			<p:contextMenu for="elTab">
+				<p:menuitem value="Typ zuweisen" update="elTab"
+					oncomplete="PF('assignTypeDialog').show()" />
+				<p:menuitem value="Fassade zuweisen" update="elTab" rendered="false"
+					oncomplete="PF('assignFrontDialog').show()" />
+				<p:menuitem value="Ausrichtung zuweisen" update="elTab"
+					oncomplete="PF('assignDirctionDialog').show()" />
+				<p:menuitem value="DIN zuweisen" update="elTab"
+					oncomplete="PF('assignDINDialog').show()" />
+				<p:menuitem value="Bemerkung zuweisen" update="elTab"
+					oncomplete="PF('assignCommentDialog').show()" />
+					
+				<p:menuitem value="Stockwerk zuweisen" update="elTab"
+					oncomplete="PF('assignFloorDialog').show()" />
+					
+				<p:menuitem value="Zimmer zuweisen" update="elTab"
+					oncomplete="PF('assignRoomDialog').show()" />
+					
+			</p:contextMenu>
+		</h:panelGrid>
+	</p:panel>
+
+</ui:composition>
+

@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		
+		<p:dialog id="confirmOfferCancel"
+			header="Kein Angbot erstellen"
+			widgetVar="confirmOfferCancel" modal="true" height="90">
+			<h:panelGrid columns="1" cellpadding="5">
+				<p:outputLabel value="Die ausgewählten Elemente werden aus der Liste entfernt. Fortfahren?" />
+			</h:panelGrid>
+			<f:facet name="footer">
+				<p:commandButton value="Ja"
+					id="confirm" action="#{serviceBean.cancelOfferForElements}"
+					onclick="PF('confirmOfferCancel').hide();" update="@form" />
+					
+				<p:commandButton value="Nein"
+					id="cancel"
+					onclick="PF('confirmOfferCancel').hide();" update="@form" />
+			</f:facet>
+		</p:dialog>
+		
+		<p:panel id="pnl_checklistsElementsTyps"
+			header="Angebote noch nicht abgeschlossen"
+			styleClass="intervall_overview" toggleable="false"
+			style="margin-bottom:20px; width: 1800px;">
+			<p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
+
+			<h:panelGrid columns="2" cellpadding="5">
+				
+				<p:contextMenu for="openOffers" rendered="#{sessionBean.isAdmin}">
+					<p:menuitem value="Kein Angebot erstellen"
+						oncomplete="PF('confirmOfferCancel').show();"
+						update="openOffers @form"/>										
+						
+				</p:contextMenu>
+			
+				<p:dataTable var="sv" value="#{serviceBean.openOfferElements}"
+					paginator="true" widgetVar="intervallTable" rowKey="#{sv}"
+					filteredValue="#{serviceBean.openOfferElementsFiltered}"
+					paginatorPosition="bottom" id="openOffers" 
+					selection="#{serviceBean.openOfferElementsSelected}" rows="15">
+					
+					<p:ajax event="rowSelectCheckbox" update=":frmList:layButtons"
+						process="@this" />
+						
+					<p:ajax event="rowUnselectCheckbox" update=":frmList:layButtons"
+						process="@this" />
+						
+					<p:ajax event="toggleSelect" update=":frmList:layButtons"
+						process="@this" />
+						
+					<p:column selectionMode="multiple"
+						style="width:16px;text-align:center" />
+
+					<p:column headerText="Wartung-Nr " rendered="true" width="150" 
+						styleClass="wartNr" filterBy="#{sv.serviceContractNumber}" filterMatchMode="exact"
+						sortBy="#{sv.serviceContractNumber}">
+						<f:facet name="filter">
+							<p:selectOneMenu id="conContractType" onchange="PF('intervallTable').filter()"  
+								converter="omnifaces.SelectItemsConverter" filter="false" 
+								value="#{reportingBean.contContractListSelected}">
+								<p:ajax listener="#{serviceBean.resetSelected}" update="@form"  />
+								 <f:selectItem itemLabel="Vertrag wählen" itemValue="" />
+								<f:selectItems value="#{reportingBean.contContractList}"  
+									var="con" itemLabel="#{con.serviceContractNumber}" >
+									</f:selectItems>
+							</p:selectOneMenu>
+						</f:facet>
+						<h:outputText value="#{sv.serviceContractNumber}" />
+
+					</p:column>
+
+					<p:column headerText="Wartung-Beschreibung " rendered="true"
+						filterBy="#{sv.serviceContractDescription}"
+						sortBy="#{sv.serviceContractDescription}">
+						<h:outputText value="#{sv.serviceContractDescription}" />
+					</p:column>
+
+					<p:column headerText="Bezeichnung Baustelle " styleClass="baust"
+						width="170" filterBy="#{sv.buildingSiteName}"
+						sortBy="#{sv.buildingSiteName}">
+						<h:outputText value="#{sv.buildingSiteName}" />
+					</p:column>
+
+					<p:column headerText="Baustellen-Nr " styleClass="code" width="120"
+						filterBy="#{sv.buildingSiteNr}" sortBy="#{sv.buildingSiteNr}">
+						<h:outputText value="#{sv.buildingSiteNr}" />
+					</p:column>
+
+					<p:column headerText="Element" rendered="true" styleClass="wartNr"
+						filterBy="#{sv.serviceElement}" sortBy="#{sv.serviceElement}">
+						<h:outputText value="#{sv.serviceElement}" />
+					</p:column>
+
+					<p:column headerText="Raum" rendered="true" width="125"
+						filterBy="#{sv.serviceElementZimmer}"
+						sortBy="#{sv.serviceElementZimmer}">
+						<h:outputText value="#{sv.serviceElementZimmer}" />
+					</p:column>
+
+					<p:column headerText="Stockwerk" rendered="true" width="125"
+						filterBy="#{sv.serviceElementStockwerk}"
+						sortBy="#{sv.serviceElementStockwerk}">
+						<h:outputText value="#{sv.serviceElementStockwerk}" />
+					</p:column>
+
+
+				</p:dataTable>
+			</h:panelGrid>
+
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="Angebot erstellen" ajax="false"
+					disabled="#{empty serviceBean.openOfferElementsSelected}"
+					action="#{serviceBean.createNewOffer}" />
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

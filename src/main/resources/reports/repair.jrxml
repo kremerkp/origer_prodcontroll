@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cert" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" resourceBundle="reports/i18n/i18n" uuid="d9ef4970-b202-46ad-9eb5-69c99136de54">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="buildingSite" class="java.lang.String">
+		<fieldDescription><![CDATA[buildingSite]]></fieldDescription>
+	</field>
+	<field name="buildingSiteCode" class="java.lang.String">
+		<fieldDescription><![CDATA[buildingSiteCode]]></fieldDescription>
+	</field>
+	<field name="subRepair" class="java.util.List">
+		<fieldDescription><![CDATA[subRepair]]></fieldDescription>
+	</field>
+	<sortField name="buildingSite"/>
+	<group name="baustelle">
+		<groupExpression><![CDATA[$F{buildingSite}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<textField>
+					<reportElement x="0" y="0" width="560" height="20" uuid="fbe86f58-9e7e-49bd-bfa5-ff3a4aa543bb"/>
+					<box>
+						<topPen lineColor="#DBDBDB"/>
+						<leftPen lineColor="#DBDBDB"/>
+						<bottomPen lineWidth="1.0" lineColor="#DBDBDB"/>
+						<rightPen lineColor="#DBDBDB"/>
+					</box>
+					<textElement verticalAlignment="Bottom">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{buildingSite} + " " + $F{buildingSiteCode}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="181" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="560" height="150" uuid="858ba12a-1a0d-4ed3-b335-be58a2018a3b"/>
+				<imageExpression><![CDATA["https://maintenance.origer.lu:58443/origer/filearchiv/material/header.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="151" width="560" height="30" uuid="eb2d03c7-4016-4c6f-a393-13c21136ea1c"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Geleistete Reparaturen]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="253">
+			<subreport>
+				<reportElement x="0" y="0" width="560" height="240" uuid="9de69ab2-3512-4ecc-9932-b2f24003038f"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{subRepair})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reports/subRepairElement.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="106">
+			<image>
+				<reportElement x="0" y="40" width="560" height="66" uuid="7c55a997-bfe8-4f8c-ad6f-b3c45d80a735"/>
+				<imageExpression><![CDATA["https://maintenance.origer.lu:58443/origer/filearchiv/material/fusszeile.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+</jasperReport>

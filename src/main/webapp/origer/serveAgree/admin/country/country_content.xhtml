@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<p:panel id="pnl_techContact" header="Länder"
+			styleClass="invoices_table" toggleable="false"
+			style="margin-bottom:20px">
+
+			<p:dataTable value="#{countryBean.countryList}"
+				filteredValue="#{countryBean.filteredCountryList}" var="ctr"
+				paginator="true" paginatorPosition="bottom" editable="true"
+				editMode="cell" styleClass="checklistTable listtable" rows="20"
+				selectionMode="single" rowKey="#{ctr.id}"
+				selection="#{countryBean.selectedCountry}">
+
+				<p:ajax event="cellEdit" listener="#{countryBean.onCellEdit}"
+					update="@form" />
+
+				<p:column headerText="Name" filterBy="#{ctr.name}"
+					filterMatchMode="contains" styleClass="col_big">
+                    #{ctr.name}                
+                </p:column>
+
+				<p:column headerText="Name-DE" filterBy="#{ctr.nameDE}"
+					filterMatchMode="contains">
+                    #{ctr.nameDE}                
+                </p:column>
+
+				<p:column headerText="Name-FR" filterBy="#{ctr.nameFR}"
+					filterMatchMode="contains">
+                    #{ctr.nameFR}                
+                </p:column>
+
+				<p:column headerText="Kurzname" rendered="false"
+					filterBy="#{ctr.shn}" filterMatchMode="contains">
+                    #{ctr.shn}                
+                </p:column>
+
+				<p:column headerText="Beschreibung" rendered="false"
+					filterBy="#{ctr.description}" filterMatchMode="contains">
+                    #{ctr.description}                
+                </p:column>
+
+				<p:column headerText="Alpha2" filterBy="#{ctr.alpha2}"
+					filterMatchMode="contains">
+                    #{ctr.alpha2}                
+                </p:column>
+
+				<p:column headerText="Alpha3" filterBy="#{ctr.alpha3}"
+					filterMatchMode="contains">
+                    #{ctr.alpha3}                
+                </p:column>
+
+
+
+				<p:column headerText="Aktiv" styleClass="col_active">
+					<p:cellEditor>
+						<f:facet name="output">
+							<p:selectBooleanCheckbox disabled="true" value="#{ctr.active}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectBooleanCheckbox disabled="false" value="#{ctr.active}">
+								<p:ajax update="@form"></p:ajax>
+							</p:selectBooleanCheckbox>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+
+	</h:form>
+
+</ui:composition>

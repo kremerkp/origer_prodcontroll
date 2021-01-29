@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<p:panel id="pnl_servicesTable" header="#{msg['offers.contracts']}" 
+		styleClass="servicesElementsTable_table" toggleable="false"
+		style="margin-bottom:20px; height: 70%">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:dataTable var="sv" id="histTable"
+				value="#{serviceCustomerHistoryBean.serviceListCustomer}"
+				paginator="true" selectionMode="single" rowKey="#{sv.id}"
+				filteredValue="#{serviceCustomerHistoryBean.filteredServiceListCustomer}"
+				paginatorPosition="bottom" widgetVar="serviceTable" 
+				selection="#{serviceCustomerHistoryBean.selectedServiceListCustomer}"
+				rows="5">
+
+				<p:ajax event="rowSelect" process="@this"
+					listener="#{serviceCustomerHistoryBean.onRowSelectService}"
+					update=":customerView:elTab :customerView:histElTab :customerView:checkTab :customerView:layButtons" />
+
+				<p:column headerText="#{msg['history.maintenance.number']}" rendered="true" styleClass="oneFilterSmall"
+					filterBy="#{sv.serviceContract.serviceContractNumber}"
+					sortBy="#{sv.serviceContract.serviceContractNumber}">
+					<h:outputText value="#{sv.serviceContract.serviceContractNumber}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.service.type']}" styleClass="oneFilterSmall"
+					filterBy="#{sv.serviceType.shortname}"
+					sortBy="#{sv.serviceType.shortname}">
+					<h:outputText value="#{sv.serviceType.shortname}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.site.designation']}" styleClass="oneFilterSmall"
+					filterBy="#{sv.serviceContract.buildingSite.name}" filterMatchMode="contains"
+					sortBy="#{sv.serviceContract.buildingSite.name}"> 
+					<h:outputText value="#{sv.serviceContract.buildingSite.name}" />
+				</p:column>
+
+				<p:column rendered="false" headerText="Jahr" filterBy="#{sv.latestServiceDate}">
+					<h:outputText value="#{sv.latestServiceDate}">
+						<f:convertDateTime pattern="yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column rendered="false" headerText="Interv." filterBy="#{sv.intervall}"
+					sortBy="#{sv.intervall}">
+					<h:outputText value="#{sv.intervall} von #{sv.countPerType}" />
+				</p:column>
+
+				<p:column rendered="false" headerText="Aktiv" styleClass="img-center" id="active"
+					filterBy="#{sv.active}" filterMatchMode="equals">
+
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('serviceTable').filter()">
+							<f:converter converterId="javax.faces.Boolean" />
+							<f:selectItem itemLabel="Alle" itemValue="" />
+							<f:selectItem itemLabel="Aktiv" itemValue="true" />
+							<f:selectItem itemLabel="Inaktiv" itemValue="false" />
+						</p:selectOneMenu>
+					</f:facet>
+
+					<p:graphicImage rendered="#{sv.active}"
+						value="/resources/img/green.png" width="24" height="24" />
+					<p:graphicImage rendered="#{!sv.active}"
+						value="/resources/img/wait.png" width="24" height="24" />
+				</p:column>
+
+			</p:dataTable>
+		</h:panelGrid>
+
+		<p:tooltip id="toolTipContent" for="histTable:active"
+			style="width: 500px; height:200px;" position="bottom">
+			<p:dataTable var="legendTip" value="#{applicationBean.legendHistorie}">
+				<p:column headerText="#{msg['offers.icon']}">
+					<p:graphicImage id="no" value="#{legendTip.url}" width="24"
+						height="24">
+					</p:graphicImage>
+				</p:column>
+				<p:column headerText="#{msg['offers.legend']}">
+					<h:outputText value="#{legendTip.description}" />
+				</p:column>
+			</p:dataTable>
+		</p:tooltip>
+		
+	</p:panel>
+
+</ui:composition>
+

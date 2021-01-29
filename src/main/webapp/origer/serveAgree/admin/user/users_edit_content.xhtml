@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="frmUsersOriger" styleClass="editForm">
+		<p:panelGrid styleClass="pnlStd frmUsers">
+			<p:row>
+				<p:column styleClass="header" colspan="2">
+					<p:outputLabel value="Benutzer" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="error" colspan="2">
+					<p:messages />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+						<p:outputLabel value="Username" />
+                        
+                    </p:column>
+				<p:column>
+					<p:inputText id="username" value="#{usersEditBean.user.username}"
+						required="true" requiredMessage="Bitte Benutzername eingeben" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+				<p:outputLabel value="Passwort" />
+                        
+                    </p:column>
+				<p:column>
+					<p:password id="password" value="#{usersEditBean.user.password}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        <p:outputLabel value="Passwort bestätigen" />
+                    </p:column>
+				<p:column>
+					<p:password id="cpassword" value="#{usersEditBean.confirmPassword}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        
+                        <p:outputLabel value="Email" />
+                    </p:column>
+				<p:column>
+					<p:inputText id="email" value="#{usersEditBean.user.email}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+				<p:outputLabel value="Vorname" />
+                        
+                    </p:column>
+				<p:column>
+					<p:inputText id="prename" value="#{usersEditBean.user.prename}"
+						required="true" requiredMessage="Bitte Vornamen eingeben" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        
+                        <p:outputLabel value="Name" />
+                    </p:column>
+				<p:column>
+					<p:inputText id="name" value="#{usersEditBean.user.name}"
+						required="true" requiredMessage="Bitte Namen eingeben" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Sprache"/>
+				</p:column>
+				<p:column>
+					<p:selectOneMenu id="language" value="#{usersEditBean.user.lang}">										
+						<f:selectItem itemLabel="Deutsch" itemValue="DE" />
+						<f:selectItem itemLabel="Französisch" itemValue="FR" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+                        <p:outputLabel value="Aktiviert" />
+                    </p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="active"
+						value="#{usersEditBean.user.active}" />
+				</p:column>
+			</p:row>			
+		</p:panelGrid>
+
+		<div class="panel allgemein ml15">
+
+			<p:panelGrid styleClass="pnlStd frmUsers">
+				<p:row>
+					<p:column styleClass="header" colspan="2">
+						<p:outputLabel value="Berechtigungen" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="content" colspan="2">
+						<p:pickList value="#{usersEditBean.rolesPicklist}" var="role"
+							itemValue="#{role}" itemLabel="#{role.description}"
+							styleClass="picklistItems roles" filterFunction="true"
+							responsive="true" showSourceFilter="true" showTargetFilter="true"
+							filterMatchMode="contains">
+							<f:facet name="sourceCaption">Verfügbar</f:facet>
+							<f:facet name="targetCaption">Ausgewählt</f:facet>
+							<o:converter converterId="omnifaces.ListConverter"
+								list="#{usersEditBean.allroles}" />
+						</p:pickList>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="header" colspan="2">
+						<p:outputLabel value="Wartungsverträge zuordnen" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="content" colspan="2" >
+						<p:pickList value="#{usersEditBean.serviceContractPickList}" 
+							var="ser" itemValue="#{ser}" itemLabel="#{ser.serviceContractNumber} - #{ser.description}"
+							styleClass="picklistItems sc" filterFunction="true"
+							responsive="true" showSourceFilter="true" showTargetFilter="true"
+							filterMatchMode="contains">
+							<f:facet name="sourceCaption">Verfügbar</f:facet>
+							<f:facet name="targetCaption">Ausgewählt</f:facet>
+							<o:converter converterId="omnifaces.ListConverter"
+								list="#{usersEditBean.serviceContractList}" />
+						</p:pickList>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+
+		</div>
+
+
+
+
+		<br clear="all" />
+
+		<p:spacer styleClass="seperator" />
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<p:commandButton actionListener="#{usersEditBean.save()}"
+				rendered="true" onstart="PF('w_dlgWait').show();"
+				oncomplete="PF('w_dlgWait').hide();" value="Speichern"
+				process="@form" update="@form" styleClass="clear" />
+			<p:commandButton actionListener="#{usersEditBean.saveAndClose()}"
+				value="Speichern und Schliessen" process="@form" update="@form"
+				styleClass="clear" />
+		</h:panelGroup>
+		<p:dialog widgetVar="w_dlgWait" modal="true" closable="false"
+			draggable="false" resizable="false" header="Speichern...">
+			<p>Bitte warten...</p>
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

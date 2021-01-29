@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+
+		<p:panel id="pnl_checklistsElementsCats" header="Bestandteile"
+			styleClass="invoices_table" toggleable="false"
+			style="margin-bottom:20px">
+
+
+			<p:dataTable value="#{checklistItemCategoryBean.data}"
+				filteredValue="#{checklistItemCategoryBean.filteredData}"
+				var="checklistItemCategory" paginator="true"
+				paginatorPosition="bottom" rows="20" selectionMode="single"
+				rowKey="#{checklistItemCategory.id}"
+				selection="#{checklistItemCategoryBean.selectedData}">
+				<p:ajax event="rowSelect" update=":frmList:layButtons"
+					process="@this" />
+				<p:ajax event="rowUnselect" update="@form" process="@this" />
+				<p:ajax event="rowDblselect"
+					listener="#{checklistItemCategoryBean.openChecklistItemCategory()}"
+					process="@this" />
+
+				<p:column headerText="" filterBy="#{checklistItemCategory.name}"
+					filterMatchMode="contains">
+					<h:outputText value="#{checklistItemCategory.name}"/>                
+                </p:column>
+                <p:column headerText="" filterBy="#{checklistItemCategory.nameFrench}"
+					filterMatchMode="contains">
+					<h:outputText value="#{checklistItemCategory.nameFrench}"/>                
+                </p:column>
+				<p:column headerText="Aktiv" styleClass="col_active centerCol">
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{checklistItemCategory.active}" />
+				</p:column>
+			</p:dataTable>
+
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="neu" ajax="false"
+					action="#{checklistItemCategoryBean.add()}" />
+				<p:commandButton value="bearbeiten" ajax="false"
+					action="#{checklistItemCategoryBean.edit()}" styleClass="ml15"
+					disabled="#{checklistItemCategoryBean.selectedData == null}"
+					process="@this" />
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

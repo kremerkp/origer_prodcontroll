@@ -1,0 +1,116 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\Users\ian.husting.EYE-T\origer-develop\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\origer.serviceagreement\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="AndroidSync" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="loadConfig" qname="ns1:loadConfig" returnQName="ns1:loadConfigReturn" returnType="ns1:ConfigParcel" soapAction="" xmlns:ns1="http://soap.backend.serviceagree.origer.lu" xmlns:ns2="http://xml.apache.org/axis/wsdd/"/>
+  <ns1:operation name="downloadUpdatedControls" qname="ns2:downloadUpdatedControls" returnQName="ns2:downloadUpdatedControlsReturn" returnType="ns2:SoapParcel" soapAction="" xmlns:ns2="http://soap.backend.serviceagree.origer.lu">
+   <ns1:parameter qname="ns2:intervalId" type="ns2:SoapParcel"/>
+  </ns1:operation>
+  <ns1:operation name="getEligibleSites" qname="ns3:getEligibleSites" returnQName="ns3:getEligibleSitesReturn" returnType="ns3:BuildingSiteSO" soapAction="" xmlns:ns3="http://soap.backend.serviceagree.origer.lu">
+   <ns1:parameter qname="ns3:startDate" type="xsd:dateTime" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:endDate" type="xsd:dateTime" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="downloadData" qname="ns4:downloadData" returnQName="ns4:downloadDataReturn" returnType="ns4:SoapParcel" soapAction="" xmlns:ns4="http://soap.backend.serviceagree.origer.lu">
+   <ns1:parameter qname="ns4:bsIds" type="ns4:SoapParcel"/>
+   <ns1:parameter qname="ns4:startDate" type="xsd:dateTime" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:endDate" type="xsd:dateTime" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="uploadData" qname="ns5:uploadData" returnQName="ns5:uploadDataReturn" returnType="xsd:boolean" soapAction="" xmlns:ns5="http://soap.backend.serviceagree.origer.lu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:uploadData" type="ns5:SoapParcel"/>
+  </ns1:operation>
+  <ns1:operation name="getRepairSites" qname="ns6:getRepairSites" returnQName="ns6:getRepairSitesReturn" returnType="ns6:BuildingSiteSO" soapAction="" xmlns:ns6="http://soap.backend.serviceagree.origer.lu">
+   <ns1:parameter qname="ns6:siteName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getEligibleSites uploadData downloadData loadConfig downloadUpdatedControls getRepairSites"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="AndroidSync"/>
+  <ns1:parameter name="className" value="lu.origer.serviceagree.backend.soap.AndroidSync"/>
+  <ns1:parameter name="wsdlServicePort" value="AndroidSync"/>
+  <ns1:parameter name="schemaQualified" value="http://types.contact.models.serviceagree.origer.lu,http://soap.backend.serviceagree.origer.lu,http://contact.models.serviceagree.origer.lu"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:parameter name="wsdlServiceElement" value="AndroidSyncService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns7:SyncControlsSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.SyncControlsSO" xmlns:ns7="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns8:ServiceTechnicianAssocSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.ServiceTechnicianAssocSO" xmlns:ns8="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns9:PersonSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.PersonSO" xmlns:ns9="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns10:DirectionSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.DirectionSO" xmlns:ns10="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns11:DinType" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.models.contact.types.DinType" xmlns:ns11="http://types.contact.models.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns12:ServiceSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.ServiceSO" xmlns:ns12="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns13:Contact" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.models.contact.Contact" xmlns:ns13="http://contact.models.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns14:OfferSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.OfferSO" xmlns:ns14="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns15:BuildingSiteSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.BuildingSiteSO" xmlns:ns15="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns16:ServiceTypeSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.ServiceTypeSO" xmlns:ns16="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns17:ChecklistItemSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.ChecklistItemSO" xmlns:ns17="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns18:SoapParcel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.SoapParcel" xmlns:ns18="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns19:ConfigParcel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.ConfigParcel" xmlns:ns19="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns20:ServiceElementSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.ServiceElementSO" xmlns:ns20="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns21:Address" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.models.contact.Address" xmlns:ns21="http://contact.models.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns22:ContactType" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.models.contact.ContactType" xmlns:ns22="http://contact.models.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns23:ServiceContractSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.ServiceContractSO" xmlns:ns23="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns24:Country" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.models.contact.Country" xmlns:ns24="http://contact.models.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns25:FileArchiveSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.FileArchiveSO" xmlns:ns25="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns26:TimeRecordingSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.TimeRecordingSO" xmlns:ns26="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns27:ServiceElementTypeSO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.ServiceElementTypeSO" xmlns:ns27="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns28:ChecklistItemCategorySO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:lu.origer.serviceagree.backend.soap.ChecklistItemCategorySO" xmlns:ns28="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:arrayMapping innerType="ns30:Contact" languageSpecificType="java:lu.origer.serviceagree.models.contact.Contact[]" qname="ns29:ArrayOf_tns2_Contact" xmlns:ns29="http://soap.backend.serviceagree.origer.lu" xmlns:ns30="http://contact.models.serviceagree.origer.lu"/>
+  <ns1:arrayMapping innerType="ns31:ServiceElementTypeSO" languageSpecificType="java:lu.origer.serviceagree.backend.soap.ServiceElementTypeSO[]" qname="ns31:ArrayOfServiceElementTypeSO" xmlns:ns31="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:arrayMapping innerType="ns32:OfferSO" languageSpecificType="java:lu.origer.serviceagree.backend.soap.OfferSO[]" qname="ns32:ArrayOfOfferSO" xmlns:ns32="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:arrayMapping innerType="ns34:DinType" languageSpecificType="java:lu.origer.serviceagree.models.contact.types.DinType[]" qname="ns33:ArrayOf_tns1_DinType" xmlns:ns33="http://soap.backend.serviceagree.origer.lu" xmlns:ns34="http://types.contact.models.serviceagree.origer.lu"/>
+  <ns1:arrayMapping innerType="ns35:FileArchiveSO" languageSpecificType="java:lu.origer.serviceagree.backend.soap.FileArchiveSO[]" qname="ns35:ArrayOfFileArchiveSO" xmlns:ns35="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:arrayMapping innerType="ns36:PersonSO" languageSpecificType="java:lu.origer.serviceagree.backend.soap.PersonSO[]" qname="ns36:ArrayOfPersonSO" xmlns:ns36="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:arrayMapping innerType="ns37:DirectionSO" languageSpecificType="java:lu.origer.serviceagree.backend.soap.DirectionSO[]" qname="ns37:ArrayOfDirectionSO" xmlns:ns37="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:arrayMapping innerType="ns38:TimeRecordingSO" languageSpecificType="java:lu.origer.serviceagree.backend.soap.TimeRecordingSO[]" qname="ns38:ArrayOfTimeRecordingSO" xmlns:ns38="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:arrayMapping innerType="ns39:ServiceElementSO" languageSpecificType="java:lu.origer.serviceagree.backend.soap.ServiceElementSO[]" qname="ns39:ArrayOfServiceElementSO" xmlns:ns39="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:arrayMapping innerType="ns40:ServiceSO" languageSpecificType="java:lu.origer.serviceagree.backend.soap.ServiceSO[]" qname="ns40:ArrayOfServiceSO" xmlns:ns40="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:arrayMapping innerType="xsd:int" languageSpecificType="java:int[]" qname="ns41:ArrayOf_xsd_int" xmlns:ns41="http://soap.backend.serviceagree.origer.lu" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:arrayMapping innerType="ns42:SyncControlsSO" languageSpecificType="java:lu.origer.serviceagree.backend.soap.SyncControlsSO[]" qname="ns42:ArrayOfSyncControlsSO" xmlns:ns42="http://soap.backend.serviceagree.origer.lu"/>
+  <ns1:arrayMapping innerType="ns43:ServiceTechnicianAssocSO" languageSpecificType="java:lu.origer.serviceagree.backend.soap.ServiceTechnicianAssocSO[]" qname="ns43:ArrayOfServiceTechnicianAssocSO" xmlns:ns43="http://soap.backend.serviceagree.origer.lu"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

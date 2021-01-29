@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<p:panel id="pnl_checklistForSelectedElement"
+		styleClass="checklistForSelectedElement_table" toggleable="false"
+		style="margin-bottom:20px; height: 70%">
+		
+		
+		
+			<h:panelGroup layout="block" id="layButtons2"
+						styleClass="margin-top">
+						<h3 style="margin-left: 10px; font-size: 20px; font-weight: normal; font-variant: small-caps;" >#{msg['history.to.be.checked']}</h3>
+				<div style="text-align: right; margin-top: -53px; margin-right: 16px; ">					
+				
+			<p:commandButton id="bc_button_set_checklist_ok"
+				oncomplete="PF('wv_diagChecklistBackOk').show();"
+				rendered="#{sessionBean.isAdmin}" icon="fa fa-gavel" title="#{msg['history.to.be.setChecklistBackOk']}"
+				actionListener="#{serviceCustomerHistoryBean.resetValues}"
+				update=":checklistComment:in_add_comment"
+				disabled="#{serviceCustomerHistoryBean.selectedChecklistitem == null}"
+				ajax="true" />
+				</div>
+			</h:panelGroup>
+
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:dataTable var="checklist" paginator="true"
+				paginatorPosition="bottom" rows="25" id="checkTab"
+				selectionMode="single" rowKey="#{checklist}"
+				rowStyleClass="#{checklist.wasSettedBackOk ? 'setBackOk' : null}"
+				rowsPerPageTemplate="25,50,100"
+				selection="#{serviceCustomerHistoryBean.selectedChecklistitem}"
+				value="#{serviceCustomerHistoryBean.checklistitems}">
+				<p:ajax event="rowSelect" update="@form" />
+
+				<p:column headerText="#{msg['history.to.be.checked']}"
+					styleClass="wordwrap">
+					<p:outputLabel rendered="#{sessionBean.userLocale.country == 'DE'}"
+						value="#{checklist.checkListItem.checkListItemCategory.name} - #{checklist.checkListItem.name}" />
+					<p:outputLabel rendered="#{sessionBean.userLocale.country == 'FR'}"
+						value="#{checklist.checkListItem.checkListItemCategory.nameFrench} - #{checklist.checkListItem.nameFrench}" />
+				</p:column>
+				<p:column headerText="#{msg['history.function.control']}"
+					styleClass="wordwrap" width="30">
+					<p:selectBooleanCheckbox disabled="true"
+						rendered="#{checklist.visualAndFuntionControl == 0 or checklist.visualAndFuntionControl == 2}"
+						value="#{checklist.functionalControl}" />
+				</p:column>
+				<p:column headerText="#{msg['history.view.control']}"
+					styleClass="wordwrap" width="30">
+					<p:selectBooleanCheckbox disabled="true"
+						rendered="#{checklist.visualAndFuntionControl == 0 or checklist.visualAndFuntionControl == 1}"
+						value="#{checklist.visualControl}" />
+				</p:column>
+				<p:column headerText="#{msg['history.ok']}" width="30">
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{checklist.checkedAsOk}" />
+				</p:column>
+				<p:column headerText="#{msg['history.defect']}"
+					styleClass="wordwrap" width="30">
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{checklist.checkedAsDefect}" />
+				</p:column>
+				<p:column headerText="#{msg['history.faulty']}"
+					styleClass="wordwrap" width="30">
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{checklist.checkedAsLack}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.offer']}" styleClass="wordwrap"
+					width="30">
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{checklist.createOffer}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.repaired']}"
+					styleClass="wordwrap" width="30">
+					<p:selectBooleanCheckbox disabled="true"
+						value="#{checklist.checkedAsRepaired}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.comment']}"
+					styleClass="wordwrap #{serviceCustomerHistoryBean.setBackOkFormat(checklist.wasSettedBackOk)}"
+					width="90" style="word-wrap: break-word !important; overflow-wrap: break-word !important;">
+					<p:outputLabel value="#{checklist.description}" />
+				</p:column>
+
+				<p:column headerText="#{msg['history.picture']}" width="125">
+
+					<p:lightBox styleClass="imagebox" id="lighbox1">
+
+						<p:repeat var="file" id="fileTable" styleClass="filesdownload"
+							value="#{checklist.files}">
+							<h:outputLink
+								value="/origer/filearchiv/#{file.subfolder}/#{file.name}"
+								title="File#{file.id}">
+								<img id="#{file.id}"
+									src="/origer/filearchiv/#{file.subfolder}/#{file.name}"
+									style="width: 100px;" />
+							</h:outputLink>
+							<br />
+						</p:repeat>
+					</p:lightBox>
+
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+	</p:panel>
+
+</ui:composition>
+

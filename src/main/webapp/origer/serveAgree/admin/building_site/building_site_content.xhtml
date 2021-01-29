@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<p:panel id="pnl_buildingsite" header="Baustellen" styleClass="bs_table"
+			toggleable="false" style="margin-bottom:20px">
+
+			<p:dataTable value="#{buildingSiteBean.data}"
+				filteredValue="#{buildingSiteBean.filteredData}" var="bs"
+				paginator="true" paginatorPosition="bottom" rows="20"
+				selectionMode="single" rowKey="#{bs.id}"
+				selection="#{buildingSiteBean.selectedData}">
+
+				<p:column headerText="Bezeichnung Baustelle" 
+				styleClass="oneFilterSmall"
+				filterBy="#{bs.name}"
+					filterMatchMode="contains">
+					<h:outputText value="#{bs.name}"/>
+                </p:column>
+
+				<p:column headerText="Kurzname"
+				styleClass="oneFilterSmall" 
+				filterBy="#{bs.shortname}" rendered="false"
+					filterMatchMode="contains">
+					<h:outputText value="#{bs.shortname}"/>
+                </p:column>
+
+				<p:column headerText="Baustellen-Nr" filterBy="#{bs.code}"
+				styleClass="oneFilterSmall"
+					filterMatchMode="contains">
+					<h:outputText value="#{bs.code}"/>
+                </p:column>
+
+				<p:column headerText="Beschreibung" 
+				styleClass="oneFilterSmall"
+				filterBy="#{bs.description}" rendered="false"
+					filterMatchMode="contains">
+					<h:outputText value="#{bs.description}"/>
+                </p:column>
+
+				<p:column headerText="Stadt" filterBy="#{bs.address.city}"
+					styleClass="oneFilterSmall" 
+					filterMatchMode="contains">
+					<h:outputText value="#{bs.address.city}"/>
+                </p:column>
+
+				<p:column headerText="ZIP" filterBy="#{bs.address.zip}"
+					styleClass="oneFilterSmall" 
+					filterMatchMode="contains">
+					<h:outputText value="#{bs.address.zip}"/>
+                </p:column>
+				<p:column headerText="Staße" filterBy="#{bs.address.street}"
+					styleClass="oneFilterSmall" filterMatchMode="contains">
+					<h:outputText value="#{bs.address.street}"/>
+                </p:column>
+				<p:column headerText="Nr" filterBy="#{bs.address.streetNumber}"
+					styleClass="oneFilterSmall" filterMatchMode="contains">
+					<h:outputText value="#{bs.address.streetNumber}"/>
+                </p:column>
+				<p:column headerText="Land" filterBy="#{bs.address.country.nameDE}"
+					styleClass="oneFilterSmall" 
+					filterMatchMode="contains">
+					<h:outputText value="#{bs.address.country.nameDE}"/>                
+                </p:column>
+                
+               
+				<p:column headerText="Aktiv" styleClass="col_active marginTop">
+					<p:selectBooleanCheckbox disabled="true" value="#{bs.active}" />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+
+
+	</h:form>
+
+</ui:composition>

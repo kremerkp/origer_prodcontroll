@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="./../layout/basic_layout_tile.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="content">
+		<h:form id="back">
+			<p:commandButton value="Zurück" id="back" ajax="false"
+				process="@this" update="@none"
+				action="#{tileNavigationBean.redirectServeAgreeStart}"
+				styleClass="ui-priority-primary backButton" />
+		</h:form>
+
+		<h:form>
+			<div class="tileNavigation">
+					
+				<p:commandButton value="Vertrag" id="tile_contract"
+					ajax="false" action="#{tileNavigationBean.homeAdminContractAdmin()}"
+					styleClass="ui-priority-primary tile" />
+					
+				<p:commandButton value="Checkliste" id="tile_checklist"
+					ajax="false" action="#{tileNavigationBean.homeAdminChecklistAdmin()}"
+					styleClass="ui-priority-primary tile" />
+					
+				<p:commandButton value="Kontakte" id="tile_checklistContactsAdmin"
+					ajax="false" action="#{tileNavigationBean.homeAdminContacts()}"
+					styleClass="ui-priority-primary tile" /> 
+
+			</div>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+

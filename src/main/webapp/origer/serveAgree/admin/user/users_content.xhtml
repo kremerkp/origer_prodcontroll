@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:form id="frmList">
+		<script type="text/javascript">
+			markTopMenuActive('users');
+			markLeftMenuActive('users');
+		</script>
+		<p:panel id="pnl_userContact" header="Benutzer"
+			styleClass="invoices_table" toggleable="false"
+			style="margin-bottom:20px">
+
+			<p:dataTable value="#{usersListBean.data}"
+				filteredValue="#{usersListBean.filteredData}" var="user"
+				paginator="true" paginatorPosition="bottom" rows="20"
+				selectionMode="single" rowKey="#{user.id}"
+				selection="#{usersListBean.selectedData}">
+				<p:ajax event="rowSelect" update=":frmList:layButtons"
+					process="@this" />
+				<p:ajax event="rowUnselect" update="@form" process="@this" />
+				<p:ajax event="rowDblselect" listener="#{usersListBean.openUser()}"
+					process="@this" />
+				<p:column headerText="Benutzername" filterBy="#{user.username}"
+					filterMatchMode="contains" width="200">
+					<h:outputText value="#{user.username}"/>   
+                    
+                </p:column>
+				<p:column headerText="Email" filterBy="#{user.email}"
+					filterMatchMode="contains">
+					<h:outputText value="#{user.email}"/>                
+                </p:column>
+				<p:column headerText="Vorname" filterBy="#{user.prename}"
+					filterMatchMode="contains">
+					<h:outputText value="#{user.prename}"/>
+                </p:column>
+				<p:column headerText="Name" filterBy="#{user.name}"
+					filterMatchMode="contains">
+					<h:outputText value="#{user.name}"/>
+                </p:column>
+			</p:dataTable>
+
+		</p:panel>
+
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+			<div>
+				<p:commandButton value="neu" ajax="false"
+					action="#{usersListBean.add()}" />
+
+				<p:commandButton value="bearbeiten" ajax="false"
+					action="#{usersListBean.edit()}"
+					disabled="#{usersListBean.selectedData == null}" styleClass="ml15"
+					process="@this" />
+			</div>
+		</h:panelGroup>
+
+	</h:form>
+
+</ui:composition>

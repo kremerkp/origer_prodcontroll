@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:form id="frmChecklist">
+		<p:panelGrid styleClass="pnlStd frmChecklist" style="width:500px!important;">
+			<p:row>
+				<p:column styleClass="header" colspan="2">
+					<p:outputLabel value="Checkliste" />
+
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="error" colspan="2">
+					<p:messages />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width:80px !important">
+
+					<p:outputLabel value="Aktiv" />
+				</p:column>
+				<p:column>
+					<p:selectBooleanCheckbox id="active"
+						value="#{checklistAssocEditBean.checklistActiv}" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Name" />
+				</p:column>
+				<p:column>
+					<p:inputText value="#{checklistAssocEditBean.checklistName}"
+						required="true" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:outputLabel id="selectArea2"></p:outputLabel>
+			</p:row>
+			<p:outputLabel id="selectArea">
+				<p:row>
+					<p:dataTable id="sourceEntries" var="ent" rendered="false"
+						value="#{checklistAssocEditBean.source2}">
+						<p:column style="width:20px">
+							<h:outputText id="dragIcon" styleClass="ui-icon ui-icon-arrow-4" />
+							<p:draggable for="dragIcon" revert="true" helper="clone" />
+						</p:column>
+
+						<p:column headerText="ID">
+							<h:outputText value="#{ent.checklistItem.id}" />
+						</p:column>
+
+						<p:column headerText="Name">
+							<h:outputText value="#{ent.checklistItem.name}" />
+						</p:column>
+					</p:dataTable>
+				</p:row>
+			</p:outputLabel>
+
+
+		</p:panelGrid>
+
+		<p:panel id="pnl_assocChecklist" header="" styleClass="assocChecklist"
+			rendered="#{!checklistAssocEditBean.langFr}" toggleable="false"
+			style="margin-bottom:20px; height: 30%">
+			<h:panelGrid columns="3" cellpadding="5" styleClass="assocGrid">
+				<p:dataTable id="srcEntries" var="ent" styleClass="srcTable"
+					selection="#{checklistAssocEditBean.sourceSelected}"
+					rowKey="#{ent}" value="#{checklistAssocEditBean.source}">
+					<p:column selectionMode="multiple"
+						style="width:16px;text-align:center" />
+
+					<p:column headerText="Name" width="300px;"
+						filterBy="#{ent.checklistItem.name}">
+						<h:outputText value="#{ent.checklistItem.checkListItemCategory.name} - #{ent.checklistItem.name}" />
+					</p:column>
+					<p:column headerText="SK"  styleClass="mini" width="20">
+						<p:selectBooleanCheckbox value="#{ent.vc}" />
+					</p:column>
+					<p:column headerText="FK"  styleClass="mini" width="20">
+						<p:selectBooleanCheckbox value="#{ent.fc}" />
+					</p:column>
+				</p:dataTable>
+				<h:panelGrid columns="1" styleClass="buttonTableSelected">
+					<p:commandButton value="+" update="@form"
+						actionListener="#{checklistAssocEditBean.setTargetList}" />
+					<p:commandButton value="-" update="@form"
+						actionListener="#{checklistAssocEditBean.setSourceList}" />
+				</h:panelGrid>
+				<p:dataTable id="targetEntries" var="ent" styleClass="trgTable"
+					selection="#{checklistAssocEditBean.targetSelected}"
+					rowKey="#{ent}" value="#{checklistAssocEditBean.target}">
+					<p:column selectionMode="multiple"
+						style="width:16px;text-align:center" />
+					<p:column headerText="Name" filterBy="#{ent.checklistItem.name}">
+						<h:outputText value="#{ent.checklistItem.checkListItemCategory.name} - #{ent.checklistItem.name}" />
+					</p:column>
+					<p:column headerText="SK" styleClass="mini" width="20" >
+						<p:selectBooleanCheckbox value="#{ent.vc}" />
+					</p:column>
+					<p:column headerText="FK" styleClass="mini"  width="20">
+						<p:selectBooleanCheckbox value="#{ent.fc}" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+		</p:panel>
+
+		<p:panel id="pnl_assocChecklist_fr" header="" styleClass="assocChecklist"
+			rendered="#{checklistAssocEditBean.langFr}" toggleable="false"
+			style="margin-bottom:20px; height: 30%">
+			<h:panelGrid columns="3" cellpadding="5" styleClass="assocGrid">
+				<p:dataTable id="srcEntries_fr" var="ent" styleClass="srcTable"
+					selection="#{checklistAssocEditBean.sourceSelected}"
+					rowKey="#{ent}" value="#{checklistAssocEditBean.source}">
+					<p:column selectionMode="multiple"
+						style="width:16px;text-align:center" />
+
+					<p:column headerText="Name" width="300px;"
+						filterBy="#{ent.checklistItem.name}">
+						<h:outputText value="#{ent.checklistItem.checkListItemCategory.nameFrench} - #{ent.checklistItem.nameFrench}" />
+					</p:column>
+					<p:column headerText="SK" styleClass="mini" width="20" >
+						<p:selectBooleanCheckbox value="#{ent.vc}" />
+					</p:column>
+					<p:column headerText="FK" styleClass="mini" width="20" >
+						<p:selectBooleanCheckbox value="#{ent.fc}" />
+					</p:column>
+				</p:dataTable>
+				<h:panelGrid columns="1" styleClass="buttonTableSelected">
+					<p:commandButton value=" + " update="@form"
+						actionListener="#{checklistAssocEditBean.setTargetList}" />
+					<p:commandButton value=" - " update="@form"
+						actionListener="#{checklistAssocEditBean.setSourceList}" />
+				</h:panelGrid>
+				<p:dataTable id="targetEntries_fr" var="ent" styleClass="trgTable"
+					selection="#{checklistAssocEditBean.targetSelected}"
+					rowKey="#{ent}" value="#{checklistAssocEditBean.target}">
+					<p:column selectionMode="multiple"
+						style="width:16px;text-align:center" />
+					<p:column headerText="Name" filterBy="#{ent.checklistItem.nameFrench}">
+						<h:outputText value=" #{ent.checklistItem.checkListItemCategory.nameFrench} - #{ent.checklistItem.nameFrench}" />
+					</p:column>
+					<p:column headerText="SK" styleClass="mini" width="20" >
+						<p:selectBooleanCheckbox value="#{ent.vc}" />
+					</p:column>
+					<p:column headerText="FK" styleClass="mini" width="20" >
+						<p:selectBooleanCheckbox value="#{ent.fc}" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+		</p:panel>
+
+		<br clear="all" />
+
+		<p:spacer styleClass="seperator" />
+		<h:panelGroup layout="block" id="layButtons"
+			styleClass="margin-top layButtons">
+
+			<p:commandButton actionListener="#{checklistAssocEditBean.save()}"
+				onstart="PF('w_dlgWait').show();"
+				oncomplete="PF('w_dlgWait').hide();" value="Speichern"
+				process="@form" update="@form" styleClass="clear" />
+
+			<p:commandButton
+				actionListener="#{checklistAssocEditBean.saveAndClose()}"
+				value="Speichern und Schliessen" process="@form" update="@form"
+				styleClass="clear" />
+		</h:panelGroup>
+		<p:dialog widgetVar="w_dlgWait" modal="true" closable="false"
+			draggable="false" resizable="false" header="Speichern...">
+			<p>Bitte warten...</p>
+		</p:dialog>
+
+	</h:form>
+
+</ui:composition>

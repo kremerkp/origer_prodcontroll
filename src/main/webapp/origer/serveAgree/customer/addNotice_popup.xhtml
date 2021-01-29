@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<div id="diagAddNotice">
+		<p:dialog header="Notiz erfassen" widgetVar="addNotice" modal="true"
+			height="150">
+			<h:form id="addNotice">
+				<h:panelGrid columns="2" cellpadding="5">
+
+					<p:inputTextarea rows="5" cols="30" 
+					maxlength="1000" value="#{serviceCustomerHistoryBean.notice}"
+					autoResize="false"
+					 id="add_notice" title="Notiz hinzufügen: ">
+						<p:ajax />
+					</p:inputTextarea>
+
+
+				</h:panelGrid>
+			</h:form>
+
+			<f:facet name="footer">
+				<p:commandButton value="Notiz erstellen"
+					actionListener="#{serviceCustomerHistoryBean.aNotice}" update=":customerView:histElTab :addNotice:add_notice"
+					onclick="PF('addNotice').hide();"/>
+				<p:commandButton value="Abbrechen" onclick="PF('addNotice').hide();" />
+			</f:facet>
+		</p:dialog>
+	</div>
+
+</ui:composition>

@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<script>
+		
+	</script>
+
+	<div id="diagServiceType">
+		<p:dialog header="Elemente hinzufügen neu" widgetVar="addServiceElements"
+			modal="true" height="600" width="1000">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:panelGrid id="pnl_refreshobject" columns="2" cellpadding="5">
+
+					<p:dataTable var="addElements" value="#{contractInfo.addElements}"
+						id="addElements" editable="true" editMode="cell"
+						styleClass="addElements" widgetVar="dn" paginator="false">
+
+						<p:ajax event="cellEdit"
+							listener="#{contractInfo.onCellEditAddElements}" />
+
+
+						<p:column headerText="Anzahl" width="50" styleClass="dn_amount">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="" id="dn_amount" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Stockwerk" width="80" styleClass="dn_floor">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="" id="dn_floor" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Rechnungstext" styleClass="dn_text">
+							<!--  autocoplete reinhauen -->
+							<!--  value mit var addElements von Table -->
+
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{addElement.checklist}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:autoComplete var="c" itemValue="#{c}" itemLabel="#{c.code}"
+										converter="#{simpleConverter}"
+										completeMethod="#{contractInfo.completeChecklist}"
+										value="#{addElement.checklist}" scrollHeight="400"
+										dropdown="true" id="elementChecklist" forceSelection="false"
+										styleClass="autocomplete_customer closed">
+									</p:autoComplete>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column style="width:32px;text-align: center;" width="80"
+							headerText="" styleClass="add_delete_note">
+							<p:commandButton update="@form" onstart="statusDialog.show()"
+								oncomplete="statusDialog.hide()" value="" styleClass="btn_add"
+								action="#{ttBasicView.addTreeEntry()}"
+								title="Lieferschein bearbeiten">
+								<f:setPropertyActionListener value="#{delivernote}"
+									target="#{ttBasicView.selectedDeliveryNote}" />
+							</p:commandButton>
+							<p:commandButton update="@form" onstart="statusDialog.show()"
+								styleClass="btn_del" oncomplete="statusDialog.hide()" value=""
+								action="#{ttBasicView.delTreeEntry()}"
+								title="Lieferschein bearbeiten">
+								<f:setPropertyActionListener value="#{delivernote}"
+									target="#{ttBasicView.selectedDeliveryNote}" />
+							</p:commandButton>
+
+						</p:column>
+
+						<!-- Sum Total -->
+						<p:columnGroup type="footer">
+							<p:row>
+								<p:column colspan="4" style="text-align:right"
+									footerText="Rechnungsbetrag netto:" />
+
+								<p:column>
+									<f:facet name="footer">
+										<h:outputText value="#{ttBasicView.nettoTotal}"
+											rendered="false">
+											<f:convertNumber type="currency" currencySymbol="€"
+												locale="de_DE" />
+										</h:outputText>
+									</f:facet>
+								</p:column>
+
+								<p:column colspan="2" style="text-align:right" />
+
+								<p:column>
+									<f:facet name="footer">
+										<h:outputText value="#{ttBasicView.totalTotal}">
+											<f:convertNumber type="currency" currencySymbol="€"
+												locale="de_DE" />
+										</h:outputText>
+									</f:facet>
+								</p:column>
+
+								<p:column colspan="1" style="text-align:right" />
+							</p:row>
+						</p:columnGroup>
+
+					</p:dataTable>
+					
+					<!-- Autocomplete setzt alle Checklisten von addElement-->
+
+					<p:autoComplete var="c" itemValue="#{c}" itemLabel="#{c.code}"
+						converter="#{simpleConverter}"
+						completeMethod="#{contractInfo.completeChecklist}"
+						value="#{contractInfo.elementChecklist}" scrollHeight="400"
+						dropdown="true" id="elementChecklist" forceSelection="false"
+						styleClass="autocomplete_customer closed">
+					</p:autoComplete>
+
+				</h:panelGrid>
+
+				<f:facet name="footer">
+					<p:commandButton value="ok" onstart="PF('bui').block();"
+						oncomplete="PF('bui').unblock();"
+						onclick="PF('addServiceElements').hide();"
+						actionListener="#{contractInfo.generateElementsForSelectedIntervall()}"
+						update="@form" />
+					<p:commandButton value="chancel"
+						onclick="PF('addServiceElements').hide();" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</div>
+
+</ui:composition>
