@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiJARLocking="true" path="/origer3">
-    <ResourceLink global="jdbc/origer" name="jdbc/origer" type="javax.sql.DataSource"/>
+    <ResourceLink global="origer_pc_prod" name="origer_pc_prod" type="javax.sql.DataSource"/>
     <ResourceLink global="mail/origer" name="mail/origer" type="javax.mail.Session"/>
     <Realm className="org.apache.catalina.realm.DataSourceRealm" 
-    	dataSourceName="jdbc/origer" 
+    	dataSourceName="origer_pc_prod" 
     	digest="MD5" 
     	localDataSource="true" 
     	resourceName="ORIGERRealm" 
