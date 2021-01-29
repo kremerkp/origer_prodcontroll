@@ -44,7 +44,7 @@ public class AndroidSync {
 		if (startDate != null && endDate != null) {
 			try {
 				Context context = new InitialContext();
-				DataSource dataSource = (DataSource) context.lookup("java:comp/env/origer_pc_prod");
+				DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 				Connection conn = dataSource.getConnection();
 				Statement stmt = conn.createStatement();
@@ -95,7 +95,7 @@ public class AndroidSync {
 				final ArrayList<OfferSO> offers = new ArrayList<>();
 				final ArrayList<FileArchiveSO> archives = new ArrayList<>();
 				final ArrayList<ServiceTechnicianAssocSO> assocs = new ArrayList<>();
-				DataSource dataSource = (DataSource) context.lookup("java:comp/env/origer_pc_prod");
+				DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 				Connection conn = dataSource.getConnection();
 				Statement stmt = conn.createStatement();
@@ -339,7 +339,7 @@ public class AndroidSync {
 				Context context;
 				try {
 					context = new InitialContext();
-					DataSource dataSource = (DataSource) context.lookup("java:comp/env/origer_pc_prod");
+					DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 					Connection conn = dataSource.getConnection();
 					Statement stmt = conn.createStatement();
 					SimpleDateFormat formatter = new SimpleDateFormat(DATE_TIME_PATTERN);
@@ -558,7 +558,7 @@ public class AndroidSync {
 			} else {
 				try {
 					Context context = new InitialContext();
-					DataSource dataSource = (DataSource) context.lookup("java:comp/env/origer_pc_prod");
+					DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 					Connection conn = dataSource.getConnection();
 					Statement stmt = conn.createStatement();
@@ -607,7 +607,7 @@ public class AndroidSync {
 		try {
 			final ResultsetMapper mapper = new ResultsetMapper();
 			context = new InitialContext();
-			DataSource dataSource = (DataSource) context.lookup("java:comp/env/origer_pc_prod");
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 			Connection conn = dataSource.getConnection();
 			Statement stmt = conn.createStatement();
@@ -663,7 +663,7 @@ public class AndroidSync {
 		try {
 			final ResultsetMapper mapper = new ResultsetMapper();
 			context = new InitialContext();
-			DataSource dataSource = (DataSource) context.lookup("java:comp/env/origer_pc_prod");
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 			Connection conn = dataSource.getConnection();
 			Statement stmt = conn.createStatement();
@@ -830,7 +830,7 @@ public class AndroidSync {
 
 		try {
 			Context context = new InitialContext();
-			DataSource dataSource = (DataSource) context.lookup("java:comp/env/origer_pc_prod");
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 			Connection conn = dataSource.getConnection();
 			Statement stmt = conn.createStatement();
@@ -1152,7 +1152,7 @@ public class AndroidSync {
 
 		try {
 			Context context = new InitialContext();
-			DataSource dataSource = (DataSource) context.lookup("java:comp/env/origer_pc_prod");
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 			Connection conn = dataSource.getConnection();
 			Statement stmt = conn.createStatement();

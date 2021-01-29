@@ -398,7 +398,7 @@ public class ReportGeneratorBean extends BasicBean {
 	private Connection getConnection() {
 		try {
 			InitialContext ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/origer_pc_prod");
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 			connection = ds.getConnection();
 		} catch (NamingException | SQLException ex) {
