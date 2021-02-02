@@ -1,76 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://soap.backend.serviceagree.origer.lu" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://soap.backend.serviceagree.origer.lu" xmlns:intf="http://soap.backend.serviceagree.origer.lu" xmlns:tns1="http://types.contact.models.serviceagree.origer.lu" xmlns:tns2="http://contact.models.serviceagree.origer.lu" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:definitions targetNamespace="http://soap.backend.serviceagree.origer.lu" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://soap.backend.serviceagree.origer.lu" xmlns:intf="http://soap.backend.serviceagree.origer.lu" xmlns:tns1="http://contact.models.serviceagree.origer.lu" xmlns:tns2="http://types.contact.models.serviceagree.origer.lu" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <!--WSDL created by Apache Axis version: 1.4
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://soap.backend.serviceagree.origer.lu" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://contact.models.serviceagree.origer.lu"/>
    <import namespace="http://types.contact.models.serviceagree.origer.lu"/>
-   <element name="loadConfig">
-    <complexType/>
-   </element>
-   <element name="loadConfigResponse">
+   <element name="uploadData">
     <complexType>
      <sequence>
-      <element name="loadConfigReturn" type="impl:ConfigParcel"/>
-     </sequence>
-    </complexType>
-   </element>
-   <complexType name="ArrayOf_tns1_DinType">
-    <sequence>
-     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:DinType"/>
-    </sequence>
-   </complexType>
-   <complexType name="DirectionSO">
-    <sequence>
-     <element name="active" nillable="true" type="xsd:boolean"/>
-     <element name="id" nillable="true" type="xsd:int"/>
-     <element name="name" nillable="true" type="xsd:string"/>
-    </sequence>
-   </complexType>
-   <complexType name="ArrayOfDirectionSO">
-    <sequence>
-     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:DirectionSO"/>
-    </sequence>
-   </complexType>
-   <complexType name="ServiceElementTypeSO">
-    <sequence>
-     <element name="active" nillable="true" type="xsd:boolean"/>
-     <element name="id" nillable="true" type="xsd:int"/>
-     <element name="name" nillable="true" type="xsd:string"/>
-    </sequence>
-   </complexType>
-   <complexType name="ArrayOfServiceElementTypeSO">
-    <sequence>
-     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:ServiceElementTypeSO"/>
-    </sequence>
-   </complexType>
-   <complexType name="PersonSO">
-    <sequence>
-     <element name="firstName" nillable="true" type="xsd:string"/>
-     <element name="id" nillable="true" type="xsd:int"/>
-     <element name="lastName" nillable="true" type="xsd:string"/>
-     <element name="name" nillable="true" type="xsd:string"/>
-     <element name="title" nillable="true" type="xsd:string"/>
-    </sequence>
-   </complexType>
-   <complexType name="ArrayOfPersonSO">
-    <sequence>
-     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:PersonSO"/>
-    </sequence>
-   </complexType>
-   <complexType name="ConfigParcel">
-    <sequence>
-     <element name="dins" nillable="true" type="impl:ArrayOf_tns1_DinType"/>
-     <element name="directions" nillable="true" type="impl:ArrayOfDirectionSO"/>
-     <element name="elementTypes" nillable="true" type="impl:ArrayOfServiceElementTypeSO"/>
-     <element name="persons" nillable="true" type="impl:ArrayOfPersonSO"/>
-    </sequence>
-   </complexType>
-   <element name="downloadUpdatedControls">
-    <complexType>
-     <sequence>
-      <element name="intervalId" type="impl:SoapParcel"/>
+      <element name="uploadData" type="impl:SoapParcel"/>
      </sequence>
     </complexType>
    </element>
@@ -87,6 +26,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="active" nillable="true" type="xsd:boolean"/>
      <element name="category" nillable="true" type="impl:ChecklistItemCategorySO"/>
      <element name="id" nillable="true" type="xsd:long"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ServiceElementTypeSO">
+    <sequence>
+     <element name="active" nillable="true" type="xsd:boolean"/>
+     <element name="id" nillable="true" type="xsd:int"/>
      <element name="name" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
@@ -115,17 +61,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="status" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
-   <complexType name="ArrayOf_tns2_Contact">
+   <complexType name="ArrayOf_tns1_Contact">
     <sequence>
-     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns2:Contact"/>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:Contact"/>
     </sequence>
    </complexType>
    <complexType name="BuildingSiteSO">
     <sequence>
      <element name="active" type="xsd:boolean"/>
-     <element name="address" nillable="true" type="tns2:Address"/>
+     <element name="address" nillable="true" type="tns1:Address"/>
      <element name="code" nillable="true" type="xsd:string"/>
-     <element name="contactList" nillable="true" type="impl:ArrayOf_tns2_Contact"/>
+     <element name="contactList" nillable="true" type="impl:ArrayOf_tns1_Contact"/>
      <element name="createDate" nillable="true" type="xsd:dateTime"/>
      <element name="createUser" type="xsd:int"/>
      <element name="deleteDate" nillable="true" type="xsd:dateTime"/>
@@ -204,6 +150,15 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <complexType name="ArrayOfServiceElementSO">
     <sequence>
      <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:ServiceElementSO"/>
+    </sequence>
+   </complexType>
+   <complexType name="PersonSO">
+    <sequence>
+     <element name="firstName" nillable="true" type="xsd:string"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="lastName" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="title" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
    <complexType name="TimeRecordingSO">
@@ -298,25 +253,10 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="technicians" nillable="true" type="impl:ArrayOfServiceTechnicianAssocSO"/>
     </sequence>
    </complexType>
-   <element name="downloadUpdatedControlsResponse">
+   <element name="uploadDataResponse">
     <complexType>
      <sequence>
-      <element name="downloadUpdatedControlsReturn" type="impl:SoapParcel"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getEligibleSites">
-    <complexType>
-     <sequence>
-      <element name="startDate" type="xsd:dateTime"/>
-      <element name="endDate" type="xsd:dateTime"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getEligibleSitesResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="getEligibleSitesReturn" type="impl:BuildingSiteSO"/>
+      <element name="uploadDataReturn" type="xsd:boolean"/>
      </sequence>
     </complexType>
    </element>
@@ -336,17 +276,77 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="uploadData">
+   <element name="getEligibleSites">
     <complexType>
      <sequence>
-      <element name="uploadData" type="impl:SoapParcel"/>
+      <element name="startDate" type="xsd:dateTime"/>
+      <element name="endDate" type="xsd:dateTime"/>
      </sequence>
     </complexType>
    </element>
-   <element name="uploadDataResponse">
+   <element name="getEligibleSitesResponse">
     <complexType>
      <sequence>
-      <element name="uploadDataReturn" type="xsd:boolean"/>
+      <element maxOccurs="unbounded" name="getEligibleSitesReturn" type="impl:BuildingSiteSO"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="loadConfig">
+    <complexType/>
+   </element>
+   <element name="loadConfigResponse">
+    <complexType>
+     <sequence>
+      <element name="loadConfigReturn" type="impl:ConfigParcel"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns2_DinType">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns2:DinType"/>
+    </sequence>
+   </complexType>
+   <complexType name="DirectionSO">
+    <sequence>
+     <element name="active" nillable="true" type="xsd:boolean"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfDirectionSO">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:DirectionSO"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfServiceElementTypeSO">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:ServiceElementTypeSO"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfPersonSO">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:PersonSO"/>
+    </sequence>
+   </complexType>
+   <complexType name="ConfigParcel">
+    <sequence>
+     <element name="dins" nillable="true" type="impl:ArrayOf_tns2_DinType"/>
+     <element name="directions" nillable="true" type="impl:ArrayOfDirectionSO"/>
+     <element name="elementTypes" nillable="true" type="impl:ArrayOfServiceElementTypeSO"/>
+     <element name="persons" nillable="true" type="impl:ArrayOfPersonSO"/>
+    </sequence>
+   </complexType>
+   <element name="downloadUpdatedControls">
+    <complexType>
+     <sequence>
+      <element name="intervalId" type="impl:SoapParcel"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="downloadUpdatedControlsResponse">
+    <complexType>
+     <sequence>
+      <element name="downloadUpdatedControlsReturn" type="impl:SoapParcel"/>
      </sequence>
     </complexType>
    </element>
@@ -364,24 +364,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-  </schema>
-  <schema elementFormDefault="qualified" targetNamespace="http://types.contact.models.serviceagree.origer.lu" xmlns="http://www.w3.org/2001/XMLSchema">
-   <import namespace="http://contact.models.serviceagree.origer.lu"/>
-   <import namespace="http://soap.backend.serviceagree.origer.lu"/>
-   <complexType name="DinType">
-    <sequence>
-     <element name="active" type="xsd:boolean"/>
-     <element name="createDate" nillable="true" type="xsd:dateTime"/>
-     <element name="createUser" type="xsd:int"/>
-     <element name="description" nillable="true" type="xsd:string"/>
-     <element name="editDate" nillable="true" type="xsd:dateTime"/>
-     <element name="editUser" nillable="true" type="xsd:int"/>
-     <element name="id" nillable="true" type="xsd:int"/>
-     <element name="name" nillable="true" type="xsd:string"/>
-     <element name="nameFrench" nillable="true" type="xsd:string"/>
-     <element name="shortname" nillable="true" type="xsd:string"/>
-    </sequence>
-   </complexType>
   </schema>
   <schema elementFormDefault="qualified" targetNamespace="http://contact.models.serviceagree.origer.lu" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://soap.backend.serviceagree.origer.lu"/>
@@ -407,7 +389,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <sequence>
      <element name="active" type="xsd:boolean"/>
      <element name="city" nillable="true" type="xsd:string"/>
-     <element name="country" nillable="true" type="tns2:Country"/>
+     <element name="country" nillable="true" type="tns1:Country"/>
      <element name="createDate" nillable="true" type="xsd:dateTime"/>
      <element name="createUser" type="xsd:int"/>
      <element name="deleteDate" nillable="true" type="xsd:dateTime"/>
@@ -436,12 +418,30 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <sequence>
      <element name="active" type="xsd:boolean"/>
      <element name="contactField" nillable="true" type="xsd:string"/>
-     <element name="contactType" nillable="true" type="tns2:ContactType"/>
+     <element name="contactType" nillable="true" type="tns1:ContactType"/>
      <element name="createDate" nillable="true" type="xsd:dateTime"/>
      <element name="createUser" type="xsd:int"/>
      <element name="editDate" nillable="true" type="xsd:dateTime"/>
      <element name="editUser" nillable="true" type="xsd:int"/>
      <element name="id" nillable="true" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://types.contact.models.serviceagree.origer.lu" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://contact.models.serviceagree.origer.lu"/>
+   <import namespace="http://soap.backend.serviceagree.origer.lu"/>
+   <complexType name="DinType">
+    <sequence>
+     <element name="active" type="xsd:boolean"/>
+     <element name="createDate" nillable="true" type="xsd:dateTime"/>
+     <element name="createUser" type="xsd:int"/>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="editDate" nillable="true" type="xsd:dateTime"/>
+     <element name="editUser" nillable="true" type="xsd:int"/>
+     <element name="id" nillable="true" type="xsd:int"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="nameFrench" nillable="true" type="xsd:string"/>
+     <element name="shortname" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
   </schema>
@@ -545,6 +545,42 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    <wsdl:portType name="AndroidSync">
 
+      <wsdl:operation name="uploadData">
+
+         <wsdl:input message="impl:uploadDataRequest" name="uploadDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:uploadDataResponse" name="uploadDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadData">
+
+         <wsdl:input message="impl:downloadDataRequest" name="downloadDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:downloadDataResponse" name="downloadDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEligibleSites">
+
+         <wsdl:input message="impl:getEligibleSitesRequest" name="getEligibleSitesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getEligibleSitesResponse" name="getEligibleSitesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="loadConfig">
 
          <wsdl:input message="impl:loadConfigRequest" name="loadConfigRequest">
@@ -569,42 +605,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getEligibleSites">
-
-         <wsdl:input message="impl:getEligibleSitesRequest" name="getEligibleSitesRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getEligibleSitesResponse" name="getEligibleSitesResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="downloadData">
-
-         <wsdl:input message="impl:downloadDataRequest" name="downloadDataRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:downloadDataResponse" name="downloadDataResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="uploadData">
-
-         <wsdl:input message="impl:uploadDataRequest" name="uploadDataRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:uploadDataResponse" name="uploadDataResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="getRepairSites">
 
          <wsdl:input message="impl:getRepairSitesRequest" name="getRepairSitesRequest">
@@ -622,6 +622,60 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:binding name="AndroidSyncSoapBinding" type="impl:AndroidSync">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="uploadData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="uploadDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="uploadDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="downloadData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="downloadDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="downloadDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEligibleSites">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getEligibleSitesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getEligibleSitesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
 
       <wsdl:operation name="loadConfig">
 
@@ -652,60 +706,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="downloadUpdatedControlsResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getEligibleSites">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getEligibleSitesRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getEligibleSitesResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="downloadData">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="downloadDataRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="downloadDataResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="uploadData">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="uploadDataRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="uploadDataResponse">
 
             <wsdlsoap:body use="literal"/>
 
