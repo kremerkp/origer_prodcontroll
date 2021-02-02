@@ -171,12 +171,17 @@ public class FileArchiveFacade extends AbstractFacade<FileArchive>
 		q.where(f.service.eq(service));
 		q.where(f.signature.isTrue()).orderBy(f.id.desc());
 		String result = q.singleResult(f.url);
-		if (result != null)
+
+		if (result != null) {
 		{
 			result = result.replace("/etc", "");
+			result = result.replace("/etc", "");
+			result = result.replace("/usr/local/tomee/", "/origer/");
+		}
 		}
 
-		return q.singleResult(f.url);
+
+		return result;
 	}
 	
 	public FileArchive findApprovalSignForTimeRecording(final Long recordId)

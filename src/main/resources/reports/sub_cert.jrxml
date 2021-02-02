@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_cert" pageWidth="595" pageHeight="842" orientation="Landscape" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" resourceBundle="reports/i18n/i18n" uuid="49e02ecc-08a5-4d55-a13f-c85715c9675f">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="alternateStyle" mode="Opaque" forecolor="#FFFFFF" backcolor="#FFFFFF" radius="1">
@@ -101,7 +101,7 @@
 		<variableExpression><![CDATA[$F{description}]]></variableExpression>
 	</variable>
 	<variable name="URL_FOTO" class="java.lang.String">
-		<variableExpression><![CDATA[$F{urlFoto} == "" ? "" : "https://maintenance.origer.lu:58443/" +  $F{urlFoto}]]></variableExpression>
+		<variableExpression><![CDATA[$F{urlFoto} == "" ? "" : "http://test-production-control.origer.lu:57081/" +  $F{urlFoto}]]></variableExpression>
 	</variable>
 	<group name="elementdate">
 		<groupExpression><![CDATA[$F{elementDate}]]></groupExpression>
@@ -379,7 +379,7 @@
 					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
 					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#3B3B3B"/>
 				</box>
-				<imageExpression><![CDATA["https://maintenance.origer.lu:58443" + $F{urlFoto}.replaceAll( "etc", "")]]></imageExpression>
+				<imageExpression><![CDATA["http://test-production-control.origer.lu:57081" + $F{urlFoto}.replaceAll( "etc", "")]]></imageExpression>
 			</image>
 		</band>
 	</detail>

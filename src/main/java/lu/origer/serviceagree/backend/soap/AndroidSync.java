@@ -14,16 +14,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.net.ssl.HttpsURLConnection;
 import javax.sql.DataSource;
 
 import lu.origer.serviceagree.models.contact.types.DinType;
-import lu.origer.serviceagree.models.main.FileArchive;
 import lu.origer.serviceagree.models.synch.SynchJobs;
 
 /**
@@ -34,8 +34,10 @@ import lu.origer.serviceagree.models.synch.SynchJobs;
 @Stateless
 public class AndroidSync {
 	private static Long TECHNICIAN_TYPE_ID = 5L;	
-	private static String SYNC_URL_PROD_CONTROL = "http://maintenance.origer.lu:57080/origer/synchroniZe/origer/";
-	private static String SYNC_URL_PROD_CONTROL_TEST = "http://maintenance.origer.lu:56080/origer/synchroniZe/origer/";
+	
+	private static String SYNC_URL_PROD_CONTROL = "http://test-production-control.origer.lu:57081/origer/synchroniZe/origer/";
+	
+	
 	public static String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
 	public BuildingSiteSO[] getEligibleSites(final Date startDate, final Date endDate) {
@@ -44,7 +46,7 @@ public class AndroidSync {
 		if (startDate != null && endDate != null) {
 			try {
 				Context context = new InitialContext();
-				DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_test");
+				DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 				Connection conn = dataSource.getConnection();
 				Statement stmt = conn.createStatement();
@@ -76,7 +78,7 @@ public class AndroidSync {
 	public SoapParcel downloadData(final SoapParcel bsIds, final Date startDate, final Date endDate) {
 		final SoapParcel parcel = new SoapParcel();
 		if (bsIds != null && bsIds.getPrintRequestElements() != null && bsIds.getPrintRequestElements().length > 0) {
-			System.out.println("Received ids");
+			Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Received ids");
 			String idList = "(";
 
 			for (int c = 0; c < bsIds.getPrintRequestElements().length; c++) {
@@ -95,7 +97,7 @@ public class AndroidSync {
 				final ArrayList<OfferSO> offers = new ArrayList<>();
 				final ArrayList<FileArchiveSO> archives = new ArrayList<>();
 				final ArrayList<ServiceTechnicianAssocSO> assocs = new ArrayList<>();
-				DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_test");
+				DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 				Connection conn = dataSource.getConnection();
 				Statement stmt = conn.createStatement();
@@ -243,7 +245,8 @@ public class AndroidSync {
 					}
 
 					// Get buildingsite archives
-					System.out.println("DOWNLOAD - Fetching buildingsite plans");
+					Logger.getLogger(this.getClass().getName()).log(Level.INFO, "DOWNLOAD - Fetching buildingsite plans");
+					
 					ResultSet rsArchives = stmt.executeQuery(
 							"SELECT DISTINCT FA.ID AS FA_ID, FA.URL, FA.FK_SERVICE_HISTORY, FA.NAME AS FA_NAME, FA.DESCRIPTION AS FA_DESCRIPTION, FA.FK_BUILDING_SITE AS FA_SITE, FA.IS_SIGNATURE "
 									+ "FROM filearchive AS FA " + "WHERE FA.FK_BUILDING_SITE IN " + idList
@@ -260,7 +263,7 @@ public class AndroidSync {
 									input.read(tempArchive.getData());
 									input.close();
 								} catch (Exception e) {
-									System.out.println("DOWNLOAD - Fetching data failed");
+									Logger.getLogger(this.getClass().getName()).log(Level.INFO, "DOWNLOAD - Fetching data failed");
 									e.printStackTrace();
 								} finally {
 									// Only add archive if file has been
@@ -291,7 +294,7 @@ public class AndroidSync {
 					rs.close();
 					stmt.close();
 					conn.close();
-					System.out.println("Done");
+					Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Done");
 				}
 
 			} catch (NamingException | SQLException e) {
@@ -303,7 +306,8 @@ public class AndroidSync {
 	}
 
 	public Boolean uploadData(final SoapParcel uploadData) {
-		System.out.println("CALLED UPLOAD!");
+
+		Logger.getLogger(this.getClass().getName()).log(Level.INFO, "CALLED UPLOAD!");
 		Boolean success = false;
 
 		if (uploadData != null) {
@@ -334,12 +338,12 @@ public class AndroidSync {
 					jobDescription += " " + jobs.getDescription();
 				}
 					
-				System.out.println("UPDATE - Parcel-check completed, status: " + jobDescription);
+				Logger.getLogger(this.getClass().getName()).log(Level.INFO, "UPDATE - Parcel-check completed, status: " + jobDescription);
 
 				Context context;
 				try {
 					context = new InitialContext();
-					DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_test");
+					DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 					Connection conn = dataSource.getConnection();
 					Statement stmt = conn.createStatement();
 					SimpleDateFormat formatter = new SimpleDateFormat(DATE_TIME_PATTERN);
@@ -539,18 +543,10 @@ public class AndroidSync {
 					URL url = new URL(SYNC_URL_PROD_CONTROL);
 					HttpURLConnection connectionProdControl = (HttpURLConnection) url.openConnection();
 					if (connectionProdControl.getResponseCode() == 200) {
-						System.out.println("UPDATE - Prod control synchronsation successful." + connectionProdControl.getResponseCode());
+						Logger.getLogger(this.getClass().getName()).log(Level.INFO, "UPDATE - Prod control synchronsation successful." + connectionProdControl.getResponseCode());
 					} else {
-						System.out.println("UPDATE - Prod control on test synchronsation." + connectionProdControl.getResponseCode());
+						Logger.getLogger(this.getClass().getName()).log(Level.INFO, "UPDATE - Prod control on test synchronsation." + connectionProdControl.getResponseCode());
 					}
-					// Sync prod control test
-//					url = new URL(SYNC_URL_PROD_CONTROL_TEST);
-//					HttpURLConnection connectionProdControlTest = (HttpURLConnection) url.openConnection();
-//					if (connectionProdControlTest.getResponseCode() == 200) {
-//						System.out.println("UPDATE - Prod control synchronsation successful." + connectionProdControlTest.getResponseCode());
-//					} else {
-//						System.out.println("UPDATE - Prod control on test synchronsation." + connectionProdControlTest.getResponseCode());
-//					}
 				} catch (Exception e) {
 					e.printStackTrace();
 					success = false;
@@ -558,12 +554,12 @@ public class AndroidSync {
 			} else {
 				try {
 					Context context = new InitialContext();
-					DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_test");
+					DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 					Connection conn = dataSource.getConnection();
 					Statement stmt = conn.createStatement();
 					success = false;
-					System.out.println("UPDATE - Parcel-check completed, status: " + jobDescription);
+					Logger.getLogger(this.getClass().getName()).log(Level.INFO, "UPDATE - Parcel-check completed, status: " + jobDescription);
 					final String jobQuery = "INSERT INTO synch_jobs(TARGET_ELEMENTS, ACTUAL_ELEMENTS, STATE_ANDROID, CREATE_DATE, DESCRIPTION) "
 							+ "VALUES (" + jobs.getTargetElementsCount() + "," + jobs.getActualCountedElements() + ",\'"
 							+ jobs.getAndroidState() + "\', CURRENT_TIMESTAMP() ,\'"
@@ -573,18 +569,10 @@ public class AndroidSync {
 					URL url = new URL(SYNC_URL_PROD_CONTROL);
 					HttpURLConnection connectionProdControl = (HttpURLConnection) url.openConnection();
 					if (connectionProdControl.getResponseCode() == 200) {
-						System.out.println("UPDATE - Prod control synchronsation successful." + connectionProdControl.getResponseCode());
+						Logger.getLogger(this.getClass().getName()).log(Level.INFO, "UPDATE - Prod control synchronsation successful." + connectionProdControl.getResponseCode());
 					} else {
-						System.out.println("UPDATE - Prod control on test synchronsation." + connectionProdControl.getResponseCode());
+						Logger.getLogger(this.getClass().getName()).log(Level.INFO, "UPDATE - Prod control on test synchronsation." + connectionProdControl.getResponseCode());
 					}
-					// Sync prod control test
-//					url = new URL(SYNC_URL_PROD_CONTROL_TEST);
-//					HttpURLConnection connectionProdControlTest = (HttpURLConnection) url.openConnection();
-//					if (connectionProdControlTest.getResponseCode() == 200) {
-//						System.out.println("UPDATE - Prod control synchronsation successful." + connectionProdControlTest.getResponseCode());
-//					} else {
-//						System.out.println("UPDATE - Prod control on test synchronsation." + connectionProdControlTest.getResponseCode());
-//					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -592,7 +580,7 @@ public class AndroidSync {
 		} else {
 			success = false;
 		}
-		System.out.println("UPDATE - Done, success is " + success.toString());
+		Logger.getLogger(this.getClass().getName()).log(Level.INFO, "UPDATE - Done, success is " + success.toString());
 		return success;
 	}
 
@@ -607,7 +595,7 @@ public class AndroidSync {
 		try {
 			final ResultsetMapper mapper = new ResultsetMapper();
 			context = new InitialContext();
-			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_test");
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 			Connection conn = dataSource.getConnection();
 			Statement stmt = conn.createStatement();
@@ -663,7 +651,7 @@ public class AndroidSync {
 		try {
 			final ResultsetMapper mapper = new ResultsetMapper();
 			context = new InitialContext();
-			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_test");
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 			Connection conn = dataSource.getConnection();
 			Statement stmt = conn.createStatement();
@@ -830,7 +818,7 @@ public class AndroidSync {
 
 		try {
 			Context context = new InitialContext();
-			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_test");
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 			Connection conn = dataSource.getConnection();
 			Statement stmt = conn.createStatement();
@@ -1152,7 +1140,7 @@ public class AndroidSync {
 
 		try {
 			Context context = new InitialContext();
-			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_test");
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/origer_pc_prod");
 
 			Connection conn = dataSource.getConnection();
 			Statement stmt = conn.createStatement();
