@@ -2,7 +2,7 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <persistence-unit name="ORIGERPU" transaction-type="JTA">
     <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-    <jta-data-source>jdbc/origer_pc_test</jta-data-source>
+    <jta-data-source>jdbc/origer_pc_prod</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
             <property name="openjpa.QueryCache" value="false"/>
