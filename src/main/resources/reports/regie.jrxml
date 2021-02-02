@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="regie" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" resourceBundle="reports/i18n/i18n" uuid="0da36194-536c-454b-bbd7-0ee21af5bb1f">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -249,7 +249,7 @@
 					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#666666"/>
 					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#666666"/>
 				</box>
-				<imageExpression><![CDATA["https://maintenance.origer.lu:58443/"  + $F{fileUrlSign}]]></imageExpression>
+				<imageExpression><![CDATA["http://production-control.origer.lu:57080/"  + $F{fileUrlSign}]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="390" y="40" width="170" height="16" uuid="ce9ad443-799e-43f7-a08a-3c41998fa51a">
