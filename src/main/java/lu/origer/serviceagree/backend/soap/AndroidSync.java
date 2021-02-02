@@ -35,7 +35,7 @@ import lu.origer.serviceagree.models.synch.SynchJobs;
 public class AndroidSync {
 	private static Long TECHNICIAN_TYPE_ID = 5L;	
 	
-	private static String SYNC_URL_PROD_CONTROL = "http://test-production-control.origer.lu:57081/origer/synchroniZe/origer/";
+	private static String SYNC_URL_PROD_CONTROL = "http://production-control.origer.lu:57080/origer/synchroniZe/origer/";
 	
 	
 	public static String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";

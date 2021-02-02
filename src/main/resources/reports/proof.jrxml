@@ -231,7 +231,7 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<imageExpression><![CDATA["http://test-production-control.origer.lu:57081" + $F{urlUnterschrift}.replace( "/etc", "")]]></imageExpression>
+				<imageExpression><![CDATA["http://production-control.origer.lu:57080" + $F{urlUnterschrift}.replace( "/etc", "")]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="330" y="113" width="223" height="30" uuid="2487ce77-97be-41a3-b7cb-5e6aa14a769c"/>

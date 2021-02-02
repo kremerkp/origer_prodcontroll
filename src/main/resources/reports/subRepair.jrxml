@@ -58,7 +58,7 @@
 			</textField>
 			<image>
 				<reportElement stretchType="RelativeToBandHeight" x="241" y="1" width="88" height="28" isRemoveLineWhenBlank="true" uuid="361d3de4-f915-440a-b571-683afd55b067"/>
-				<imageExpression><![CDATA["http://test-production-control.origer.lu:57081" + $F{signature}.replaceAll( "etc", "")]]></imageExpression>
+				<imageExpression><![CDATA["http://production-control.origer.lu:57080" + $F{signature}.replaceAll( "etc", "")]]></imageExpression>
 			</image>
 		</band>
 	</detail>

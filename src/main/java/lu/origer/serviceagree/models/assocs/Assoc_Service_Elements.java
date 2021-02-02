@@ -16,7 +16,7 @@ public class Assoc_Service_Elements implements Serializable{
 	 */
 	private static final long serialVersionUID = 1055930920494098025L;
 	@EmbeddedId          
-	private AssocServiceElementsId id;
+	public AssocServiceElementsId id;
 
 	public AssocServiceElementsId getId() {
 		return id;
