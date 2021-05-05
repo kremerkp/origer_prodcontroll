@@ -1588,3 +1588,7 @@ td.dn_text>span>input
 {
 	width: 90%;
 }
+
+div#bottom{
+        position: relative!important;
+}
